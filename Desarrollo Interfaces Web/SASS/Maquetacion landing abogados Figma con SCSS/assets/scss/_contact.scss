@@ -1,0 +1,26 @@
+.contact-form {
+  background: $light-bg;
+  padding: 90px 0;
+
+  max-width: 800px;
+  margin: auto;
+
+  form {
+    margin-top: 30px;
+    display: grid;
+    gap: 20px;
+
+    input,
+    textarea {
+      padding: 12px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      @include btn($gold, $dark-blue);
+      width: 150px;
+      margin: auto;
+    }
+  }
+}

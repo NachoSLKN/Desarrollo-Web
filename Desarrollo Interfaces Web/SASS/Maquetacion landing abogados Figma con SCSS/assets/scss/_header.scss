@@ -1,0 +1,77 @@
+.hero {
+  background-image: url("../img/header-background.jpg");
+  background-size: cover;
+  background-position: center;
+  color: $white;
+  padding-bottom: 160px;
+  position: relative;
+
+  .top-bar {
+    background: $dark-blue;
+    padding: 6px 0;
+    font-size: 12px;
+    text-align: right;
+
+    a {
+      color: $white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+  }
+
+  nav {
+    max-width: 1400px;
+    margin: auto;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+
+      a {
+        text-decoration: none;
+        color: $white;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .hero-content {
+    max-width: 600px;
+    margin-left: 60px;
+    margin-top: 60px;
+
+    .highlight {
+      color: $gold;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 46px;
+      margin: 15px 0;
+    }
+
+    p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      margin-top: 20px;
+
+      .primary {
+        @include btn($gold, $dark-blue);
+        margin-right: 10px;
+      }
+
+      .secondary {
+        @include btn(#ce592d);
+      }
+    }
+  }
+}

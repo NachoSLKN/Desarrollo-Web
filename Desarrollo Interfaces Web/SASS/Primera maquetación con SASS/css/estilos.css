@@ -1,0 +1,148 @@
+.margen-1 {
+  margin: 5px;
+}
+
+.margen-2 {
+  margin: 10px;
+}
+
+.margen-3 {
+  margin: 15px;
+}
+
+.margen-4 {
+  margin: 20px;
+}
+
+.margen-5 {
+  margin: 25px;
+}
+
+.borde-1 {
+  border-width: 2px;
+}
+
+.borde-2 {
+  border-width: 4px;
+}
+
+.borde-3 {
+  border-width: 6px;
+}
+
+.borde-4 {
+  border-width: 8px;
+}
+
+.caja-italia {
+  background-color: lightgreen;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+}
+
+.caja-francia {
+  background-color: dodgerblue;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+}
+
+.caja-espana {
+  background-color: goldenrod;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+}
+
+.caja-alemania {
+  background-color: plum;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+}
+
+body {
+  background: #eaeaea;
+  font-family: Arial;
+}
+
+nav {
+  background-color: rgb(155, 111, 145);
+  padding: 0.5rem;
+}
+nav ul {
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  list-style: none;
+}
+nav ul li {
+  padding: 5px 12px;
+  border-radius: 5px;
+}
+nav ul li.active {
+  font-weight: bold;
+}
+nav ul li:hover {
+  color: black;
+  cursor: pointer;
+}
+nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+nav ul li:nth-child(1) {
+  background: lightgreen;
+}
+nav ul li:nth-child(2) {
+  background: dodgerblue;
+}
+nav ul li:nth-child(3) {
+  background: goldenrod;
+}
+nav ul li:nth-child(4) {
+  background: plum;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  padding: 10px;
+}
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+.card p {
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
+.flag {
+  width: 35px !important;
+  height: 22px !important;
+  object-fit: cover;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+/*# sourceMappingURL=estilos.css.map */
