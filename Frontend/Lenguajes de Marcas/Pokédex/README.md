@@ -19,5 +19,5 @@ Este es un **miniproyecto desarrollado con HTML, CSS y JavaScript**, cuyo objeti
 
 ---
 
-## 📁 Estructura del proyecto
+
 
