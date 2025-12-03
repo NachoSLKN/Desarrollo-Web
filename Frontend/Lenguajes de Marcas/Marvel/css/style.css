@@ -1,0 +1,71 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-image: url("../img/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*Importante*/
+    color: white;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+header{
+position: relative;
+}
+
+.imglogo{
+width: 10rem;
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.imgheader{
+width: 100%;
+opacity: 0.5;
+}
+
+header img {
+    width: 50px;
+}
+
+.descripcion {
+    text-align: center;
+    font-size: 26px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+
+    
+}
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+main {
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+footer {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
