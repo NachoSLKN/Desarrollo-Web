@@ -1,0 +1,16 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin btn($bg, $color: white) {
+  background: $bg;
+  color: $color;
+  padding: 12px 26px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  transition: 0.2s ease;
+}

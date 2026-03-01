@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Nacho Liñán Vicente</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Prism.js para resaltar sintaxis -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+
+
+</head>
+
+<body>
+
+  <header class="encabezado">
+    <button class="menu-toggle" onclick="document.querySelector('.menu').classList.toggle('active')">
+  ☰
+</button>
+
+    <div class="logo">
+      <img src="img/LOGO.png" alt="Nacho SLKN">
+    </div>
+    <h1 class="titulo">Nacho Liñán Vicente</h1>
+    <nav class="menu">
+      <a href="#mis-estudios">Estudios</a>
+      <a href="#daw">DAW</a>
+      <a href="#3d">3D</a>
+      <a href="#multimedia">Multimedia</a>
+    </nav>
+  </header>
+
+
+  <main>
+    <section id="mis-estudios">
+      <h2>Mis habilidades</h2>
+
+      <div class="contenedor-estudios">
+
+        <div class="estudio animacion">Animación, Entornos Interactivos y 3D</div>
+
+        <div class="estudio daw">Desarrollo de Aplicaciones Web</div>
+
+        <div class="estudio videojuegos">
+          Curso de Especialización en Videojuegos<br>y Realidad Virtual
+        </div>
+
+        <div class="estudio en-progreso">
+          Ingeniería en Computadoras<br>&<br>Ingeniería en Videojuegos
+        </div>
+
+        <section id="posiciones">
+          <h2>Ejemplo de Posicionamiento en CSS</h2>
+
+          <section id="columnas">
+            <h2>Proyectos y Experiencia</h2>
+            <div class="texto-columnas">
+              <p>
+                Durante mis estudios en <strong>Animación 3D</strong> desarrollé varios proyectos centrados en la
+                creación de entornos, modelado de personajes y animación técnica.
+                <br><br>
+                En el grado de <strong>Desarrollo de Aplicaciones Web</strong> trabajé en aplicaciones dinámicas, bases
+                de datos y desarrollo front-end utilizando HTML, CSS, JavaScript y frameworks modernos.
+                <br><br>
+                En el <strong>Curso de Especialización en Videojuegos y Realidad Virtual</strong>, participé en
+                proyectos de simulación interactiva y entornos inmersivos con Unity y Unreal Engine.
+                <br><br>
+                Actualmente sigo formándome en <strong>Ingeniería Informática</strong> y <strong>Videojuegos</strong>,
+                buscando unir el desarrollo técnico con el diseño visual.
+              </p>
+            </div>
+          </section>
+
+
+          <div class="caja posicion-relativa">
+            <p class="texto-absoluto">Texto con position: absolute</p>
+          </div>
+
+          <div class="sticky-demo">
+            <h3>Elemento Sticky (permanece visible al hacer scroll)</h3>
+          </div>
+        </section>
+        <section id="float-demo">
+          <h2>Galería de Tecnologías</h2>
+
+          <div class="galeria clearfix">
+            <div class="caja-float izquierda">
+              <img src="img/html.png" alt="HTML">
+              <p>HTML5</p>
+            </div>
+
+            <div class="caja-float centro">
+              <img src="img/css.png" alt="CSS">
+              <p>CSS3</p>
+            </div>
+
+            <div class="caja-float derecha">
+              <img src="img/js.png" alt="JavaScript">
+              <p>JavaScript</p>
+            </div>
+
+            <div class="caja-float centro">
+              <img src="img/blender.png" alt="Blender">
+              <p>Blender</p>
+            </div>
+
+            <div class="caja-float derecha">
+              <img src="img/java.png" alt="Java">
+              <p>Java</p>
+            </div>
+
+
+
+
+
+          </div>
+
+          <div class="texto-final">
+            <p>Estos lenguajes forman la base de todos mis proyectos web y son esenciales en el desarrollo moderno.</p>
+          </div>
+        </section>
+
+
+
+      </div>
+    </section>
+
+
+
+<section id="proyectos">
+  <h2>Proyectos Destacados</h2>
+  <div class="galeria-proyectos">
+    <div class="proyecto">
+      <img src="img/proyecto1.jpg" alt="Proyecto Web">
+      <img src="img/proyecto2.jpg" alt="Proyecto Web">
+      <img src="img/proyecto3.jpg" alt="Proyecto Web">
+
+      <h3>Modelado 3D</h3>
+    </div>
+
+    <div class="proyecto">
+      <img src="img/jueguito1.jpg" alt="Proyecto 3D">
+            <img src="img/jueguito2.jpg" alt="Proyecto 3D">
+
+      <h3>DEMOS</h3>
+      <p>Videojueguitos</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="script-ags">
+  <h2>Script Global – Adventure Game Studio</h2>
+  <p>
+    Este script controla la lógica principal del juego: gestión de entradas del jugador,
+    comportamiento de personajes, inventario y transiciones entre habitaciones.
+    Es una parte esencial del sistema de interacción del proyecto.
+  </p>
+
+  <pre><code class="language-c">
+// main global script file
+
+int lastFlipTime = 0; // Para llevar el control del tiempo
+int flipInterval = 10000; // 10 segundos en milisegundos
+int isDialogActive = 0;
+
+// Definir una variable global para controlar la dirección
+int enemigoDireccion = 1;  // 1 significa que está mirando a la derecha (eDirectionRight), 0 para izquierda (eDirectionLeft)
+
+// called when the game starts, before the first room is loaded
+function game_start()
+{
+  SetRestartPoint();
+  mouse.Visible = true;
+  mouse.Mode = eModeWalkto;
+}
+
+function repeatedly_execute()
+{
+  if (isDialogActive == 1) return;
+  LocationType location = GetLocationType(mouse.x, mouse.y);
+  if (location == eLocationObject || location == eLocationCharacter) {
+    mouse.Mode = eModeUsermode1;
+  } else {
+    mouse.Mode = eModeWalkto;
+  }
+}
+
+function on_key_press(eKeyCode keycode, int mod)
+{
+  if (IsGamePaused()) keycode = 0;
+  else if (keycode == eKeyQ && (mod & eKeyModCtrl)) QuitGame(1);
+  else if (keycode == eKeyF9) RestartGame();
+  else if (keycode == eKeyF12) SaveScreenShot("screenshot.pcx");
+}
+
+function cAyudante_Talk(Character *theCharacter, CursorMode mode)
+{
+  cAyudante.Say("Con cualquier cosa, aquí estoy");
+  dDialog1.Start();
+}
+  </code></pre>
+</section>
+
+
+
+
+
+  </main>
+
+  <footer>
+    <!-- Aquí luego pondremos tus redes o contacto -->
+  </footer>
+
+</body>
+
+</html>

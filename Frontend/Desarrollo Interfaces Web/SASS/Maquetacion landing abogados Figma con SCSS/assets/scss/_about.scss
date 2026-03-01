@@ -1,0 +1,29 @@
+.about {
+  background: $light-bg;
+  padding: 90px 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1200px;
+  margin: auto;
+  gap: 40px;
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .btn.primary {
+    @include btn($gold, $dark-blue);
+  }
+}

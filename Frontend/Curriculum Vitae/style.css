@@ -1,0 +1,626 @@
+/* ----- SECCIÓN GENERAL ----- */
+#mis-estudios {
+  text-align: center; /* centramos el contenido */
+  margin: 50px auto;
+  width: 80%;
+  color: white; /* por si el fondo luego es oscuro */
+  font-family: Arial, sans-serif;
+}
+
+/* ----- CONTENEDOR GENERAL ----- */
+.contenedor-estudios {
+  border: 1px solid white; /* solo para visualizar límites */
+  padding: 20px;
+  background-color: #111;
+}
+
+/* ----- ELEMENTOS INDIVIDUALES ----- */
+.estudio {
+  border: 1px solid gray;
+  padding: 10px 15px;
+  margin: 10px;
+  color: white;
+}
+
+/* 1️⃣ DISPLAY INLINE → ocupa solo su contenido, no hace salto de línea */
+.animacion {
+  display: inline;
+  background-color: #444;
+}
+
+/* 2️⃣ DISPLAY INLINE-BLOCK → puede tener ancho/alto y margen, sigue en línea */
+.daw {
+  display: inline-block;
+  width: 200px;
+  height: 60px;
+  line-height: 60px; /* centra el texto verticalmente */
+  background-color: #666;
+}
+
+/* 3️⃣ DISPLAY BLOCK → ocupa toda la línea */
+.videojuegos {
+  display: block;
+  background-color: #888;
+  width: 100%;
+}
+
+/* 4️⃣ OPCIONAL: "En progreso" (aún sin barra de carga, la haremos luego) */
+.en-progreso {
+  display: inline-block;
+  background-color: #333;
+  width: 250px;
+  height: 25px;
+  line-height: 25px;
+  margin-top: 10px;
+}
+
+/* --- HEADER --- */
+header {
+  display: flex;              /* Activa el modo Flexbox (permite alinear elementos en fila o columna) */
+  align-items: center;        /* Centra verticalmente el texto y la imagen dentro del header */
+  justify-content: center;    /* Centra todo el bloque (texto + imagen) en la página */
+  gap: 20px;                  /* Espacio entre el texto y la imagen */
+  background-color: #111;     /* Fondo negro suave */
+  color: white;               /* Texto en blanco */
+  padding: 20px;              /* Espaciado interno */
+  font-size: 1.5rem;          /* Tamaño del texto (1rem = tamaño de fuente base del navegador) */
+  font-family: "Arial", sans-serif;
+}
+
+/* --- IMAGEN DEL LOGO --- */
+header img {
+  width: 100px;               /* Tamaño del logo reducido */
+  height: auto;               /* Mantiene las proporciones */
+  border-radius: 5px;         /* Esquinas ligeramente redondeadas */
+}
+
+
+/* --- SECCIÓN DE HABILIDADES --- */
+#mis-estudios {
+  background-color: #0d0d0d;    /* Fondo negro elegante */
+  color: white;                 /* Texto blanco */
+  padding: 40px 0;              /* Espacio superior e inferior */
+  text-align: center;           /* Centra el título */
+}
+
+#mis-estudios h2 {
+  margin-bottom: 30px;          /* Espacio debajo del título */
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* --- CONTENEDOR DE BLOQUES --- */
+.contenedor-estudios {
+  display: flex;                /* Flexbox para alinear los divs en fila */
+  flex-wrap: wrap;              /* Permite que salten a otra línea si no caben */
+  justify-content: center;      /* Centra horizontalmente los divs */
+  gap: 20px;                    /* Espacio entre los divs */
+  max-width: 1000px;            /* Limita el ancho total */
+  margin: 0 auto;               /* Centra el bloque dentro de la página */
+}
+
+/* --- BLOQUES INDIVIDUALES --- */
+.estudio {
+  background-color: #1a1a1a;    /* Fondo gris oscuro */
+  border: 1px solid #333;       /* Borde sutil */
+  padding: 20px;
+  width: 250px;                 /* Ancho fijo (lo cambiaremos luego con layout) */
+  border-radius: 8px;           /* Bordes redondeados */
+  font-weight: bold;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.estudio:hover {
+  background-color: #222;       /* Efecto al pasar el ratón */
+  transform: scale(1.05);       /* Aumenta ligeramente el tamaño */
+}
+
+/* --- LAYOUT: TIPOS DE DISEÑO --- */
+
+/* 1️⃣ Fixed layout → Tamaño fijo en píxeles */
+.estudio.animacion {
+  width: 250px; /* siempre mide 250px sin importar el tamaño de la pantalla */
+}
+
+/* 2️⃣ Fluid layout → Se adapta al ancho del contenedor */
+.estudio.daw {
+  width: 30%; /* ocupa el 30% del ancho disponible */
+  min-width: 200px; /* pero nunca será menor de 200px */
+}
+
+/* 3️⃣ Elastic layout → Escala según el tamaño de la fuente (em) */
+.estudio.videojuegos {
+  width: 25em; /* depende del tamaño del texto base */
+}
+
+/* 4️⃣ Híbrido layout → combinación de fijo + fluido */
+.estudio.en-progreso {
+  width: calc(200px + 10%); /* mezcla de valor fijo y relativo */
+}
+
+/* --- UNIFICAR LONGITUD Y SANGRÍA --- */
+
+/* Contenedor general */
+.contenedor-estudios {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /* reparte el espacio equitativamente */
+  align-items: stretch;          /* hace que todas las cajas tengan la misma altura */
+  gap: 30px;                     /* espacio uniforme entre bloques */
+  padding: 20px 40px;            /* "sangría" interior a los lados */
+  border: 1px solid #555;        /* borde para delimitar visualmente la sección */
+  box-sizing: border-box;        /* hace que padding + border se cuenten dentro del tamaño total */
+}
+
+/* Bloques individuales */
+.estudio {
+  flex: 1 1 300px;               /* todos crecen y reducen de forma equilibrada */
+  max-width: 400px;              /* límite superior para pantallas grandes */
+  min-width: 250px;              /* límite inferior para móviles */
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Efecto visual más limpio al pasar el ratón */
+.estudio:hover {
+  background-color: #222;
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* --- CENTRADO Y ALTURA UNIFORME --- */
+
+.contenedor-estudios {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: stretch; /* todas las cajas tendrán la misma altura */
+  gap: 30px;
+  padding: 20px 40px;
+  border: 1px solid #555;
+  box-sizing: border-box;
+}
+
+/* Centrado horizontal y vertical dentro de cada caja */
+.estudio {
+  display: flex;                /* convierte cada bloque en contenedor flexible */
+  justify-content: center;      /* centra el texto horizontalmente */
+  align-items: center;          /* centra el texto verticalmente */
+  flex: 1 1 300px;
+  max-width: 400px;
+  min-width: 250px;
+  height: 120px;                /* altura uniforme */
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.estudio:hover {
+  background-color: #222;
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+
+/* --- HEADER PRINCIPAL --- */
+.encabezado {
+  position: fixed;          /* HEADER siempre visible al hacer scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #111;   /* fondo oscuro */
+  display: flex;            /* layout flexible */
+  justify-content: space-between; /* separa logo, título y menú */
+  align-items: center;      /* centra verticalmente los elementos */
+  padding: 0 40px;
+  box-sizing: border-box;   /* incluye padding en el ancho total */
+  z-index: 1000;            /* asegura que el header esté por encima del resto */
+  border-bottom: 1px solid #333;
+}
+
+/* --- LOGO --- */
+.logo img {
+  height: 60px;
+  width: auto;
+  float: left;              /* Ejemplo de float:left */
+  display: inline-block;    /* combina inline + dimensiones */
+}
+
+/* --- TÍTULO --- */
+.titulo {
+  display: inline-block;    /* ejemplo inline-block */
+  color: white;
+  font-size: 1.5em;
+  text-align: center;       /* centrado inline */
+  flex-grow: 1;             /* ocupa espacio restante */
+}
+
+/* --- MENÚ DE NAVEGACIÓN --- */
+.menu {
+  display: inline-block;    /* ejemplo inline-block */
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #888;
+}
+
+
+/* --- AJUSTE GENERAL DE LAYOUT --- */
+body {
+  margin: 0;
+  background-color: #0b0b0b;
+  color: white;
+  font-family: "Poppins", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Deja espacio suficiente debajo del header fijo */
+main {
+  margin-top: 100px; /* Altura del header + algo de margen */
+  display: block; /* ejemplo de display:block */
+  padding: 20px;
+}
+
+
+/* --- CONTENEDOR DE ESTUDIOS (LAYOUT FLUIDO + HÍBRIDO) --- */
+.contenedor-estudios {
+  width: 90%;                /* layout fluido (ocupa el 90% del viewport) */
+  max-width: 1200px;         /* límite fijo -> híbrido */
+  margin: 0 auto;            /* centrado horizontal bloque */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  gap: 30px;
+  padding: 2em;              /* elastic -> usa 'em' en lugar de px */
+  border: 1px solid #555;
+  box-sizing: border-box;
+  background-color: #111;
+  border-radius: 10px;
+}
+
+
+/* --- SECCIÓN DE POSICIONES --- */
+#posiciones {
+  width: 80%;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Caja principal (position: relative) */
+.caja {
+  position: relative;       /* Punto de referencia para el absolute */
+  width: 300px;
+  height: 200px;
+  margin: 20px auto;
+  background-color: #333;
+  border: 2px solid white;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+/* Texto dentro de la caja (position: absolute) */
+.texto-absoluto {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(255,255,255,0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+/* Elemento sticky */
+.sticky-demo {
+  position: sticky;        /* Se queda fijo al hacer scroll */
+  top: 100px;              /* se adhiere cuando llega a esta posición */
+  background-color: #222;
+  border: 2px solid #555;
+  padding: 15px;
+  margin-top: 100px;
+  text-align: center;
+  z-index: 2;              /* Se asegura de estar encima del resto */
+  border-radius: 5px;
+}
+
+/* Ejemplo de z-index con pseudo-elemento decorativo */
+.caja::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #888;
+  opacity: 0.3;
+  z-index: -1; /* Se queda debajo del texto */
+  border-radius: 50%;
+}
+
+/* --- SECCIÓN DE COLUMNAS --- */
+#columnas {
+  width: 85%;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+#columnas h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+/* Columnas aplicadas al texto */
+.texto-columnas p {
+  column-count: 2;           /* Divide el texto en 2 columnas */
+  column-gap: 50px;          /* Espacio entre columnas */
+  column-rule: 2px solid #333; /* Línea divisoria entre columnas */
+  text-align: justify;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 20px;
+  color: #ccc;
+}
+
+
+/* --- SECCIÓN DE FLOTANTES --- */
+#float-demo {
+  width: 85%;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#float-demo h2 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+/* Contenedor general */
+.galeria {
+  text-align: center;       /* centra las cajas visualmente */
+  overflow: hidden;         /* oculta cualquier desbordamiento por float */
+  padding: 20px 0;
+}
+
+/* Cajas individuales */
+.caja-float {
+  width: 28%;
+  margin: 1%;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: white;
+  float: left;              /* requisito del ejercicio: flotación */
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 220px;            /* altura fija para mantener alineadas */
+  display: flex;            /* centrado interno */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Efecto hover */
+.caja-float:hover {
+  transform: scale(1.05);
+  background-color: #222;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+/* Imágenes dentro de las cajas */
+.caja-float img {
+  width: 80%;
+  height: 120px;                 /* 🔹 Fuerza todas las imágenes a misma altura */
+  object-fit: contain;           /* 🔹 Ajusta sin deformar */
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.1)); /* Sutil realce */
+}
+
+
+.caja-float:hover img {
+  transform: scale(1.1);
+}
+
+/* Texto debajo de las imágenes */
+.caja-float p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Clearfix hack → evita que el contenedor colapse */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Texto final debajo de los floats */
+.texto-final {
+  clear: both; /* reinicia el flujo */
+  padding-top: 30px;
+  color: #ccc;
+  font-size: 1rem;
+  text-align: justify;
+  line-height: 1.4;
+}
+
+.caja-float p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* --- PROYECTOS --- */
+#proyectos {
+  width: 85%;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.galeria-proyectos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.proyecto {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  width: 45%;
+  min-width: 280px;
+  max-width: 400px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  transition: transform .3s ease;
+}
+
+.proyecto:hover {
+  transform: scale(1.05);
+}
+
+.proyecto img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
+/* 📱 Tiny Tweaks */
+@media (max-width: 1200px) {
+  header .titulo {
+    font-size: 1.2em;
+  }
+}
+
+/* 💻 Column Drop (de 3 a 2 columnas) */
+@media (max-width: 900px) {
+  .caja-float {
+    width: 45%;
+  }
+  .proyecto {
+    width: 90%;
+  }
+}
+
+/* 📱 Layout para móviles (1 columna + menú off-canvas) */
+@media (max-width: 600px) {
+  /* Column Drop total */
+  .caja-float {
+    float: none;
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  /* Header off-canvas */
+  .menu {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: 2px solid #888;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  /* Cuando el menú esté activo */
+  .menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background-color: #111;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #333;
+  }
+
+  .menu.active a {
+    margin: 10px 0;
+  }
+}
+
+
+/* --- SCRIPT AGS --- */
+#script-ags {
+  width: 85%;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  color: #ddd;
+}
+
+#script-ags h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.8em;
+  color: #7dd3fc;
+}
+
+#script-ags p {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  color: #bbb;
+}
+
+/* Ajusta el bloque de código al diseño oscuro */
+#script-ags pre {
+  background-color: #1a1a1a !important;
+  border-radius: 8px;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#script-ags code {
+  font-family: "Fira Code", monospace;
+}

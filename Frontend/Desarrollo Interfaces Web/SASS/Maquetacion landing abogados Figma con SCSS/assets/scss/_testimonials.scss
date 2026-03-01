@@ -1,0 +1,29 @@
+.testimonials {
+  background: $dark-blue;
+  color: $white;
+  padding: 70px 20px;
+  text-align: center;
+
+  h3 {
+    margin-bottom: 40px;
+  }
+
+  .testimonials-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    blockquote {
+      background: $white;
+      color: $dark-blue;
+      width: 300px;
+      padding: 25px;
+      border-radius: 8px;
+
+      footer {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    }
+  }
+}
