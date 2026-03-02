@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Entornos virtuales
+venv/
+.env
+
+# Docker
+*.log
+*.pid
+
+# Archivos raros generados por Docker
+0
+Using
+use
+Running
+Removed
+
+# Archivos con nombres hash (si se generaron dentro del proyecto)
+[0-9a-f]*
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,7 @@
+
+flask
+pymongo
+flask-wtf
+wtforms
+flask-login
+werkzeug
