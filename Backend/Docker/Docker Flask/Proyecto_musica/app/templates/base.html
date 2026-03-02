@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white min-h-screen flex flex-col">
+
+<header class="bg-black border-b border-gray-800 p-6">
+
+    <!-- Título -->
+    <h1 class="text-3xl font-bold tracking-widest text-center">
+        BURY TOMORROW
+    </h1>
+
+    <!-- Navegación -->
+    <nav class="flex justify-between items-center mt-6 max-w-6xl mx-auto text-sm tracking-wider">
+
+        <!-- Enlaces principales -->
+        <div class="flex gap-8">
+            <a href="{{ url_for('inicio') }}" class="hover:text-gray-400">Inicio</a>
+            <a href="{{ url_for('read') }}" class="hover:text-gray-400">Álbumes</a>
+
+            {% if session.get("user") %}
+                <a href="{{ url_for('add') }}" class="hover:text-gray-400">Añadir</a>
+            {% endif %}
+        </div>
+
+        <!-- Zona usuario -->
+        <div class="flex gap-4 items-center">
+
+            {% if session.get("user") %}
+
+                <span class="text-gray-400 text-sm">
+                    👤 {{ session.get("user") }}
+                </span>
+
+                <a href="{{ url_for('logout') }}"
+                   class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 transition">
+                    Cerrar sesión
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('login') }}"
+                   class="px-4 py-2 border border-white rounded hover:bg-white hover:text-black transition">
+                    Login
+                </a>
+
+                <a href="{{ url_for('register') }}"
+                   class="px-4 py-2 bg-white text-black rounded hover:bg-gray-300 transition">
+                    Registrarse
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+</header>
+
+<main class="flex-grow p-10">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="text-center p-6 text-gray-500 text-sm border-t border-gray-800">
+    © 2026 Bury Tomorrow - Proyecto Docker
+</footer>
+
+</body>
+</html>

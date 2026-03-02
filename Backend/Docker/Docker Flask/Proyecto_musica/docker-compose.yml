@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  db:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+  admin:
+    image: mongo-express
+    container_name: mongo_admin
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: db
+    depends_on:
+      - db
+
+  web:
+    build: .
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db

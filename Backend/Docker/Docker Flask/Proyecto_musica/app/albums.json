@@ -1,0 +1,16 @@
+[
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Portraits",
+    "anio": 2009,
+    "precio": 14.99,
+    "stock": 5,
+    "formato": "CD",
+    "portada": "portraits.jpg",
+    "canciones": [
+      "You & I",
+      "Unite",
+      "Confessions"
+    ]
+  }
+]

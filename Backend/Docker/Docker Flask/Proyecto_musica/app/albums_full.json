@@ -1,0 +1,100 @@
+[
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Portraits",
+    "anio": 2009,
+    "precio": 14.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "portraits.jpg",
+    "canciones": [
+      "You & I", "Unite", "Confessions", "Another Journey", "Under the Sun"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "The Union of Crowns",
+    "anio": 2012,
+    "precio": 15.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "the_union_of_crowns.jpg",
+    "canciones": [
+      "An Honourable Reign","Knight Life","Royal Blood","Vacant Throne"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Runes",
+    "anio": 2014,
+    "precio": 15.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "runes.jpg",
+    "canciones": [
+      "Of Glory","Last of the Ice","Divine Breath","Garden of Thorns"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Earthbound",
+    "anio": 2016,
+    "precio": 16.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "earthbound.jpg",
+    "canciones": [
+      "The Eternal","Last Light","Earthbound","Cemetery","Restless & Cold","301","Memories","For Us"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Black Flame",
+    "anio": 2018,
+    "precio": 17.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "black_flame.jpg",
+    "canciones": [
+      "No Less Violent","Adrenaline","Black Flame","My Revenge",
+      "More Than Mortal","Knife of Gold","The Age","Stormbringer","Overcast","Peacekeeper"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Cannibal",
+    "anio": 2020,
+    "precio": 17.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "cannibal.jpg",
+    "canciones": [
+      "Cannibal","Lionheart","Abandon Us","The Grey (VIXI)","Choke","What If I Burn"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "The Seventh Sun",
+    "anio": 2023,
+    "precio": 18.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "the_seventh_sun.jpg",
+    "canciones": [
+      "Abandon Us","Begin Again","Forced Divide","Boltcutter","Heretic"
+    ]
+  },
+  {
+    "grupo": "Bury Tomorrow",
+    "album": "Will You Haunt Me, with That Same Patience",
+    "anio": 2025,
+    "precio": 19.99,
+    "stock": 10,
+    "formato": "CD",
+    "portada": "will_you_haunt_me.jpg",
+    "canciones": [
+      "To Dream, To Forget","Villain Arc","Wasteland","What If I Burn",
+      "Forever The Night","Waiting","Silence Isn't Helping Us","Yōkai","Paradox","Let Go"
+    ]
+  }
+]

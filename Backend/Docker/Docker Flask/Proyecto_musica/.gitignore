@@ -13,15 +13,12 @@ venv/
 *.log
 *.pid
 
-# Archivos raros generados por Docker
+# Archivos basura manuales
 0
 Using
 use
 Running
 Removed
-
-# Archivos con nombres hash (si se generaron dentro del proyecto)
-[0-9a-f]*
 
 # Sistema
 .DS_Store

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Añadir Álbum{% endblock %}
+
+{% block content %}
+
+<section class="max-w-xl mx-auto py-16 px-6">
+
+    <h2 class="text-3xl font-bold mb-10 text-center tracking-widest">
+        AÑADIR ÁLBUM
+    </h2>
+
+    <form method="POST" class="space-y-6 bg-gray-900 p-8 rounded-xl shadow-lg">
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{ form.grupo.label(class="block text-sm font-semibold mb-2") }}
+            {{ form.grupo(class="w-full p-2 rounded bg-gray-800 border border-gray-700") }}
+        </div>
+
+        <div>
+            {{ form.album.label(class="block text-sm font-semibold mb-2") }}
+            {{ form.album(class="w-full p-2 rounded bg-gray-800 border border-gray-700") }}
+        </div>
+
+        <div>
+            {{ form.anio.label(class="block text-sm font-semibold mb-2") }}
+            {{ form.anio(class="w-full p-2 rounded bg-gray-800 border border-gray-700") }}
+        </div>
+
+        <div>
+            {{ form.precio.label(class="block text-sm font-semibold mb-2") }}
+            {{ form.precio(class="w-full p-2 rounded bg-gray-800 border border-gray-700") }}
+        </div>
+
+        <div>
+            {{ form.stock.label(class="block text-sm font-semibold mb-2") }}
+            {{ form.stock(class="w-full p-2 rounded bg-gray-800 border border-gray-700") }}
+        </div>
+
+        <div>
+            {{ form.formato.label(class="block text-sm font-semibold mb-2") }}
+            {{ form.formato(class="w-full p-2 rounded bg-gray-800 border border-gray-700") }}
+        </div>
+
+        <div class="text-center">
+            {{ form.submit(class="px-6 py-2 bg-white text-black rounded hover:bg-gray-300 transition") }}
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
