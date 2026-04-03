@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb
+    container_name: servidor_mariadb
+    restart: always
+    environment:
+      MARIADB_DATABASE: bd_wp
+      MARIADB_USER: user_wp
+      MARIADB_PASSWORD: asdasd
+      MARIADB_ROOT_PASSWORD: asdasd
+    volumes:
+      - vol_mariadb:/var/lib/mysql
+    networks:
+      - red_wp
+
+  wordpress:
+    image: wordpress
+    container_name: servidor_wp
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      WORDPRESS_DB_HOST: servidor_mariadb
+      WORDPRESS_DB_USER: user_wp
+      WORDPRESS_DB_PASSWORD: asdasd
+      WORDPRESS_DB_NAME: bd_wp
+    volumes:
+      - vol_wordpress:/var/www/html
+    networks:
+      - red_wp
+
+volumes:
+  vol_mariadb:
+  vol_wordpress:
+
+networks:
+  red_wp:
