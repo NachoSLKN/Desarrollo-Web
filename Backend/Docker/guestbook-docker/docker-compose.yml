@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    volumes:
+      - ./redis-data:/data
+
+  guestbook:
+    image: iesgn/guestbook
+    container_name: guestbook
+    ports:
+      - "8080:5000"
+    depends_on:
+      - redis
