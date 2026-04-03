@@ -2,7 +2,6 @@
 
 Proyecto Docker usando Docker Compose con frontend y backend de temperaturas.
 
-### Aplicación funcionando
 ![Aplicacion](screenshots/1.png)
 
 
@@ -32,4 +31,3 @@ http://localhost:8081
 ## Arquitectura
 Frontend -> Backend
 
-## Capturas
