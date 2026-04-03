@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  backend:
+    image: iesgn/temperaturas_backend
+    container_name: temperaturas-backend
+    networks:
+      - red_temperaturas
+
+  frontend:
+    image: iesgn/temperaturas_frontend
+    container_name: temperaturas-frontend
+    ports:
+      - "8081:3000"
+    networks:
+      - red_temperaturas
+
+networks:
+  red_temperaturas:
