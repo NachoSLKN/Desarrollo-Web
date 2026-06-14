@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="3.0"
+    xmlns="https://jakarta.ee/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+    https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit
+        name="ciclosformativos"
+        transaction-type="RESOURCE_LOCAL">
+
+        <!-- PROVEEDOR JPA -->
+        <provider>
+            org.eclipse.persistence.jpa.PersistenceProvider
+        </provider>
+       
+
+        <!-- DETECTAR ENTIDADES AUTOMÁTICAMENTE -->
+        <exclude-unlisted-classes>
+            false
+        </exclude-unlisted-classes>
+
+        <properties>
+
+            <!-- DRIVER MYSQL -->
+            <property
+                name="jakarta.persistence.jdbc.driver"
+                value="com.mysql.cj.jdbc.Driver"/>
+
+            <!-- ========================= -->
+            <!-- URL BANCO SANTANDER -->
+            <!-- ========================= -->
+            <!--
+            <property
+                name="jakarta.persistence.jdbc.url"
+                value="jdbc:mysql://localhost:3306/bancosantander?useSSL=false&amp;serverTimezone=UTC"/>
+            -->
+
+            <!-- ========================= -->
+            <!-- URL MODELOSCLASICOS -->
+            <!-- ========================= -->
+            <!--
+            <property
+                name="jakarta.persistence.jdbc.url"
+                value="jdbc:mysql://localhost:3306/modelosclasicos?useSSL=false&amp;serverTimezone=UTC"/>
+            -->
+
+            <!-- ========================= -->
+            <!-- URL CICLOS FORMATIVOS -->
+            <!-- ========================= -->
+            <property
+                name="jakarta.persistence.jdbc.url"
+                value="jdbc:mysql://localhost:3306/ciclosformativos?useSSL=false&amp;serverTimezone=UTC"/>
+
+            <!-- ========================= -->
+            <!-- USUARIO MODELOSCLASICOS -->
+            <!-- ========================= -->
+            <!--
+            <property
+                name="jakarta.persistence.jdbc.user"
+                value="Nacho"/>
+            -->
+
+            <!-- ========================= -->
+            <!-- USUARIO CICLOS -->
+            <!-- ========================= -->
+            <property
+                name="jakarta.persistence.jdbc.user"
+                value="ciclos"/>
+
+            <!-- ========================= -->
+            <!-- PASSWORD MODELOSCLASICOS -->
+            <!-- ========================= -->
+            <!--
+            <property
+                name="jakarta.persistence.jdbc.password"
+                value="Nacho"/>
+            -->
+
+            <!-- ========================= -->
+            <!-- PASSWORD CICLOS -->
+            <!-- ========================= -->
+            <property
+                name="jakarta.persistence.jdbc.password"
+                value="ciclos123"/>
+
+            <!-- LOG ECLIPSELINK -->
+            <property
+                name="eclipselink.logging.level"
+                value="FINE"/>
+
+            <!-- NO MODIFICAR TABLAS -->
+            <property
+                name="jakarta.persistence.schema-generation.database.action"
+                value="none"/>
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
