@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulario Práctica 4</title>
+
+<style>
+body{
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+    margin:40px;
+}
+
+h1,h2,h3{
+    color:white;
+}
+
+table{
+    border-collapse:collapse;
+}
+
+td,th{
+    border:1px solid white;
+    padding:10px;
+    text-align:center;
+}
+
+input,
+button,
+select{
+    padding:8px;
+    margin:5px;
+    background:#222;
+    color:white;
+    border:1px solid white;
+}
+
+a{
+    color:#66ccff;
+}
+
+form{
+    margin-top:20px;
+}
+
+.container{
+    max-width:800px;
+}
+</style>
+</head>
+<body>
+
+
+
+
+<h1>Formulario</h1>
+
+<form id="miFormulario" action="Controller4">
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre">
+
+    <br><br>
+
+    <label>Apellidos:</label>
+    <input type="text" name="apellidos">
+
+    <br><br>
+
+    <input type="radio" name="metodo" value="get" checked> GET
+    <input type="radio" name="metodo" value="post"> POST
+
+    <br><br>
+
+    <input type="submit" value="Enviar">
+
+</form>
+
+
+<script>
+
+document.getElementById("miFormulario")
+        .addEventListener("submit", function() {
+
+    let metodo =
+        document.querySelector(
+            'input[name="metodo"]:checked'
+        ).value;
+
+    this.method = metodo;
+
+});
+
+</script>
+
+</body>
+</html>

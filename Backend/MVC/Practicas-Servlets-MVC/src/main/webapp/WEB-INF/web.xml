@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+  <display-name>Practicas-Servlets</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.xhtml</welcome-file>
+  </welcome-file-list>
+  <context-param>
+    <param-name>parametroGlobal</param-name>
+    <param-value>Valor global</param-value>
+</context-param>
+
+<servlet>
+
+    <servlet-name>Controller10_2</servlet-name>
+
+    <servlet-class>
+        servlets.Controller10_2
+    </servlet-class>
+
+    <init-param>
+        <param-name>parametroLocal</param-name>
+        <param-value>Local desde web.xml</param-value>
+    </init-param>
+
+</servlet>
+
+<servlet-mapping>
+
+    <servlet-name>Controller10_2</servlet-name>
+
+    <url-pattern>
+        /Controller10_2
+    </url-pattern>
+
+</servlet-mapping>
+</web-app>

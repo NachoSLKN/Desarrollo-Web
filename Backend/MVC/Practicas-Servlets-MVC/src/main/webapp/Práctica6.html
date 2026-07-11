@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Práctica 6</title>
+
+<style>
+body{
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+    margin:40px;
+}
+
+h1,h2,h3{
+    color:white;
+}
+
+table{
+    border-collapse:collapse;
+}
+
+td,th{
+    border:1px solid white;
+    padding:10px;
+    text-align:center;
+}
+
+input,
+button,
+select{
+    padding:8px;
+    margin:5px;
+    background:#222;
+    color:white;
+    border:1px solid white;
+}
+
+a{
+    color:#66ccff;
+}
+
+form{
+    margin-top:20px;
+}
+
+.container{
+    max-width:800px;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1>Generador de tablas</h1>
+
+<form action="Controller6" onsubmit="return validar()">
+
+    <label>Filas:</label>
+    <input type="text" name="filas">
+
+    <br><br>
+
+    <label>Columnas:</label>
+    <input type="text" name="columnas">
+
+    <br><br>
+
+    <input type="submit" value="Generar tabla">
+
+</form>
+
+
+
+<script>
+
+function validar(){
+
+    let filas =
+        document.getElementById("filas").value;
+
+    let columnas =
+        document.getElementById("columnas").value;
+
+    if(filas < 1 || filas > 10){
+        alert("Filas entre 1 y 10");
+        return false;
+    }
+
+    if(columnas < 1 || columnas > 10){
+        alert("Columnas entre 1 y 10");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+</body>
+</html>

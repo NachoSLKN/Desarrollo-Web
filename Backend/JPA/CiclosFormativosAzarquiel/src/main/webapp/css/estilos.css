@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+body {
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.banner {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+}
+
+.contenedor {
+    width: 800px;
+    margin: auto;
+}
+
+.mensaje{
+	 width: 500px;
+    margin: 15px auto;
+    padding: 12px;
+
+    background-color: #d4edda;
+    border: 2px solid #28a745;
+    border-radius: 8px;
+
+    color: #155724;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tablaOfertas {
+    margin: 20px auto;
+    border-collapse: collapse;
+}
