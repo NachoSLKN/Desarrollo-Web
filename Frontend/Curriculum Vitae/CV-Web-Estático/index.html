@@ -1,220 +1,172 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Nacho Liñán Vicente</title>
+  <meta name="description" content="Portfolio de Ignacio Liñán Vicente — Game Developer, Web Developer y 3D Artist.">
+  <title>NachoSLKN | Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Prism.js para resaltar sintaxis -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
-
-
 </head>
-
 <body>
-
   <header class="encabezado">
-    <button class="menu-toggle" onclick="document.querySelector('.menu').classList.toggle('active')">
-  ☰
-</button>
-
-    <div class="logo">
-      <img src="img/LOGO.png" alt="Nacho SLKN">
-    </div>
-    <h1 class="titulo">Nacho Liñán Vicente</h1>
-    <nav class="menu">
-      <a href="#mis-estudios">Estudios</a>
-      <a href="#daw">DAW</a>
-      <a href="#3d">3D</a>
-      <a href="#multimedia">Multimedia</a>
+    <a class="logo" href="#inicio" aria-label="Volver al inicio">
+      <img src="img/LOGO.png" alt="Logotipo de NachoSLKN">
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal">☰</button>
+    <nav id="menu-principal" class="menu" aria-label="Navegación principal">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#tecnologias">Tecnologías</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#formacion">Formación</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
-
   <main>
-    <section id="mis-estudios">
-      <h2>Mis habilidades</h2>
-
-      <div class="contenedor-estudios">
-
-        <div class="estudio animacion">Animación, Entornos Interactivos y 3D</div>
-
-        <div class="estudio daw">Desarrollo de Aplicaciones Web</div>
-
-        <div class="estudio videojuegos">
-          Curso de Especialización en Videojuegos<br>y Realidad Virtual
+    <section id="inicio" class="hero">
+      <div class="hero-contenido">
+        <p class="hero-etiqueta">Portfolio personal</p>
+        <h1>Ignacio Liñán Vicente</h1>
+        <p class="hero-profesiones">Game Developer · Web Developer · 3D Artist</p>
+        <p class="hero-descripcion">Desarrollo web, animación entornos interactivos y videojuegos.</p>
+        <div class="hero-acciones">
+          <a class="boton boton-principal" href="#proyectos">Ver proyectos</a>
+          <a class="boton boton-secundario" href="#contacto">Contactar</a>
         </div>
-
-        <div class="estudio en-progreso">
-          Ingeniería en Computadoras<br>&<br>Ingeniería en Videojuegos
-        </div>
-
-        <section id="posiciones">
-          <h2>Ejemplo de Posicionamiento en CSS</h2>
-
-          <section id="columnas">
-            <h2>Proyectos y Experiencia</h2>
-            <div class="texto-columnas">
-              <p>
-                Durante mis estudios en <strong>Animación 3D</strong> desarrollé varios proyectos centrados en la
-                creación de entornos, modelado de personajes y animación técnica.
-                <br><br>
-                En el grado de <strong>Desarrollo de Aplicaciones Web</strong> trabajé en aplicaciones dinámicas, bases
-                de datos y desarrollo front-end utilizando HTML, CSS, JavaScript y frameworks modernos.
-                <br><br>
-                En el <strong>Curso de Especialización en Videojuegos y Realidad Virtual</strong>, participé en
-                proyectos de simulación interactiva y entornos inmersivos con Unity y Unreal Engine.
-                <br><br>
-                Actualmente sigo formándome en <strong>Ingeniería Informática</strong> y <strong>Videojuegos</strong>,
-                buscando unir el desarrollo técnico con el diseño visual.
-              </p>
-            </div>
-          </section>
-
-
-          <div class="caja posicion-relativa">
-            <p class="texto-absoluto">Texto con position: absolute</p>
-          </div>
-
-          <div class="sticky-demo">
-            <h3>Elemento Sticky (permanece visible al hacer scroll)</h3>
-          </div>
-        </section>
-        <section id="float-demo">
-          <h2>Galería de Tecnologías</h2>
-
-          <div class="galeria clearfix">
-            <div class="caja-float izquierda">
-              <img src="img/html.png" alt="HTML">
-              <p>HTML5</p>
-            </div>
-
-            <div class="caja-float centro">
-              <img src="img/css.png" alt="CSS">
-              <p>CSS3</p>
-            </div>
-
-            <div class="caja-float derecha">
-              <img src="img/js.png" alt="JavaScript">
-              <p>JavaScript</p>
-            </div>
-
-            <div class="caja-float centro">
-              <img src="img/blender.png" alt="Blender">
-              <p>Blender</p>
-            </div>
-
-            <div class="caja-float derecha">
-              <img src="img/java.png" alt="Java">
-              <p>Java</p>
-            </div>
-
-
-
-
-
-          </div>
-
-          <div class="texto-final">
-            <p>Estos lenguajes forman la base de todos mis proyectos web y son esenciales en el desarrollo moderno.</p>
-          </div>
-        </section>
-
-
-
       </div>
     </section>
 
+    <section id="sobre-mi" class="seccion">
+      <div class="seccion-cabecera">
+        <p class="seccion-etiqueta">Perfil</p>
+        <h2>Sobre mí</h2>
+      </div>
+      <div class="sobre-mi-contenido">
+        <p>Soy desarrollador web, artista 3D y estudiante del Grado en Diseño y Desarrollo de Videojuegos en la Universidad Rey Juan Carlos. Cuento además con formación superior en Videojuegos y Realidad Virtual.</p>
+        <p>Me interesa participar en proyectos donde pueda combinar la parte técnica y visual, seguir aprendiendo y crecer junto a otros profesionales.</p>
+      </div>
+    </section>
 
+    <section id="tecnologias" class="seccion">
+      <div class="seccion-cabecera">
+        <p class="seccion-etiqueta">Herramientas</p>
+        <h2>Tecnologías</h2>
+      </div>
+      <div class="tecnologias-grid">
+        <article class="tecnologia"><img src="img/html.png" alt="HTML5"><h3>HTML5</h3></article>
+        <article class="tecnologia"><img src="img/css.png" alt="CSS3"><h3>CSS3</h3></article>
+        <article class="tecnologia"><img src="img/js.png" alt="JavaScript"><h3>JavaScript</h3></article>
+        <article class="tecnologia"><img src="img/java.png" alt="Java"><h3>Java</h3></article>
+        <article class="tecnologia"><img src="img/blender.png" alt="Blender"><h3>Blender</h3></article>
+      </div>
+    </section>
 
-<section id="proyectos">
-  <h2>Proyectos Destacados</h2>
-  <div class="galeria-proyectos">
-    <div class="proyecto">
-      <img src="img/proyecto1.jpg" alt="Proyecto Web">
-      <img src="img/proyecto2.jpg" alt="Proyecto Web">
-      <img src="img/proyecto3.jpg" alt="Proyecto Web">
+    <section id="proyectos" class="seccion">
+      <div class="seccion-cabecera">
+        <p class="seccion-etiqueta">Trabajo</p>
+        <h2>Proyectos destacados</h2>
+      </div>
+      <div class="proyectos-grid">
+        <article class="proyecto">
+          <div class="proyecto-galeria">
+            <img src="img/proyecto1.jpg" alt="Vista del proyecto de modelado 3D">
+            <img src="img/proyecto2.jpg" alt="Vista adicional del proyecto de modelado 3D">
+            <img src="img/proyecto3.jpg" alt="Detalle del proyecto de modelado 3D">
+          </div>
+          <div class="proyecto-contenido">
+            <p class="proyecto-categoria">3D</p>
+            <h3>Modelado 3D</h3>
+            <p>Selección de trabajos de modelado, creación de assets y experimentación visual.</p>
+          </div>
+        </article>
 
-      <h3>Modelado 3D</h3>
-    </div>
+        <article class="proyecto">
+          <div class="proyecto-galeria">
+            <img src="img/jueguito1.jpg" alt="Captura de un proyecto de videojuego">
+            <img src="img/jueguito2.jpg" alt="Segunda captura de un proyecto de videojuego">
+          </div>
+          <div class="proyecto-contenido">
+            <p class="proyecto-categoria">Game Development</p>
+            <h3>Demos y videojuegos</h3>
+            <p>Prototipos y experiencias desarrolladas durante mi formación en videojuegos y realidad virtual.</p>
+          </div>
+        </article>
 
-    <div class="proyecto">
-      <img src="img/jueguito1.jpg" alt="Proyecto 3D">
-            <img src="img/jueguito2.jpg" alt="Proyecto 3D">
+        <article class="proyecto proyecto-interactivo">
+          <div class="proyecto-contenido">
+            <p class="proyecto-categoria">Web 3D</p>
+            <h3>Portfolio interactivo Three.js</h3>
+            <p>Experiencia web tridimensional desarrollada con JavaScript, Three.js y recursos creados en Blender.</p>
+            <a class="boton boton-secundario" href="#" aria-disabled="true">Próximamente</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <h3>DEMOS</h3>
-      <p>Videojueguitos</p>
-    </div>
-  </div>
-</section>
+    <section id="experiencia" class="seccion">
+      <div class="seccion-cabecera">
+        <p class="seccion-etiqueta">Trayectoria</p>
+        <h2>Experiencia</h2>
+      </div>
+      <div class="experiencia-grid">
+        <article class="experiencia-bloque">
+          <h3>Experiencia en el sector</h3>
+          <div class="experiencia-item"><p class="experiencia-fecha">2026</p><div><h4>XPrint</h4><p>Prácticas de Desarrollo de Aplicaciones Web.</p></div></div>
+          <div class="experiencia-item"><p class="experiencia-fecha">2025</p><div><h4>OutSystems</h4><p>Prácticas en desarrollo de aplicaciones.</p></div></div>
+          <div class="experiencia-item"><p class="experiencia-fecha">2021</p><div><h4>VSION Studio</h4><p>Prácticas del CFGS de Animación 3D.</p></div></div>
+        </article>
+        <article class="experiencia-bloque">
+          <h3>Otra experiencia laboral</h3>
+          <p>Experiencia en logística y hostelería desarrollada mientras ampliaba mi formación.</p>
+          <p class="experiencia-listado">GXO · DHL · SEUR · Carreras Grupo Logístico · Reypama · Logisfashion · Arvato · Tortillas de Gabino · Wiltons Restaurant · Beykebab.</p>
+        </article>
+      </div>
+    </section>
 
+    <section id="formacion" class="seccion">
+      <div class="seccion-cabecera">
+        <p class="seccion-etiqueta">Educación</p>
+        <h2>Formación</h2>
+      </div>
+      <div class="formacion-lista">
+        <article class="formacion-item"><p class="formacion-estado">En curso</p><div><h3>Grado en Diseño y Desarrollo de Videojuegos</h3><p>Universidad Rey Juan Carlos</p></div></article>
+        <article class="formacion-item"><p class="formacion-estado">Finalizado</p><div><h3>Técnico Superior en Desarrollo de Aplicaciones Web</h3><p>IES Azarquiel</p></div></article>
+        <article class="formacion-item"><p class="formacion-estado">Finalizado</p><div><h3>Curso de Especialización en Videojuegos y Realidad Virtual</h3><p>IES Azarquiel</p></div></article>
+        <article class="formacion-item"><p class="formacion-estado">Finalizado</p><div><h3>Técnico Superior en Animación 3D, Juegos y Entornos Interactivos</h3><p>IES Alfonso X</p></div></article>
+      </div>
+    </section>
 
-<section id="script-ags">
-  <h2>Script Global – Adventure Game Studio</h2>
-  <p>
-    Este script controla la lógica principal del juego: gestión de entradas del jugador,
-    comportamiento de personajes, inventario y transiciones entre habitaciones.
-    Es una parte esencial del sistema de interacción del proyecto.
-  </p>
-
-  <pre><code class="language-c">
-// main global script file
-
-int lastFlipTime = 0; // Para llevar el control del tiempo
-int flipInterval = 10000; // 10 segundos en milisegundos
-int isDialogActive = 0;
-
-// Definir una variable global para controlar la dirección
-int enemigoDireccion = 1;  // 1 significa que está mirando a la derecha (eDirectionRight), 0 para izquierda (eDirectionLeft)
-
-// called when the game starts, before the first room is loaded
-function game_start()
-{
-  SetRestartPoint();
-  mouse.Visible = true;
-  mouse.Mode = eModeWalkto;
-}
-
-function repeatedly_execute()
-{
-  if (isDialogActive == 1) return;
-  LocationType location = GetLocationType(mouse.x, mouse.y);
-  if (location == eLocationObject || location == eLocationCharacter) {
-    mouse.Mode = eModeUsermode1;
-  } else {
-    mouse.Mode = eModeWalkto;
-  }
-}
-
-function on_key_press(eKeyCode keycode, int mod)
-{
-  if (IsGamePaused()) keycode = 0;
-  else if (keycode == eKeyQ && (mod & eKeyModCtrl)) QuitGame(1);
-  else if (keycode == eKeyF9) RestartGame();
-  else if (keycode == eKeyF12) SaveScreenShot("screenshot.pcx");
-}
-
-function cAyudante_Talk(Character *theCharacter, CursorMode mode)
-{
-  cAyudante.Say("Con cualquier cosa, aquí estoy");
-  dDialog1.Start();
-}
-  </code></pre>
-</section>
-
-
-
-
-
+    <section id="contacto" class="seccion contacto">
+      <div class="seccion-cabecera">
+        <p class="seccion-etiqueta">Contacto</p>
+        <h2>Hablemos</h2>
+      </div>
+      <p>Estoy abierto a oportunidades relacionadas con desarrollo web, videojuegos y 3D.</p>
+      <div class="contacto-enlaces">
+        <a href="mailto:nacho15111997@gmail.com">Email</a>
+        <a href="https://github.com/NachoSLKN" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.artstation.com/nachoslkn" target="_blank" rel="noopener noreferrer">ArtStation</a>
+        <a href="https://www.youtube.com/@NachoSLKN" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <!-- Aquí luego pondremos tus redes o contacto -->
-  </footer>
+  <footer class="pie"><p>© 2026 NachoSLKN</p></footer>
 
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    menuToggle.addEventListener('click', () => {
+      const abierto = menu.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', abierto);
+    });
+    document.querySelectorAll('.menu a').forEach((enlace) => {
+      enlace.addEventListener('click', () => {
+        menu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 </body>
-
 </html>
