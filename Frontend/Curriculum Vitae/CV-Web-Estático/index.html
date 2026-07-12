@@ -1,135 +1,361 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Prototipo de portfolio 3D de NachoSLKN">
-  <title>NachoSLKN Terminal</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Versión 1 del portfolio 3D interactivo de NachoSLKN."
+  >
+
+  <title>NachoSLKN | Portfolio 3D V1</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <main id="app">
-    <canvas id="scene" aria-label="Modelo 3D interactivo"></canvas>
 
+  <main id="app">
+
+    <canvas
+      id="scene"
+      aria-label="Modelo 3D interactivo del portfolio de NachoSLKN"
+    ></canvas>
+
+    <!-- Pantalla de carga -->
     <div class="loading" id="loading">
-      <p>SLKN TERMINAL</p>
-      <div class="loading-bar"><span id="loading-progress"></span></div>
-      <small id="loading-text">Cargando modelo 3D...</small>
+
+      <p>Cargando Portfolio de Nacho...</p>
+
+      <div class="loading-bar">
+        <span id="loading-progress"></span>
+      </div>
+
+      <small id="loading-text">
+        Preparando experiencia 3D · Versión 1
+      </small>
+
     </div>
 
+    <!-- Cabecera -->
     <header class="topbar">
-      <div>
-        <span class="brand">NACHOSLKN</span>
-        <span class="status">SYSTEM ONLINE</span>
+
+      <div class="brand-container">
+
+        <span class="brand">
+          NACHOSLKN
+        </span>
+
+        <span class="status">
+          PORTFOLIO 3D · VERSIÓN 1
+        </span>
+
       </div>
 
       <div class="controls">
-        <button id="focus-toggle" class="control-button" type="button">
+
+        <button
+          id="focus-toggle"
+          class="control-button"
+          type="button"
+        >
           FIJAR PANTALLA
         </button>
-        <button id="reset-camera" class="control-button secondary" type="button">
+
+        <button
+          id="reset-camera"
+          class="control-button secondary"
+          type="button"
+        >
           REINICIAR VISTA
         </button>
+
       </div>
+
     </header>
 
-    <section id="screen-ui" class="screen-ui hidden" aria-live="polite">
+    <!-- Interfaz superpuesta sobre la pantalla del modelo -->
+    <section
+      id="screen-ui"
+      class="screen-ui hidden"
+      aria-live="polite"
+    >
+
       <div class="screen-glass"></div>
 
-      <nav class="terminal-tabs" aria-label="Secciones del portfolio">
-        <button class="tab active" data-section="perfil">STAT</button>
-        <button class="tab" data-section="web">WEB</button>
-        <button class="tab" data-section="game">GAME</button>
-        <button class="tab" data-section="3d">3D</button>
-        <button class="tab" data-section="cv">CV</button>
-        <button class="tab" data-section="contacto">RADIO</button>
+      <nav
+        class="terminal-tabs"
+        aria-label="Secciones del portfolio"
+      >
+
+        <button
+          class="tab active"
+          data-section="perfil"
+          type="button"
+        >
+          STAT
+        </button>
+
+        <button
+          class="tab"
+          data-section="web"
+          type="button"
+        >
+          WEB
+        </button>
+
+        <button
+          class="tab"
+          data-section="game"
+          type="button"
+        >
+          GAME
+        </button>
+
+        <button
+          class="tab"
+          data-section="3d"
+          type="button"
+        >
+          3D
+        </button>
+
+        <button
+          class="tab"
+          data-section="cv"
+          type="button"
+        >
+          CV
+        </button>
+
+        <button
+          class="tab"
+          data-section="contacto"
+          type="button"
+        >
+          RADIO
+        </button>
+
       </nav>
 
       <div class="terminal-content">
-        <article class="panel active" data-panel="perfil">
-          <p class="terminal-kicker">USER PROFILE</p>
+
+        <!-- Perfil -->
+        <article
+          class="panel active"
+          data-panel="perfil"
+        >
+
+          <p class="terminal-kicker">
+            USER PROFILE · V1
+          </p>
+
           <h1>Ignacio Liñán Vicente</h1>
-          <p class="role">Game Developer · Web Developer · 3D Artist</p>
+
+          <p class="role">
+            Game Developer · Web Developer · 3D Artist
+          </p>
+
           <p>
             Desarrollo experiencias digitales combinando programación,
             videojuegos y creación 3D.
           </p>
+
           <div class="stats">
             <span>WEB: 75</span>
             <span>GAME: 65</span>
             <span>3D: 70</span>
           </div>
+
         </article>
 
-        <article class="panel" data-panel="web">
-          <p class="terminal-kicker">WEB DEVELOPMENT</p>
+        <!-- Desarrollo web -->
+        <article
+          class="panel"
+          data-panel="web"
+        >
+
+          <p class="terminal-kicker">
+            WEB DEVELOPMENT
+          </p>
+
           <h2>Desarrollo web</h2>
+
           <ul>
             <li>HTML5 · CSS3 · JavaScript</li>
             <li>Java · SQL · Git</li>
-            <li>Spring / JPA / Hibernate</li>
+            <li>Spring · JPA · Hibernate</li>
             <li>OutSystems</li>
           </ul>
+
         </article>
 
-        <article class="panel" data-panel="game">
-          <p class="terminal-kicker">GAME DEVELOPMENT</p>
+        <!-- Videojuegos -->
+        <article
+          class="panel"
+          data-panel="game"
+        >
+
+          <p class="terminal-kicker">
+            GAME DEVELOPMENT
+          </p>
+
           <h2>Videojuegos</h2>
+
           <ul>
             <li>Unity · Unreal Engine</li>
             <li>C# · Adventure Game Studio</li>
             <li>Realidad Virtual</li>
             <li>Demos, prototipos y gameplays</li>
           </ul>
+
         </article>
 
-        <article class="panel" data-panel="3d">
-          <p class="terminal-kicker">3D & VISUALS</p>
+        <!-- 3D -->
+        <article
+          class="panel"
+          data-panel="3d"
+        >
+
+          <p class="terminal-kicker">
+            3D & VISUALS
+          </p>
+
           <h2>Arte 3D</h2>
+
           <ul>
             <li>Blender · 3ds Max</li>
             <li>Modelado y creación de assets</li>
             <li>Render y presentación visual</li>
             <li>DaVinci Resolve</li>
           </ul>
+
         </article>
 
-        <article class="panel" data-panel="cv">
-          <p class="terminal-kicker">PERSONNEL FILE</p>
-          <h2>Currículum</h2>
-          <p>
-            Próximamente podrás descargar las versiones en español e inglés.
+        <!-- CV -->
+        <article
+          class="panel"
+          data-panel="cv"
+        >
+
+          <p class="terminal-kicker">
+            PERSONNEL FILE
           </p>
-          <a class="terminal-link disabled" href="#" aria-disabled="true">
+
+          <h2>Currículum</h2>
+
+          <p>
+            Próximamente estarán disponibles las versiones
+            en español y en inglés.
+          </p>
+
+          <a
+            class="terminal-link disabled"
+            href="#"
+            aria-disabled="true"
+          >
             DESCARGAR CV
           </a>
+
         </article>
 
-        <article class="panel" data-panel="contacto">
-          <p class="terminal-kicker">COMMUNICATIONS</p>
+        <!-- Contacto -->
+        <article
+          class="panel"
+          data-panel="contacto"
+        >
+
+          <p class="terminal-kicker">
+            COMMUNICATIONS
+          </p>
+
           <h2>Contacto</h2>
+
           <div class="terminal-links">
-            <a href="mailto:Nacho15111997@gmail.com">Email</a>
-            <a href="https://github.com/NachoSLKN" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.artstation.com/nachoslkn" target="_blank" rel="noopener noreferrer">ArtStation</a>
-            <a href="https://www.youtube.com/@NachoSLKN" target="_blank" rel="noopener noreferrer">YouTube</a>
+
+            <a href="mailto:Nacho15111997@gmail.com">
+              Email
+            </a>
+
+            <a
+              href="https://github.com/NachoSLKN"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+
+            <a
+              href="https://www.artstation.com/nachoslkn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ArtStation
+            </a>
+
+            <a
+              href="https://www.youtube.com/@NachoSLKN"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              YouTube
+            </a>
+
           </div>
+
         </article>
+
       </div>
 
       <div class="terminal-footer">
-        <span id="section-counter">01 / 06</span>
-        <span>SCROLL / SWIPE TO NAVIGATE</span>
+
+        <span id="section-counter">
+          01 / 06
+        </span>
+
+        <span>
+          PORTFOLIO V1 · SCROLL / SWIPE TO NAVIGATE
+        </span>
+
       </div>
+
     </section>
 
+    <!-- Ayuda -->
     <aside class="help">
-      <p><strong>MODO LIBRE:</strong> arrastra para rotar · rueda para zoom</p>
-      <p><strong>MODO PANTALLA:</strong> rueda para cambiar de sección</p>
+
+      <p>
+        <strong>MODO LIBRE:</strong>
+        arrastra para rotar · rueda para zoom
+      </p>
+
+      <p>
+        <strong>MODO PANTALLA:</strong>
+        rueda para cambiar de sección
+      </p>
+
+      <p>
+        <strong>VERSIÓN:</strong>
+        Portfolio 3D V1
+      </p>
+
     </aside>
+
   </main>
 
-  <script type="module" src="script.js"></script>
+  <script
+    type="module"
+    src="script.js"
+  ></script>
+
 </body>
+
 </html>
+```

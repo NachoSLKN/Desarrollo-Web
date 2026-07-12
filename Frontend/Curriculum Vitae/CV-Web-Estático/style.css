@@ -108,27 +108,48 @@ a {
 
 .screen-ui {
   --screen-scale: 1;
+
   position: fixed;
   z-index: 12;
-  top: 50%;
-  left: 50%;
-  width: min(560px, 58vw);
-  height: min(390px, 47vh);
-  transform: translate(-50%, -48%) scale(var(--screen-scale));
-  padding: 22px 22px 18px;
+
+  /* Ajuste provisional para esta vista del modelo */
+  top: 55%;
+  left: 42%;
+
+  width: clamp(440px, 29vw, 520px);
+  height: clamp(290px, 42vh, 330px);
+
+  transform:
+    translate(-50%, -50%)
+    scale(var(--screen-scale));
+
+  padding: 18px 20px 16px;
   overflow: hidden;
+
   border: 1px solid rgba(124, 255, 114, 0.65);
-  border-radius: 18px;
+  border-radius: 14px;
+
   background:
-    linear-gradient(rgba(124, 255, 114, 0.035) 50%, rgba(0, 0, 0, 0.09) 50%),
-    radial-gradient(circle at 50% 50%, rgba(124, 255, 114, 0.1), transparent 70%),
+    linear-gradient(
+      rgba(124, 255, 114, 0.035) 50%,
+      rgba(0, 0, 0, 0.09) 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(124, 255, 114, 0.1),
+      transparent 70%
+    ),
     var(--panel);
+
   background-size: 100% 4px, auto, auto;
+
   box-shadow:
     0 0 20px rgba(124, 255, 114, 0.32),
     0 0 55px rgba(124, 255, 114, 0.16),
     inset 0 0 40px rgba(124, 255, 114, 0.08);
+
   opacity: 1;
+
   transition:
     opacity 220ms ease,
     transform 550ms cubic-bezier(.2, .8, .2, 1);

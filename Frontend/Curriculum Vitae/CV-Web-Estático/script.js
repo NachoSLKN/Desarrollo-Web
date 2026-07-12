@@ -125,8 +125,7 @@ loader.load(
     scene.add(model);
 
     loadingProgress.style.width = "100%";
-    loadingText.textContent = "Sistema preparado";
-
+    loadingText.textContent = "Portfolio V1 preparado";
     window.setTimeout(() => loading.classList.add("done"), 450);
   },
   (event) => {
