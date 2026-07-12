@@ -907,3 +907,145 @@ a {
     font-size: 0.54rem;
   }
 }
+
+
+/* =========================================================
+   CONTROLES Y NAVEGACIÓN MÓVIL
+========================================================= */
+
+.mobile-pipboy-controls {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero-3d {
+    height: 100svh;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+
+  .topbar {
+    padding: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .topbar > div:first-child {
+    text-align: center;
+  }
+
+  .controls,
+  .help,
+  .scroll-indicator {
+    display: none;
+  }
+
+  .mobile-pipboy-controls {
+    position: absolute;
+    z-index: 30;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid rgba(124, 255, 114, 0.4);
+    background: rgba(2, 12, 5, 0.92);
+    box-shadow: 0 0 24px rgba(124, 255, 114, 0.12);
+    backdrop-filter: blur(8px);
+  }
+
+  .mobile-pipboy-controls button,
+  .mobile-portfolio-link {
+    min-height: 44px;
+    border: 1px solid rgba(124, 255, 114, 0.5);
+    background: rgba(5, 25, 10, 0.92);
+    color: var(--green-bright);
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font: inherit;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .mobile-section-controls {
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    gap: 8px;
+  }
+
+  .mobile-section-controls span {
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(124, 255, 114, 0.22);
+    color: var(--green);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .portfolio-section {
+    padding: 72px 16px 84px;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.8rem, 10vw, 3rem);
+    overflow-wrap: anywhere;
+  }
+
+  .project-card,
+  .project-features,
+  .contact-grid,
+  .info-grid,
+  .skill-columns,
+  .profile-layout,
+  .cv-viewer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 14px;
+  }
+
+  .project-screen {
+    min-height: 0;
+    padding: 7px;
+    margin-bottom: 22px;
+  }
+
+  .video-frame,
+  .project-video {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .info-card,
+  .skill-panel,
+  .profile-copy,
+  .profile-stats {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .cv-preview-shell {
+    min-height: 0;
+    padding: 8px;
+  }
+
+  .site-footer {
+    padding: 24px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

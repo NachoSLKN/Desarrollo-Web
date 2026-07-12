@@ -58,6 +58,11 @@ const loading = document.querySelector("#loading");
 const loadingProgress = document.querySelector("#loading-progress");
 const loadingText = document.querySelector("#loading-text");
 
+const mobileFocusButton = document.querySelector("#mobile-focus-toggle");
+const mobilePrevSectionButton = document.querySelector("#mobile-prev-section");
+const mobileNextSectionButton = document.querySelector("#mobile-next-section");
+const mobileSectionLabel = document.querySelector("#mobile-section-label");
+
 
 
 /* =========================================================
@@ -778,6 +783,10 @@ function setFocus(nextState) {
   if (isFocused) {
     focusButton.textContent = "LIBERAR PANTALLA";
 
+    if (mobileFocusButton) {
+      mobileFocusButton.textContent = "CERRAR PANTALLA";
+    }
+
     hideHolographicScreen();
 
     animateModelRotation(focusRotationEuler());
@@ -795,6 +804,10 @@ function setFocus(nextState) {
   } else {
     focusButton.textContent = "FIJAR PANTALLA";
 
+    if (mobileFocusButton) {
+      mobileFocusButton.textContent = "ABRIR PANTALLA";
+    }
+
     hideHolographicScreen();
 
     /*
@@ -811,6 +824,20 @@ function setFocus(nextState) {
 
 focusButton.addEventListener("click", () => {
   setFocus(!isFocused);
+});
+
+mobileFocusButton?.addEventListener("click", () => {
+  setFocus(!isFocused);
+});
+
+mobilePrevSectionButton?.addEventListener("click", () => {
+  if (!isFocused) setFocus(true);
+  selectSection(currentSection - 1);
+});
+
+mobileNextSectionButton?.addEventListener("click", () => {
+  if (!isFocused) setFocus(true);
+  selectSection(currentSection + 1);
 });
 
 resetButton.addEventListener("click", () => {
@@ -831,6 +858,10 @@ function selectSection(index) {
     (index + sections.length) % sections.length;
 
   drawScreen();
+
+  if (mobileSectionLabel) {
+    mobileSectionLabel.textContent = sections[currentSection].tab;
+  }
 }
 
 window.addEventListener(
@@ -854,6 +885,34 @@ window.addEventListener(
 
   { passive: false }
 );
+
+
+let mobileTouchStartX = null;
+let mobileTouchStartY = null;
+
+canvas.addEventListener("touchstart", (event) => {
+  if (!event.touches.length) return;
+  mobileTouchStartX = event.touches[0].clientX;
+  mobileTouchStartY = event.touches[0].clientY;
+}, { passive: true });
+
+canvas.addEventListener("touchend", (event) => {
+  if (!isFocused || mobileTouchStartX === null || mobileTouchStartY === null) {
+    mobileTouchStartX = null;
+    mobileTouchStartY = null;
+    return;
+  }
+
+  const deltaX = event.changedTouches[0].clientX - mobileTouchStartX;
+  const deltaY = event.changedTouches[0].clientY - mobileTouchStartY;
+
+  mobileTouchStartX = null;
+  mobileTouchStartY = null;
+
+  if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+  selectSection(currentSection + (deltaX < 0 ? 1 : -1));
+}, { passive: true });
 
 /* =========================================================
    PDF.JS: VISTA PREVIA SIN DESCARGA AUTOMÁTICA
@@ -914,8 +973,6 @@ window.addEventListener("DOMContentLoaded", () => {
     "cv-preview-en",
     "cv-status-en"
   );
-
-  
 });
 
 /* =========================================================
@@ -966,12 +1023,7 @@ function render() {
   controls.update();
 
   renderer.render(scene, camera);
-
-
-  
 }
 
-
-
-drawScreen();
+selectSection(0);
 render();
