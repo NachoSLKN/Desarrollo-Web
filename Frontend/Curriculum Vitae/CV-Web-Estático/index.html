@@ -1,361 +1,495 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
     name="description"
-    content="Versión 1 del portfolio 3D interactivo de NachoSLKN."
+    content="Portfolio interactivo de NachoSLKN: desarrollo web, videojuegos, 3D, proyectos y contacto."
   >
 
-  <title>NachoSLKN | Portfolio 3D V1</title>
-
+  <title>NachoSLKN | Portfolio 3D</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
   <main id="app">
 
-    <canvas
-      id="scene"
-      aria-label="Modelo 3D interactivo del portfolio de NachoSLKN"
-    ></canvas>
+    <!-- =====================================================
+         HERO 3D
+    ====================================================== -->
+    <section class="hero-3d" id="inicio">
 
-    <!-- Pantalla de carga -->
-    <div class="loading" id="loading">
+      <canvas
+        id="scene"
+        aria-label="Pip-Boy 3D interactivo del portfolio de NachoSLKN"
+      ></canvas>
 
-      <p>Cargando Portfolio de Nacho...</p>
+      <div class="loading" id="loading">
+        <p>Cargando Portfolio...</p>
 
-      <div class="loading-bar">
-        <span id="loading-progress"></span>
+        <div class="loading-bar">
+          <span id="loading-progress"></span>
+        </div>
+
+        <small id="loading-text">
+          Preparando experiencia 3D
+        </small>
       </div>
 
-      <small id="loading-text">
-        Preparando experiencia 3D · Versión 1
-      </small>
+      <header class="topbar">
+        <div>
+          <span class="brand">NACHOSLKN</span>
+          <span class="status">PORTFOLIO 3D · VERSIÓN 1</span>
+        </div>
 
-    </div>
+        <div class="controls">
+          <button
+            id="focus-toggle"
+            class="control-button"
+            type="button"
+          >
+            FIJAR PANTALLA
+          </button>
 
-    <!-- Cabecera -->
-    <header class="topbar">
+          <button
+            id="reset-camera"
+            class="control-button secondary"
+            type="button"
+          >
+            REINICIAR VISTA
+          </button>
+        </div>
+      </header>
 
-      <div class="brand-container">
+      <aside class="help">
+        <p>
+          <strong>MODO LIBRE:</strong>
+          arrastra para rotar · rueda para zoom
+        </p>
 
-        <span class="brand">
-          NACHOSLKN
-        </span>
+        <p>
+          <strong>MODO PANTALLA:</strong>
+          rueda para cambiar de sección
+        </p>
+      </aside>
 
-        <span class="status">
-          PORTFOLIO 3D · VERSIÓN 1
-        </span>
-
-      </div>
-
-      <div class="controls">
-
-        <button
-          id="focus-toggle"
-          class="control-button"
-          type="button"
-        >
-          FIJAR PANTALLA
-        </button>
-
-        <button
-          id="reset-camera"
-          class="control-button secondary"
-          type="button"
-        >
-          REINICIAR VISTA
-        </button>
-
-      </div>
-
-    </header>
-
-    <!-- Interfaz superpuesta sobre la pantalla del modelo -->
-    <section
-      id="screen-ui"
-      class="screen-ui hidden"
-      aria-live="polite"
-    >
-
-      <div class="screen-glass"></div>
-
-      <nav
-        class="terminal-tabs"
-        aria-label="Secciones del portfolio"
+      <a
+        class="scroll-indicator"
+        href="#proyectos"
+        aria-label="Ir a proyectos"
       >
+        EXPLORAR PORTFOLIO ↓
+      </a>
 
-        <button
-          class="tab active"
-          data-section="perfil"
-          type="button"
-        >
-          STAT
-        </button>
+    </section>
 
-        <button
-          class="tab"
-          data-section="web"
-          type="button"
-        >
-          WEB
-        </button>
+    <!-- =====================================================
+         PROYECTOS
+    ====================================================== -->
+    <section class="portfolio-section projects-section" id="proyectos">
+      <div class="section-heading">
+        <p class="section-code">ARCHIVE // PROJECT DATABASE</p>
+        <h2>Proyectos destacados</h2>
+        <p>
+          Prototipos, videojuegos y experiencias interactivas desarrolladas
+          con distintas tecnologías.
+        </p>
+      </div>
 
-        <button
-          class="tab"
-          data-section="game"
-          type="button"
-        >
-          GAME
-        </button>
+      <article class="project-card featured-project">
+       <div class="project-screen">
+          <div class="video-frame">
+            <iframe
+              class="project-video"
+              src="https://www.youtube.com/embed/X5yHedo7cYY?rel=0&modestbranding=1"
+              title="PyDew Valley Gameplay"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
 
-        <button
-          class="tab"
-          data-section="3d"
-          type="button"
-        >
-          3D
-        </button>
+            <div class="video-overlay" aria-hidden="true"></div>
+          </div>
+        </div>
 
-        <button
-          class="tab"
-          data-section="cv"
-          type="button"
-        >
-          CV
-        </button>
-
-        <button
-          class="tab"
-          data-section="contacto"
-          type="button"
-        >
-          RADIO
-        </button>
-
-      </nav>
-
-      <div class="terminal-content">
-
-        <!-- Perfil -->
-        <article
-          class="panel active"
-          data-panel="perfil"
-        >
-
-          <p class="terminal-kicker">
-            USER PROFILE · V1
+        <div class="project-info">
+          <p class="project-code">
+            PROJECT_001 · STATUS: COMPLETED
           </p>
 
-          <h1>Ignacio Liñán Vicente</h1>
-
-          <p class="role">
-            Game Developer · Web Developer · 3D Artist
-          </p>
+          <h3>PyDew Valley</h3>
 
           <p>
-            Desarrollo experiencias digitales combinando programación,
-            videojuegos y creación 3D.
+            Prototipo de juego de granja inspirado en Stardew Valley,
+            desarrollado con Python y Pygame.
           </p>
 
-          <div class="stats">
-            <span>WEB: 75</span>
-            <span>GAME: 65</span>
-            <span>3D: 70</span>
+          <ul class="project-features">
+            <li>Tree chopping</li>
+            <li>Apple picking</li>
+            <li>Planting and watering</li>
+            <li>Harvesting</li>
+            <li>Merchant trading</li>
+            <li>Day / night cycle</li>
+            <li>Sleep & recovery</li>
+            <li>Weather system</li>
+          </ul>
+
+          <div class="tech-list">
+            <span>PYTHON</span>
+            <span>PYGAME</span>
+            <span>GAMEDEV</span>
           </div>
 
-        </article>
-
-        <!-- Desarrollo web -->
-        <article
-          class="panel"
-          data-panel="web"
-        >
-
-          <p class="terminal-kicker">
-            WEB DEVELOPMENT
-          </p>
-
-          <h2>Desarrollo web</h2>
-
-          <ul>
-            <li>HTML5 · CSS3 · JavaScript</li>
-            <li>Java · SQL · Git</li>
-            <li>Spring · JPA · Hibernate</li>
-            <li>OutSystems</li>
-          </ul>
-
-        </article>
-
-        <!-- Videojuegos -->
-        <article
-          class="panel"
-          data-panel="game"
-        >
-
-          <p class="terminal-kicker">
-            GAME DEVELOPMENT
-          </p>
-
-          <h2>Videojuegos</h2>
-
-          <ul>
-            <li>Unity · Unreal Engine</li>
-            <li>C# · Adventure Game Studio</li>
-            <li>Realidad Virtual</li>
-            <li>Demos, prototipos y gameplays</li>
-          </ul>
-
-        </article>
-
-        <!-- 3D -->
-        <article
-          class="panel"
-          data-panel="3d"
-        >
-
-          <p class="terminal-kicker">
-            3D & VISUALS
-          </p>
-
-          <h2>Arte 3D</h2>
-
-          <ul>
-            <li>Blender · 3ds Max</li>
-            <li>Modelado y creación de assets</li>
-            <li>Render y presentación visual</li>
-            <li>DaVinci Resolve</li>
-          </ul>
-
-        </article>
-
-        <!-- CV -->
-        <article
-          class="panel"
-          data-panel="cv"
-        >
-
-          <p class="terminal-kicker">
-            PERSONNEL FILE
-          </p>
-
-          <h2>Currículum</h2>
-
-          <p>
-            Próximamente estarán disponibles las versiones
-            en español y en inglés.
-          </p>
-
-          <a
-            class="terminal-link disabled"
-            href="#"
-            aria-disabled="true"
-          >
-            DESCARGAR CV
-          </a>
-
-        </article>
-
-        <!-- Contacto -->
-        <article
-          class="panel"
-          data-panel="contacto"
-        >
-
-          <p class="terminal-kicker">
-            COMMUNICATIONS
-          </p>
-
-          <h2>Contacto</h2>
-
-          <div class="terminal-links">
-
-            <a href="mailto:Nacho15111997@gmail.com">
-              Email
-            </a>
-
+          <div class="project-actions">
             <a
+              class="terminal-link"
               href="https://github.com/NachoSLKN"
               target="_blank"
               rel="noopener noreferrer"
             >
-              GitHub
+              VER EN GITHUB
             </a>
 
             <a
-              href="https://www.artstation.com/nachoslkn"
+              class="terminal-link secondary-link"
+              href="https://youtu.be/X5yHedo7cYY"
               target="_blank"
               rel="noopener noreferrer"
             >
-              ArtStation
+              VER GAMEPLAY
             </a>
-
-            <a
-              href="https://www.youtube.com/@NachoSLKN"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              YouTube
-            </a>
-
           </div>
-
-        </article>
-
-      </div>
-
-      <div class="terminal-footer">
-
-        <span id="section-counter">
-          01 / 06
-        </span>
-
-        <span>
-          PORTFOLIO V1 · SCROLL / SWIPE TO NAVIGATE
-        </span>
-
-      </div>
-
+        </div>
+      </article>
     </section>
 
-    <!-- Ayuda -->
-    <aside class="help">
+    <!-- =====================================================
+         DESARROLLO DE VIDEOJUEGOS
+    ====================================================== -->
+    <section class="portfolio-section" id="gamedev">
+      <div class="section-heading">
+        <p class="section-code">GAME DEVELOPMENT // SYSTEMS</p>
+        <h2>Desarrollo de videojuegos</h2>
+        <p>
+          Diseño y programación de prototipos, sistemas jugables,
+          experiencias interactivas y proyectos de realidad virtual.
+        </p>
+      </div>
 
-      <p>
-        <strong>MODO LIBRE:</strong>
-        arrastra para rotar · rueda para zoom
-      </p>
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="card-index">01</span>
+          <h3>Motores</h3>
+          <p>Unity, Unreal Engine, Pygame y Adventure Game Studio.</p>
+        </article>
 
-      <p>
-        <strong>MODO PANTALLA:</strong>
-        rueda para cambiar de sección
-      </p>
+        <article class="info-card">
+          <span class="card-index">02</span>
+          <h3>Programación</h3>
+          <p>C#, Python, JavaScript y lógica de sistemas jugables.</p>
+        </article>
 
-      <p>
-        <strong>VERSIÓN:</strong>
-        Portfolio 3D V1
-      </p>
+        <article class="info-card">
+          <span class="card-index">03</span>
+          <h3>Áreas</h3>
+          <p>Gameplay, interfaces, físicas, IA básica, prototipado y VR.</p>
+        </article>
+      </div>
+    </section>
 
-    </aside>
+    <!-- =====================================================
+         DESARROLLO WEB
+    ====================================================== -->
+    <section class="portfolio-section alternate-section" id="web">
+      <div class="section-heading">
+        <p class="section-code">WEB DEVELOPMENT // ONLINE SYSTEMS</p>
+        <h2>Desarrollo web</h2>
+        <p>
+          Aplicaciones, interfaces y experiencias web construidas
+          con tecnologías frontend, backend y bases de datos.
+        </p>
+      </div>
 
+      <div class="skill-columns">
+        <article class="skill-panel">
+          <h3>Frontend</h3>
+          <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Three.js</li>
+            <li>Diseño responsive</li>
+          </ul>
+        </article>
+
+        <article class="skill-panel">
+          <h3>Backend</h3>
+          <ul>
+            <li>Java</li>
+            <li>Spring / Spring Boot</li>
+            <li>JPA / Hibernate</li>
+            <li>APIs y servicios web</li>
+          </ul>
+        </article>
+
+        <article class="skill-panel">
+          <h3>Datos y herramientas</h3>
+          <ul>
+            <li>SQL y Oracle</li>
+            <li>Git y GitHub</li>
+            <li>Eclipse / VS Code</li>
+            <li>Tomcat</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         3D
+    ====================================================== -->
+    <section class="portfolio-section" id="arte-3d">
+      <div class="section-heading">
+        <p class="section-code">3D & VISUALS // ASSET PIPELINE</p>
+        <h2>Arte 3D y multimedia</h2>
+        <p>
+          Modelado, creación de assets, render, composición y presentación
+          audiovisual para videojuegos y experiencias digitales.
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="card-index">01</span>
+          <h3>Modelado</h3>
+          <p>Blender, 3ds Max, entornos, objetos y assets para videojuegos.</p>
+        </article>
+
+        <article class="info-card">
+          <span class="card-index">02</span>
+          <h3>Visualización</h3>
+          <p>Iluminación, materiales, render y presentación de proyectos.</p>
+        </article>
+
+        <article class="info-card">
+          <span class="card-index">03</span>
+          <h3>Edición</h3>
+          <p>DaVinci Resolve, montaje de gameplays y piezas audiovisuales.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PERFIL Y CURRÍCULUM
+    ====================================================== -->
+    <section class="portfolio-section alternate-section" id="perfil">
+      <div class="section-heading">
+        <p class="section-code">PERSONNEL FILE // PROFILE & CV</p>
+        <h2>Sobre mí y currículum</h2>
+
+        <p>
+          Perfil multidisciplinar orientado al desarrollo de videojuegos,
+          desarrollo web y creación 3D. Puedes consultar o descargar el
+          currículum en español y en inglés.
+        </p>
+      </div>
+
+      <div class="profile-layout">
+        <div class="profile-copy">
+          <p class="profile-lead">
+            Soy Ignacio Liñán Vicente, Game Developer, Web Developer y 3D Artist.
+          </p>
+
+          <p>
+            Actualmente curso el Grado en Diseño y Desarrollo de Videojuegos.
+            Mi formación combina programación, aplicaciones web, realidad
+            virtual, modelado 3D y creación de experiencias interactivas.
+          </p>
+
+          <p>
+            He trabajado como desarrollador web y modelador 3D, además de contar
+            con experiencia profesional en entornos internacionales.
+          </p>
+
+          <div class="profile-actions">
+            <a
+              class="terminal-link"
+              href="cv/Curriculum_ES.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ABRIR CV EN ESPAÑOL
+            </a>
+
+            <a
+              class="terminal-link"
+              href="cv/Curriculum_EN.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              OPEN ENGLISH CV
+            </a>
+
+            <a
+              class="terminal-link secondary-link"
+              href="cv/Curriculum_ES.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ABRIR ES
+            </a>
+
+            <a
+              class="terminal-link secondary-link"
+              href="cv/Curriculum_EN.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              OPEN EN
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-stats">
+          <div>
+            <span>FOCUS</span>
+            <strong>GAME DEVELOPMENT</strong>
+          </div>
+
+          <div>
+            <span>SECONDARY</span>
+            <strong>WEB / 3D</strong>
+          </div>
+
+          <div>
+            <span>LOCATION</span>
+            <strong>MADRID, SPAIN</strong>
+          </div>
+
+          <div>
+            <span>LANGUAGES</span>
+            <strong>ES / EN / DE</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-viewer-grid">
+        <article class="cv-viewer">
+          <div class="cv-viewer-header">
+            <div>
+              <span class="cv-language">ES</span>
+              <h3>Currículum en español</h3>
+            </div>
+
+            <a
+              href="cv/Curriculum_ES.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ABRIR ↗
+            </a>
+          </div>
+
+          <div class="cv-preview-shell">
+            <canvas
+              id="cv-preview-es"
+              class="cv-preview-canvas"
+              aria-label="Vista previa del currículum en español"
+            ></canvas>
+
+            <p id="cv-status-es" class="cv-preview-status">
+              Cargando vista previa…
+            </p>
+          </div>
+        </article>
+
+        <article class="cv-viewer">
+          <div class="cv-viewer-header">
+            <div>
+              <span class="cv-language">EN</span>
+              <h3>English résumé</h3>
+            </div>
+
+            <a
+              href="cv/Curriculum_EN.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              OPEN ↗
+            </a>
+          </div>
+
+          <div class="cv-preview-shell">
+            <canvas
+              id="cv-preview-en"
+              class="cv-preview-canvas"
+              aria-label="English résumé preview"
+            ></canvas>
+
+            <p id="cv-status-en" class="cv-preview-status">
+              Loading preview…
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CONTACTO
+    ====================================================== -->
+    <section class="portfolio-section contact-section" id="contacto">
+      <div class="section-heading">
+        <p class="section-code">RADIO // OPEN CHANNEL</p>
+        <h2>Contacto</h2>
+        <p>
+          Puedes encontrar mis proyectos, vídeos y trabajos en estas plataformas.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <a href="mailto:Nacho15111997@gmail.com">
+          <span>EMAIL</span>
+          <strong>Nacho15111997@gmail.com</strong>
+        </a>
+
+        <a
+          href="https://github.com/NachoSLKN"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>GITHUB</span>
+          <strong>github.com/NachoSLKN</strong>
+        </a>
+
+        <a
+          href="https://www.youtube.com/@NachoSLKN"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>YOUTUBE</span>
+          <strong>@NachoSLKN</strong>
+        </a>
+
+        <a
+          href="https://www.artstation.com/nachoslkn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>ARTSTATION</span>
+          <strong>nachoslkn</strong>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>NACHOSLKN // PORTFOLIO SYSTEM</span>
+      <a href="#inicio">VOLVER AL PIP-BOY ↑</a>
+    </footer>
   </main>
 
-  <script
-    type="module"
-    src="script.js"
-  ></script>
-
+  <script type="module" src="script.js"></script>
 </body>
-
 </html>
-```
