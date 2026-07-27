@@ -1,0 +1,111 @@
+{
+  "games": [
+    {
+      "id": "hitman",
+      "title": "Hitman Clone",
+      "engine": "Unity",
+      "folder": "UNITY/Hitman",
+      "status": "En desarrollo",
+      "description": "Demo de sigilo en tercera persona inspirada en Hitman.",
+      "tags": [
+        "Unity",
+        "C#",
+        "Stealth"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Hitman",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Hitman/README.MD",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/Hitman/Portada.png",
+      "development": "https://youtu.be/oCQWSZgxsfI",
+      "gameplayLabel": "VER DESARROLLO"
+    },
+    {
+      "id": "pydew",
+      "title": "PyDew Valley",
+      "engine": "Pygame",
+      "folder": "PYGAME/PyDew-Valley",
+      "status": "Demo",
+      "description": "Juego de granja desarrollado con Python y Pygame.",
+      "tags": [
+        "Python",
+        "Pygame"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/PYGAME/PyDew-Valley",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/PYGAME/PyDew-Valley/README.md",
+      "gameplay": "https://youtu.be/X5yHedo7cYY",
+      "gameplayLabel": "VER GAMEPLAY"
+    },
+    {
+      "id": "inspector-ags",
+      "title": "The Inspector",
+      "engine": "Adventure Game Studio",
+      "folder": "AGS/INSPECTORAGS",
+      "status": "Proyecto",
+      "description": "Aventura gráfica desarrollada con Adventure Game Studio.",
+      "tags": [
+        "AGS",
+        "Adventure",
+        "Point & Click"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/AGS/INSPECTORAGS",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/AGS/INSPECTORAGS#readme"
+    },
+    {
+      "id": "godette",
+      "title": "The Leyend of Godette",
+      "engine": "Godot",
+      "folder": "GODOT/The Leyend Of Godette",
+      "status": "Proyecto",
+      "description": "Proyecto de videojuego desarrollado con Godot.",
+      "tags": [
+        "Godot",
+        "GDScript"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/GODOT/The%20Leyend%20Of%20Godette",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/GODOT/The%20Leyend%20Of%20Godette/README.md"
+    },
+    {
+      "id": "elden-ring",
+      "title": "Elden Ring Prototype",
+      "engine": "Unity",
+      "folder": "UNITY/Elden Ring",
+      "status": "Proyecto",
+      "description": "Prototipo de acción y combate desarrollado con Unity.",
+      "tags": [
+        "Unity",
+        "C#",
+        "Action RPG"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Elden%20Ring",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Elden%20Ring/README.md"
+    },
+    {
+      "id": "quijote",
+      "title": "Don Quijote",
+      "engine": "Unity",
+      "status": "En desarrollo",
+      "description": "Proyecto de videojuego protagonizado por Don Quijote. Repositorio pendiente de publicación.",
+      "tags": [
+        "Unity",
+        "C#",
+        "3D"
+      ],
+      "development": "https://youtube.com/live/R5Y4QydT8Pc?feature=share",
+      "gameplayLabel": "VER DESARROLLO"
+    },
+    {
+      "id": "iron-giant",
+      "title": "Gigante de Hierro",
+      "engine": "Unity",
+      "status": "En desarrollo",
+      "description": "Demo 3D del Gigante de Hierro con locomoción, vuelo y sistemas interactivos. Repositorio pendiente de publicación.",
+      "tags": [
+        "Unity",
+        "C#",
+        "Blender",
+        "3D"
+      ],
+      "development": "https://youtu.be/KEFSmnB2Yjk",
+      "gameplayLabel": "VER DESARROLLO"
+    }
+  ]
+}

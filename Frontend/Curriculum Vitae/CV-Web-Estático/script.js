@@ -7,8 +7,19 @@ import { GLTFLoader } from "https://unpkg.com/three@0.167.1/examples/jsm/loaders
    CONFIGURACIÓN EDITABLE
 ========================================================= */
 
-const MODEL_URL = "./models/PITBOYV1.glb";
+const MODEL_URL = "./models/PITBOYV2.glb";
 const PROFILE_IMAGE_URL = "./img/profile.jpg";
+
+const GITHUB_GAMES_DATABASE =
+  "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/DATA/projects.json";
+
+const GITHUB_GAMES_REPOSITORY =
+  "https://github.com/NachoSLKN/Desarrollo-Videojuegos";
+
+const GITHUB_GAMES_RAW =
+  "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main";
+
+
 /*
   Estos son los parámetros que debes terminar ajustando.
 
@@ -62,6 +73,34 @@ const mobileFocusButton = document.querySelector("#mobile-focus-toggle");
 const mobilePrevSectionButton = document.querySelector("#mobile-prev-section");
 const mobileNextSectionButton = document.querySelector("#mobile-next-section");
 const mobileSectionLabel = document.querySelector("#mobile-section-label");
+const navToggle = document.querySelector("#nav-toggle");
+const siteNavigation = document.querySelector("#site-navigation");
+
+/*
+  Asegura que los controles principales del Pip-Boy sigan visibles
+  aunque la cabecera fija quede por encima del topbar original.
+*/
+if (focusButton) {
+  focusButton.textContent = "PIPBOY";
+  focusButton.setAttribute("aria-pressed", "false");
+  focusButton.title = "Activar o desactivar la vista del Pip-Boy";
+
+  Object.assign(focusButton.style, {
+    position: "fixed",
+    top: "72px",
+    right: "20px",
+    zIndex: "9999",
+    pointerEvents: "auto"
+  });
+}
+
+/*
+  Reiniciar vista deja de mostrarse porque PIPBOY funciona
+  como interruptor ON/OFF.
+*/
+if (resetButton) {
+  resetButton.style.display = "none";
+}
 
 
 
@@ -140,6 +179,9 @@ let cameraAnimationId = 0;
 let modelAnimationId = 0;
 let screenEffectAnimationId = 0;
 let screenEffectStrength = 0;
+let animationMixer = null;
+const animationActions = new Map();
+let lastWheelAnimationTime = 0;
 
 const sections = [
   {
@@ -540,6 +582,103 @@ loader.load(
 
   (gltf) => {
     model = gltf.scene;
+    animationMixer = new THREE.AnimationMixer(model);
+    animationActions.clear();
+
+    /*
+      IMPORTANTE:
+      Blender exportó algunos nombres de Action cruzados.
+      Por eso NO confiamos únicamente en el nombre del clip.
+      Identificamos cada animación por el objeto real que mueve.
+    */
+
+    function getAnimatedTargets(clip) {
+      return [
+        ...new Set(
+          (clip.tracks ?? []).map((track) => {
+            const dotIndex = track.name.indexOf(".");
+            return dotIndex >= 0
+              ? track.name.slice(0, dotIndex)
+              : track.name;
+          })
+        )
+      ];
+    }
+
+    function scoreClip(clip) {
+      return (clip.tracks?.length ?? 0) * 1000 + (clip.duration ?? 0);
+    }
+
+    function findBestClipByTarget(patterns) {
+      const matching = gltf.animations.filter((clip) => {
+        const targets = getAnimatedTargets(clip).join(" ").toLowerCase();
+
+        return patterns.some((pattern) => pattern.test(targets));
+      });
+
+      return matching.sort((a, b) => scoreClip(b) - scoreClip(a))[0] ?? null;
+    }
+
+    function findBestClipByName(name) {
+      return gltf.animations
+        .filter((clip) => clip.name === name)
+        .sort((a, b) => scoreClip(b) - scoreClip(a))[0] ?? null;
+    }
+
+    /*
+      Nombres de objetos vistos en Blender:
+      - knob1...      -> knob superior izquierdo
+      - RightKnob...  -> rueda lateral derecha
+      - light1...     -> botón rojo
+    */
+    const logicalClips = {
+      Button_Press:
+        findBestClipByTarget([
+          /^light1/i,
+          /button/i,
+          /bottom.*button/i
+        ]) ??
+        findBestClipByName("Button_Press"),
+
+      Knob_Rotate:
+        findBestClipByTarget([
+          /^knob1/i,
+          /bigknob/i,
+          /left.*knob/i
+        ]) ??
+        findBestClipByName("Knob_Rotate"),
+
+      Wheel_Rotate:
+        findBestClipByTarget([
+          /^rightknob/i,
+          /wheel/i,
+          /side.*knob/i
+        ]) ??
+        findBestClipByName("Wheel_Rotate")
+    };
+
+    Object.entries(logicalClips).forEach(([logicalName, clip]) => {
+      if (!clip) {
+        console.warn(`No se encontró el clip físico para ${logicalName}`);
+        return;
+      }
+
+      const action = animationMixer.clipAction(clip);
+      action.setLoop(THREE.LoopOnce, 1);
+      action.clampWhenFinished = false;
+      action.enabled = true;
+
+      animationActions.set(logicalName, action);
+
+      console.log(
+        `[Pip-Boy] ${logicalName} -> clip "${clip.name}"`,
+        {
+          objetos: getAnimatedTargets(clip),
+          duracion: clip.duration,
+          pistas: clip.tracks.map((track) => track.name)
+        }
+      );
+    });
 
     model.traverse((child) => {
       if (!child.isMesh) return;
@@ -584,7 +723,7 @@ loader.load(
     loadProfileImage();
 
     loadingProgress.style.width = "100%";
-    loadingText.textContent = "Portfolio preparado";
+    loadingText.textContent = "";
 
     window.setTimeout(() => {
       loading.classList.add("done");
@@ -597,19 +736,44 @@ loader.load(
     const percent = Math.round((event.loaded / event.total) * 100);
 
     loadingProgress.style.width = `${percent}%`;
-    loadingText.textContent = `Cargando modelo 3D... ${percent}%`;
+    loadingText.textContent = "";
   },
 
   (error) => {
     console.error("No se pudo cargar el modelo:", error);
     loadingText.textContent =
-      "Error cargando el GLB. Abre el proyecto mediante Live Server.";
+      "No se pudo cargar NachoSLKN.com.";
   }
 );
 
 /* =========================================================
    ANIMACIONES Y FOCO
 ========================================================= */
+
+function playModelAnimation(name, direction = 1) {
+  const action = animationActions.get(name);
+
+  if (!action) {
+    console.warn(`Animación no disponible: ${name}`);
+    return false;
+  }
+
+  action.stop();
+  action.enabled = true;
+  action.setLoop(THREE.LoopOnce, 1);
+  action.clampWhenFinished = false;
+
+  if (direction < 0) {
+    action.timeScale = -1;
+    action.time = action.getClip().duration;
+  } else {
+    action.timeScale = 1;
+    action.time = 0;
+  }
+
+  action.play();
+  return true;
+}
 
 function focusPositionVector() {
   return new THREE.Vector3(
@@ -776,12 +940,17 @@ function hideHolographicScreen() {
 
 function setFocus(nextState) {
   isFocused = nextState;
+  if (animationMixer) playModelAnimation("Button_Press");
 
   controls.enableRotate = !isFocused;
   controls.enableZoom = !isFocused;
 
   if (isFocused) {
-    focusButton.textContent = "LIBERAR PANTALLA";
+    if (focusButton) {
+      focusButton.textContent = "PIPBOY";
+      focusButton.setAttribute("aria-pressed", "true");
+      focusButton.title = "Pip-Boy activado · pulsar para liberar";
+    }
 
     if (mobileFocusButton) {
       mobileFocusButton.textContent = "CERRAR PANTALLA";
@@ -802,7 +971,11 @@ function setFocus(nextState) {
       }
     }, 470);
   } else {
-    focusButton.textContent = "FIJAR PANTALLA";
+    if (focusButton) {
+      focusButton.textContent = "PIPBOY";
+      focusButton.setAttribute("aria-pressed", "false");
+      focusButton.title = "Pip-Boy desactivado · pulsar para fijar";
+    }
 
     if (mobileFocusButton) {
       mobileFocusButton.textContent = "ABRIR PANTALLA";
@@ -822,12 +995,44 @@ function setFocus(nextState) {
   }
 }
 
-focusButton.addEventListener("click", () => {
+focusButton?.addEventListener("click", () => {
   setFocus(!isFocused);
+});
+
+canvas.addEventListener("click", () => {
+  /*
+    Primer clic sobre el Pip-Boy:
+      fija la cámara y abre la interfaz.
+
+    Clics posteriores, con la pantalla ya fijada:
+      reproducen físicamente el botón rojo.
+  */
+  if (!isFocused) {
+    setFocus(true);
+    return;
+  }
+
+  playModelAnimation("Button_Press");
 });
 
 mobileFocusButton?.addEventListener("click", () => {
   setFocus(!isFocused);
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.repeat) return;
+
+  if (event.key.toLowerCase() === "f") {
+    setFocus(!isFocused);
+  }
+
+  if (isFocused && event.key === "ArrowLeft") {
+    selectSection(currentSection - 1);
+  }
+
+  if (isFocused && event.key === "ArrowRight") {
+    selectSection(currentSection + 1);
+  }
 });
 
 mobilePrevSectionButton?.addEventListener("click", () => {
@@ -840,23 +1045,24 @@ mobileNextSectionButton?.addEventListener("click", () => {
   selectSection(currentSection + 1);
 });
 
-resetButton.addEventListener("click", () => {
-  animateModelRotation(focusRotationEuler());
 
-  animateCamera(
-    isFocused ? focusPositionVector() : FREE_CAMERA.position,
-    isFocused ? focusTargetVector() : FREE_CAMERA.target
-  );
-});
 
 /* =========================================================
    SECCIONES DE LA PANTALLA
 ========================================================= */
 
 function selectSection(index) {
-  currentSection =
-    (index + sections.length) % sections.length;
+  const nextSection = (index + sections.length) % sections.length;
 
+  if (nextSection !== currentSection) {
+    const forward =
+      index > currentSection ||
+      (currentSection === sections.length - 1 && nextSection === 0);
+
+    playModelAnimation("Knob_Rotate", forward ? 1 : -1);
+  }
+
+  currentSection = nextSection;
   drawScreen();
 
   if (mobileSectionLabel) {
@@ -868,11 +1074,21 @@ window.addEventListener(
   "wheel",
 
   (event) => {
-    if (!isFocused) return;
+    const now = performance.now();
+
+    if (!isFocused) {
+      if (now - lastWheelAnimationTime >= 320) {
+        lastWheelAnimationTime = now;
+        playModelAnimation(
+          "Wheel_Rotate",
+          event.deltaY >= 0 ? 1 : -1
+        );
+      }
+
+      return;
+    }
 
     event.preventDefault();
-
-    const now = performance.now();
 
     if (now - lastWheelTime < 430) return;
 
@@ -913,6 +1129,261 @@ canvas.addEventListener("touchend", (event) => {
 
   selectSection(currentSection + (deltaX < 0 ? 1 : -1));
 }, { passive: true });
+
+
+/* =========================================================
+   CABECERA RESPONSIVE
+========================================================= */
+
+navToggle?.addEventListener("click", () => {
+  const open = siteNavigation?.classList.toggle("open") ?? false;
+  navToggle?.setAttribute("aria-expanded", String(open));
+});
+
+siteNavigation?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    siteNavigation.classList.remove("open");
+    navToggle?.setAttribute("aria-expanded", "false");
+  });
+});
+
+/* =========================================================
+   CATÁLOGO DE VIDEOJUEGOS DESDE GITHUB
+========================================================= */
+
+function escapeProjectText(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function encodeGitHubPath(path) {
+  return String(path ?? "")
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
+function createGameUrls(game) {
+  const hasFolder = Boolean(game.folder);
+  const encodedFolder = hasFolder
+    ? encodeGitHubPath(game.folder)
+    : "";
+
+  const imageFile = game.image || "Portada.png";
+
+  return {
+    github:
+      game.github ||
+      (hasFolder
+        ? `${GITHUB_GAMES_REPOSITORY}/tree/main/${encodedFolder}`
+        : ""),
+
+    image:
+      game.imageUrl ||
+      (hasFolder
+        ? `${GITHUB_GAMES_RAW}/${encodedFolder}/${encodeURIComponent(imageFile)}`
+        : ""),
+
+    readme:
+      game.readme ||
+      (hasFolder
+        ? `${GITHUB_GAMES_REPOSITORY}/blob/main/${encodedFolder}/README.md`
+        : "")
+  };
+}
+
+function createGameCard(game, index) {
+  const urls = createGameUrls(game);
+  const tags = Array.isArray(game.tags) ? game.tags : [];
+
+  const article = document.createElement("article");
+  article.className = "github-game-card";
+
+  const projectButton = game.github || game.folder
+    ? `
+      <a
+        class="terminal-link"
+        href="${escapeProjectText(urls.github)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VER PROYECTO
+      </a>
+    `
+    : "";
+
+  const readmeButton = game.readme || game.folder
+    ? `
+      <a
+        class="terminal-link secondary-link"
+        href="${escapeProjectText(urls.readme)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VER README
+      </a>
+    `
+    : "";
+
+  const gameplayUrl =
+    game.gameplay ||
+    game.development ||
+    game.video ||
+    "";
+
+  const gameplayLabel =
+    game.gameplayLabel ||
+    (game.status?.toLowerCase().includes("demo")
+      ? "VER GAMEPLAY"
+      : "VER DESARROLLO");
+
+  const gameplayButton = gameplayUrl
+    ? `
+      <a
+        class="terminal-link gameplay-link"
+        href="${escapeProjectText(gameplayUrl)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ${escapeProjectText(gameplayLabel)}
+      </a>
+    `
+    : "";
+
+  article.innerHTML = `
+    <div class="github-game-cover">
+      <img
+        ${urls.image ? `src="${escapeProjectText(urls.image)}"` : ""}
+        alt="Portada de ${escapeProjectText(game.title)}"
+        loading="lazy"
+      >
+
+      <div class="github-game-cover-fallback" aria-hidden="true">
+        ${escapeProjectText(game.engine || "GAME")}
+      </div>
+    </div>
+
+    <div class="github-game-content">
+      <p class="project-code">
+        PROJECT_${String(index + 1).padStart(3, "0")}
+        · ${escapeProjectText(game.status || "EN DESARROLLO")}
+      </p>
+
+      <h3>${escapeProjectText(game.title || "Proyecto sin título")}</h3>
+
+      <p class="github-game-engine">
+        ${escapeProjectText(game.engine || "Motor no indicado")}
+      </p>
+
+      <p class="github-game-description">
+        ${escapeProjectText(game.description || "Sin descripción disponible.")}
+      </p>
+
+      <div class="tech-list">
+        ${tags
+          .map((tag) => `<span>${escapeProjectText(tag)}</span>`)
+          .join("")}
+      </div>
+
+      <div class="project-actions">
+        ${projectButton}
+        ${readmeButton}
+        ${gameplayButton}
+      </div>
+    </div>
+  `;
+
+  const image = article.querySelector("img");
+  const fallback = article.querySelector(".github-game-cover-fallback");
+
+  image.addEventListener("load", () => {
+    fallback.hidden = true;
+  });
+
+  image.addEventListener("error", () => {
+    image.hidden = true;
+    fallback.hidden = false;
+  });
+
+  return article;
+}
+
+async function loadGithubGames() {
+  const grid = document.querySelector("#github-games-grid");
+  const status = document.querySelector("#github-games-status");
+
+  if (!grid || !status) return;
+
+  status.textContent = "CONECTANDO CON GITHUB…";
+
+  try {
+    const requestUrl =
+      `${GITHUB_GAMES_DATABASE}?v=${Date.now()}`;
+
+    const response = await fetch(requestUrl, {
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `GitHub respondió con el estado ${response.status}`
+      );
+    }
+
+    const database = await response.json();
+    const games = Array.isArray(database.games)
+      ? database.games
+      : [];
+
+    grid.replaceChildren();
+
+    if (!games.length) {
+      status.textContent =
+        "NO HAY PROYECTOS DEFINIDOS EN DATA/PROJECTS.JSON";
+      return;
+    }
+
+    games.forEach((game, index) => {
+      grid.appendChild(createGameCard(game, index));
+    });
+
+    status.textContent =
+      `${games.length} PROYECTO${games.length === 1 ? "" : "S"} CARGADO${games.length === 1 ? "" : "S"} DESDE GITHUB`;
+    status.classList.add("loaded");
+  } catch (error) {
+    console.error(
+      "No se pudo cargar DATA/projects.json:",
+      error
+    );
+
+    status.textContent =
+      "ERROR AL CARGAR EL CATÁLOGO DE GITHUB";
+
+    grid.innerHTML = `
+      <article class="github-catalogue-error">
+        <h3>NO SE PUDO CONECTAR</h3>
+        <p>
+          Comprueba que exista
+          <strong>DATA/projects.json</strong>
+          en la rama <strong>main</strong>.
+        </p>
+
+        <a
+          class="terminal-link"
+          href="${GITHUB_GAMES_REPOSITORY}/blob/main/DATA/projects.json"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          COMPROBAR ARCHIVO
+        </a>
+      </article>
+    `;
+  }
+}
 
 /* =========================================================
    PDF.JS: VISTA PREVIA SIN DESCARGA AUTOMÁTICA
@@ -962,6 +1433,7 @@ async function renderPdfPreview(pdfUrl, canvasId, statusId) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  loadGithubGames();
   renderPdfPreview(
     "cv/Curriculum_ES.pdf",
     "cv-preview-es",
@@ -980,8 +1452,8 @@ window.addEventListener("DOMContentLoaded", () => {
 ========================================================= */
 
 function resizeRenderer() {
-  const width = hero.clientWidth;
-  const height = hero.clientHeight;
+  const width = hero?.clientWidth || window.innerWidth;
+  const height = hero?.clientHeight || window.innerHeight;
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
@@ -1001,7 +1473,9 @@ const clock = new THREE.Clock();
 function render() {
   requestAnimationFrame(render);
 
-  const time = clock.getElapsedTime();
+  const delta = clock.getDelta();
+  const time = clock.elapsedTime;
+  if (animationMixer) animationMixer.update(delta);
 
   if (model) {
     model.position.y = Math.sin(time * 0.7) * 0.025;

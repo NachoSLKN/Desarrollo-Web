@@ -14,6 +14,32 @@
 </head>
 
 <body>
+  <header class="site-header" id="site-header">
+    <a class="site-logo" href="#inicio">NACHOSLKN.COM</a>
+
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-navigation"
+      aria-label="Abrir menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="site-navigation" class="site-navigation" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#desarrollo-videojuegos">Videojuegos</a>
+      <a href="#proyectos-web">Web</a>
+      <a href="#proyectos-3d">3D</a>
+      <a href="#perfil">CV</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
   <main id="app">
 
     <!-- =====================================================
@@ -27,15 +53,13 @@
       ></canvas>
 
       <div class="loading" id="loading">
-        <p>Cargando Portfolio...</p>
+        <p>Cargando NachoSLKN.com...</p>
 
-        <div class="loading-bar">
+        <div class="loading-bar" aria-label="Progreso de carga">
           <span id="loading-progress"></span>
         </div>
 
-        <small id="loading-text">
-          Preparando experiencia 3D
-        </small>
+        <small id="loading-text" aria-live="polite"></small>
       </div>
 
       <header class="topbar">
@@ -179,117 +203,116 @@
       </article>
     </section>
 
-    <!-- =====================================================
-         DESARROLLO DE VIDEOJUEGOS
-    ====================================================== -->
-    <section class="portfolio-section" id="gamedev">
+    <section class="portfolio-section" id="desarrollo-videojuegos">
       <div class="section-heading">
-        <p class="section-code">GAME DEVELOPMENT // SYSTEMS</p>
+        <p class="section-code">GAME DEVELOPMENT // LIVE DATABASE</p>
         <h2>Desarrollo de videojuegos</h2>
         <p>
-          Diseño y programación de prototipos, sistemas jugables,
-          experiencias interactivas y proyectos de realidad virtual.
+          Proyectos, código fuente y demos jugables organizados por plataforma.
+          El catálogo de GitHub se actualiza automáticamente desde
+          <strong>DATA/projects.json</strong>.
         </p>
       </div>
 
-      <div class="info-grid">
-        <article class="info-card">
-          <span class="card-index">01</span>
-          <h3>Motores</h3>
-          <p>Unity, Unreal Engine, Pygame y Adventure Game Studio.</p>
-        </article>
+      <div class="game-platform-block">
+        <div class="platform-heading">
+          <div>
+            <p class="project-code">SOURCE_01 // GITHUB</p>
+            <h3>Proyectos y código</h3>
+          </div>
 
-        <article class="info-card">
-          <span class="card-index">02</span>
-          <h3>Programación</h3>
-          <p>C#, Python, JavaScript y lógica de sistemas jugables.</p>
-        </article>
+          <a
+            class="terminal-link"
+            href="https://github.com/NachoSLKN/Desarrollo-Videojuegos"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ABRIR REPOSITORIO
+          </a>
+        </div>
 
-        <article class="info-card">
-          <span class="card-index">03</span>
-          <h3>Áreas</h3>
-          <p>Gameplay, interfaces, físicas, IA básica, prototipado y VR.</p>
-        </article>
+        <div id="github-games-status" class="catalogue-status">
+          CONECTANDO CON GITHUB…
+        </div>
+
+        <div
+          id="github-games-grid"
+          class="github-games-grid"
+          aria-live="polite"
+        ></div>
+      </div>
+
+      <div class="game-platform-block itch-placeholder">
+        <div class="platform-heading">
+          <div>
+            <p class="project-code">SOURCE_02 // ITCH.IO</p>
+            <h3>Demos jugables</h3>
+          </div>
+
+          <a
+            class="terminal-link"
+            href="https://nachoslkn.itch.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            VISITAR ITCH.IO
+          </a>
+        </div>
+
+        <p class="platform-description">
+          La conexión automática con itch.io será el siguiente paso.
+          De momento puedes acceder directamente al perfil público.
+        </p>
       </div>
     </section>
 
     <!-- =====================================================
          DESARROLLO WEB
     ====================================================== -->
-    <section class="portfolio-section alternate-section" id="web">
+    <section class="portfolio-section alternate-section" id="proyectos-web">
       <div class="section-heading">
-        <p class="section-code">WEB DEVELOPMENT // ONLINE SYSTEMS</p>
+        <p class="section-code">WEB DEVELOPMENT // PROJECT CATALOGUE</p>
         <h2>Desarrollo web</h2>
         <p>
-          Aplicaciones, interfaces y experiencias web construidas
-          con tecnologías frontend, backend y bases de datos.
+          En el siguiente paso conectaremos un catálogo controlado con tus
+          proyectos React y MVC reales.
         </p>
       </div>
 
-      <div class="skill-columns">
-        <article class="skill-panel">
-          <h3>Frontend</h3>
-          <ul>
-            <li>HTML5</li>
-            <li>CSS3</li>
-            <li>JavaScript</li>
-            <li>Three.js</li>
-            <li>Diseño responsive</li>
-          </ul>
-        </article>
-
-        <article class="skill-panel">
-          <h3>Backend</h3>
-          <ul>
-            <li>Java</li>
-            <li>Spring / Spring Boot</li>
-            <li>JPA / Hibernate</li>
-            <li>APIs y servicios web</li>
-          </ul>
-        </article>
-
-        <article class="skill-panel">
-          <h3>Datos y herramientas</h3>
-          <ul>
-            <li>SQL y Oracle</li>
-            <li>Git y GitHub</li>
-            <li>Eclipse / VS Code</li>
-            <li>Tomcat</li>
-          </ul>
+      <div class="project-source-grid single-source">
+        <article class="project-source-panel">
+          <p class="project-code">STATUS // PENDING SELECTION</p>
+          <h3>Proyectos web reales</h3>
+          <p>
+            Seleccionaremos cada aplicación concreta, su carpeta, tecnologías,
+            captura, repositorio y demo.
+          </p>
+          <a class="terminal-link" href="https://github.com/NachoSLKN"
+             target="_blank" rel="noopener noreferrer">VISITAR GITHUB</a>
         </article>
       </div>
     </section>
 
     <!-- =====================================================
-         3D
+         3D Y MULTIMEDIA
     ====================================================== -->
-    <section class="portfolio-section" id="arte-3d">
+    <section class="portfolio-section" id="proyectos-3d">
       <div class="section-heading">
-        <p class="section-code">3D & VISUALS // ASSET PIPELINE</p>
-        <h2>Arte 3D y multimedia</h2>
+        <p class="section-code">3D & VISUALS // ARTSTATION CHANNEL</p>
+        <h2>3D y multimedia</h2>
         <p>
-          Modelado, creación de assets, render, composición y presentación
-          audiovisual para videojuegos y experiencias digitales.
+          La integración automática se configurará después de revisar una
+          fuente estable. De momento enlazamos directamente a tu perfil.
         </p>
       </div>
 
-      <div class="info-grid">
-        <article class="info-card">
-          <span class="card-index">01</span>
-          <h3>Modelado</h3>
-          <p>Blender, 3ds Max, entornos, objetos y assets para videojuegos.</p>
-        </article>
-
-        <article class="info-card">
-          <span class="card-index">02</span>
-          <h3>Visualización</h3>
-          <p>Iluminación, materiales, render y presentación de proyectos.</p>
-        </article>
-
-        <article class="info-card">
-          <span class="card-index">03</span>
-          <h3>Edición</h3>
-          <p>DaVinci Resolve, montaje de gameplays y piezas audiovisuales.</p>
+      <div class="project-source-grid single-source">
+        <article class="project-source-panel">
+          <p class="project-code">SOURCE // ARTSTATION</p>
+          <h3>Portfolio 3D</h3>
+          <p>Modelado, renders, assets, animación y trabajos multimedia.</p>
+          <a class="terminal-link" href="https://www.artstation.com/nachoslkn"
+             target="_blank" rel="noopener noreferrer">VISITAR ARTSTATION</a>
         </article>
       </div>
     </section>

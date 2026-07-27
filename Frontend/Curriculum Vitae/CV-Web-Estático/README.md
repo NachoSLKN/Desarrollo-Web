@@ -1,18 +1,17 @@
-# Portfolio Pip-Boy
-
-Versión sin herramientas de depuración.
-
-## Estructura necesaria
-
-```text
-index.html
-style.css
-script.js
-models/PITBOYV1.glb
-img/profile.jpg
-cv/Curriculum_ES.pdf
-cv/Curriculum_EN.pdf
-```
-
-La pantalla aparece al pulsar `FIJAR PANTALLA`, con efecto holográfico,
-y se apaga al pulsar `LIBERAR PANTALLA`.
+{
+  "projects": [
+    {
+      "title": "Pip-Boy Portfolio 3D",
+      "description": "Portfolio interactivo construido con Three.js, Blender y una interfaz holográfica dinámica.",
+      "image": "",
+      "url": "https://nachoslkn.com",
+      "technologies": [
+        "Blender",
+        "Three.js",
+        "JavaScript",
+        "GLB"
+      ],
+      "source": "NachoSLKN.com"
+    }
+  ]
+}

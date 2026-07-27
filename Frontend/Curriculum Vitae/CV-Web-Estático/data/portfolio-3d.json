@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "title": "Pip-Boy Portfolio 3D",
+      "description": "Portfolio interactivo desarrollado con Three.js y Blender.",
+      "image": "",
+      "url": "https://nachoslkn.com",
+      "technologies": [
+        "Three.js",
+        "Blender",
+        "JavaScript"
+      ],
+      "source": "NachoSLKN.com"
+    }
+  ]
+}
