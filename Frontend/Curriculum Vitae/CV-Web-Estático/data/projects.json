@@ -78,34 +78,43 @@
       "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Elden%20Ring",
       "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Elden%20Ring/README.md"
     },
-    {
-      "id": "quijote",
-      "title": "Don Quijote",
-      "engine": "Unity",
-      "status": "En desarrollo",
-      "description": "Proyecto de videojuego protagonizado por Don Quijote. Repositorio pendiente de publicación.",
-      "tags": [
-        "Unity",
-        "C#",
-        "3D"
-      ],
-      "development": "https://youtube.com/live/R5Y4QydT8Pc?feature=share",
-      "gameplayLabel": "VER DESARROLLO"
-    },
-    {
-      "id": "iron-giant",
-      "title": "Gigante de Hierro",
-      "engine": "Unity",
-      "status": "En desarrollo",
-      "description": "Demo 3D del Gigante de Hierro con locomoción, vuelo y sistemas interactivos. Repositorio pendiente de publicación.",
-      "tags": [
-        "Unity",
-        "C#",
-        "Blender",
-        "3D"
-      ],
-      "development": "https://youtu.be/KEFSmnB2Yjk",
-      "gameplayLabel": "VER DESARROLLO"
-    }
+  {
+  "id": "quijote",
+  "title": "Don Quijote",
+  "engine": "Unity",
+  "folder": "UNITY/Quijote",
+  "status": "En desarrollo",
+  "description": "ARPG isométrico inspirado en Don Quijote, con combate y exploración estilo Diablo.",
+  "tags": [
+    "Unity",
+    "C#",
+    "ARPG",
+    "Isométrico"
+  ],
+  "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Quijote",
+  "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Quijote/README.md",
+  "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/Quijote/Portada.png",
+  "development": "https://youtube.com/live/R5Y4QydT8Pc?feature=share",
+  "gameplayLabel": "VER DESARROLLO"
+},
+{
+  "id": "iron-giant",
+  "title": "Gigante de Hierro",
+  "engine": "Unity",
+  "folder": "UNITY/IRONGIANT",
+  "status": "En desarrollo",
+  "description": "Demo 3D del Gigante de Hierro con locomoción, vuelo y sistemas interactivos.",
+  "tags": [
+    "Unity",
+    "C#",
+    "Blender",
+    "3D"
+  ],
+  "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/IRONGIANT",
+  "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/IRONGIANT/README.md",
+  "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/IRONGIANT/Portada.png",
+  "development": "https://youtu.be/KEFSmnB2Yjk",
+  "gameplayLabel": "VER DESARROLLO"
+}
   ]
 }
