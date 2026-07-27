@@ -1,0 +1,119 @@
+{
+  "source": "https://nachoslkn.artstation.com/rss",
+  "note": "Copia local para Live Server. En producción se usa /api/artstation-projects.",
+  "projects": [
+    {
+      "title": "IRON GIANT",
+      "description": "En proceso. Curso: https://www.artstation.com/artwork/rAPg0a",
+      "link": "https://www.artstation.com/artwork/L4qXvk",
+      "pubDate": "Wed, 11 Mar 2026 23:39:08 -0500",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/097/138/950/large/nacho-slkn-gigantedehierrorender.webp?1773290246",
+        "https://cdna.artstation.com/p/assets/images/images/097/138/952/large/nacho-slkn-gigantedehierrorender2.webp?1773290250",
+        "https://cdnb.artstation.com/p/assets/images/images/097/138/953/large/nacho-slkn-gigantedehierrorender3.webp?1773290253",
+        "https://cdnb.artstation.com/p/assets/images/images/097/158/867/large/nacho-slkn-6.webp?1773338893",
+        "https://cdnb.artstation.com/p/assets/images/images/097/158/909/large/nacho-slkn-matwriales3.webp?1773338945",
+        "https://cdna.artstation.com/p/assets/images/images/097/158/920/large/nacho-slkn-materiales-2.webp?1773338951"
+      ]
+    },
+    {
+      "title": "Skull King in 3DS MAX",
+      "description": "3DS MAX",
+      "link": "https://www.artstation.com/artwork/KeEkY9",
+      "pubDate": "Tue, 23 May 2023 07:03:52 -0500",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/063/149/310/large/nacho-slkn-renderrigesqueleto.jpg?1684842773",
+        "https://cdna.artstation.com/p/assets/images/images/063/149/304/large/nacho-slkn-captura-de-pantalla-2023-05-23-134427.jpg?1684842759",
+        "https://cdna.artstation.com/p/assets/images/images/063/149/296/large/nacho-slkn-captura-de-pantalla-2023-05-23-134336.jpg?1684842756",
+        "https://cdna.artstation.com/p/assets/images/images/063/149/294/large/nacho-slkn-cadena-de-huesos-brazo.jpg?1684842751"
+      ]
+    },
+    {
+      "title": "Lava Planet",
+      "description": "Made in Blender.",
+      "link": "https://www.artstation.com/artwork/g8rQQQ",
+      "pubDate": "Sun, 04 Dec 2022 15:05:19 -0600",
+      "images": []
+    },
+    {
+      "title": "⚙️",
+      "description": "---",
+      "link": "https://www.artstation.com/artwork/5BLm4E",
+      "pubDate": "Mon, 07 Nov 2022 01:21:22 -0600",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/055/805/468/large/nacho-slkn-render.jpg?1667805419",
+        "https://cdnb.artstation.com/p/assets/images/images/055/805/463/large/nacho-slkn-0001.jpg?1667805398",
+        "https://cdnb.artstation.com/p/assets/images/images/055/805/465/large/nacho-slkn-render-llave-inglesa.jpg?1667805411"
+      ]
+    },
+    {
+      "title": "🐟",
+      "description": "",
+      "link": "https://www.artstation.com/artwork/Ze8Lxm",
+      "pubDate": "Mon, 07 Nov 2022 01:05:54 -0600",
+      "images": [
+        "https://cdnb.artstation.com/p/assets/images/images/055/805/177/large/nacho-slkn-rendercarpacomun.jpg?1667804822",
+        "https://cdna.artstation.com/p/assets/images/images/055/805/230/large/nacho-slkn-rendercarpacomunproceso.jpg?1667804724",
+        "https://cdnb.artstation.com/p/assets/images/images/055/805/221/large/nacho-slkn-carpa-bake.jpg?1667804708",
+        "https://cdna.artstation.com/p/assets/images/images/055/805/176/large/nacho-slkn-renderanguila.jpg?1667804529"
+      ]
+    },
+    {
+      "title": "Rubik's Cube",
+      "description": "Rubik's Cube IN BLENDER.",
+      "link": "https://www.artstation.com/artwork/Ze8LDx",
+      "pubDate": "Mon, 07 Nov 2022 00:52:30 -0600",
+      "images": [
+        "https://cdnb.artstation.com/p/assets/images/images/055/805/037/large/nacho-slkn-cuborubikrender1.jpg?1667803975",
+        "https://cdna.artstation.com/p/assets/images/images/055/805/026/large/nacho-slkn-cuborubikrender2.jpg?1667803936"
+      ]
+    },
+    {
+      "title": "Kirby - カービィ 💕⭐️",
+      "description": "KIRBY IN BLENDER.",
+      "link": "https://www.artstation.com/artwork/wJXDNL",
+      "pubDate": "Mon, 07 Nov 2022 00:48:46 -0600",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/055/804/942/large/nacho-slkn-kirby-render-final.jpg?1667803701"
+      ]
+    },
+    {
+      "title": "🏠",
+      "description": "",
+      "link": "https://www.artstation.com/artwork/3qXReg",
+      "pubDate": "Mon, 07 Nov 2022 00:45:27 -0600",
+      "images": [
+        "https://cdnb.artstation.com/p/assets/images/images/055/804/823/large/nacho-slkn-untitled.jpg?1667803326",
+        "https://cdna.artstation.com/p/assets/images/images/055/804/772/large/nacho-slkn-mesamoderna.jpg?1667803167",
+        "https://cdna.artstation.com/p/assets/images/images/055/804/774/large/nacho-slkn-renderfinal.jpg?1667803179"
+      ]
+    },
+    {
+      "title": "BOSS ROOM - DARK SOULS",
+      "description": "BOSS ROOM - DARK SOULS IN BLENDER.",
+      "link": "https://www.artstation.com/artwork/yJL9Zn",
+      "pubDate": "Mon, 07 Nov 2022 00:24:46 -0600",
+      "images": [
+        "https://cdnb.artstation.com/p/assets/images/images/055/804/565/large/nacho-slkn-render2.jpg?1667802202"
+      ]
+    },
+    {
+      "title": "HELLO KITTY",
+      "description": "NACHO SLKN 3D ART WORK.",
+      "link": "https://www.artstation.com/artwork/klvA2y",
+      "pubDate": "Sun, 06 Nov 2022 23:49:24 -0600",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/055/803/928/large/nacho-slkn-renderhellokitty.jpg?1667800095"
+      ]
+    },
+    {
+      "title": "DARK SIGN - DARK SOULS",
+      "description": "NACHO SLKN 3D ART WORK.",
+      "link": "https://www.artstation.com/artwork/nEzo44",
+      "pubDate": "Sun, 06 Nov 2022 23:44:34 -0600",
+      "images": [
+        "https://cdnb.artstation.com/p/assets/images/images/055/803/823/large/nacho-slkn-render.jpg?1667799683"
+      ]
+    }
+  ]
+}

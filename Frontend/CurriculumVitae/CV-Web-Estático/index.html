@@ -231,8 +231,28 @@
           </a>
         </div>
 
-        <div id="github-games-status" class="catalogue-status">
-          CONECTANDO CON GITHUB…
+        <div class="games-carousel-toolbar">
+          <div id="github-games-status" class="catalogue-status">
+            CONECTANDO CON GITHUB…
+          </div>
+
+          <div class="carousel-controls">
+            <button
+              id="github-games-prev"
+              class="carousel-button"
+              type="button"
+              aria-label="Juegos anteriores"
+            >←</button>
+
+            <span id="github-games-page" class="carousel-page">0 / 0</span>
+
+            <button
+              id="github-games-next"
+              class="carousel-button"
+              type="button"
+              aria-label="Juegos siguientes"
+            >→</button>
+          </div>
         </div>
 
         <div
@@ -297,23 +317,36 @@
          3D Y MULTIMEDIA
     ====================================================== -->
     <section class="portfolio-section" id="proyectos-3d">
-      <div class="section-heading">
-        <p class="section-code">3D & VISUALS // ARTSTATION CHANNEL</p>
-        <h2>3D y multimedia</h2>
-        <p>
-          La integración automática se configurará después de revisar una
-          fuente estable. De momento enlazamos directamente a tu perfil.
-        </p>
+      <div class="section-heading artstation-section-heading">
+        <div>
+          <p class="section-code">3D & VISUALS // LIVE ARTSTATION FEED</p>
+          <h2>3D y multimedia</h2>
+          <p>
+            Proyectos publicados en ArtStation. El catálogo se actualiza
+            automáticamente desde el perfil público de NachoSLKN.
+          </p>
+        </div>
+
+        <a class="terminal-link" href="https://www.artstation.com/nachoslkn"
+           target="_blank" rel="noopener noreferrer">VISITAR ARTSTATION</a>
       </div>
 
-      <div class="project-source-grid single-source">
-        <article class="project-source-panel">
-          <p class="project-code">SOURCE // ARTSTATION</p>
-          <h3>Portfolio 3D</h3>
-          <p>Modelado, renders, assets, animación y trabajos multimedia.</p>
-          <a class="terminal-link" href="https://www.artstation.com/nachoslkn"
-             target="_blank" rel="noopener noreferrer">VISITAR ARTSTATION</a>
-        </article>
+      <div class="artstation-carousel" aria-label="Proyectos de ArtStation">
+        <div class="artstation-carousel-toolbar">
+          <p id="artstation-status" class="catalogue-status">
+            CONECTANDO CON ARTSTATION…
+          </p>
+
+          <div class="carousel-controls">
+            <button id="artstation-prev" class="carousel-button" type="button"
+                    aria-label="Proyectos anteriores">←</button>
+            <span id="artstation-page" class="carousel-page">0 / 0</span>
+            <button id="artstation-next" class="carousel-button" type="button"
+                    aria-label="Proyectos siguientes">→</button>
+          </div>
+        </div>
+
+        <div id="artstation-grid" class="artstation-grid" aria-live="polite"></div>
       </div>
     </section>
 
