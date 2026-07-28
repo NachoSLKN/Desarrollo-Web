@@ -1,21 +1,20 @@
 {
   "projects": [
     {
-      "id": "portfolio-pipboy",
-      "title": "Portfolio Interactivo Pip-Boy",
+      "id": "portfolio-interactivo-threejs",
+      "title": "Portfolio Interactivo ThreeJS",
       "type": "Frontend",
-      "status": "En desarrollo",
-      "description": "Portfolio personal interactivo con estética Pip-Boy, modelo 3D, carruseles dinámicos e integración con GitHub, ArtStation y Vercel.",
+      "status": "Finalizado",
+      "description": "Portfolio interactivo desarrollado con Three.js que presenta contenidos y proyectos mediante una experiencia 3D ejecutable directamente en el navegador.",
       "tags": [
         "HTML",
         "CSS",
         "JavaScript",
         "Three.js",
-        "Vercel"
+        "WebGL"
       ],
-      "folder": "Frontend/CurriculumVitae/CV-Web-Estático",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/CurriculumVitae/CV-Web-Est%C3%A1tico",
-      "demo": "https://nachoslkn.com"
+      "folder": "Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS"
     },
     {
       "id": "gameboy-react",
@@ -89,21 +88,6 @@
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO"
     },
     {
-      "id": "landing-abogados-scss",
-      "title": "Landing de Abogados",
-      "type": "Frontend",
-      "status": "Proyecto",
-      "description": "Maquetación responsive de una landing page basada en un diseño de Figma y desarrollada con SCSS.",
-      "tags": [
-        "HTML",
-        "SCSS",
-        "Figma",
-        "Responsive"
-      ],
-      "folder": "Frontend/Desarrollo Interfaces Web/SASS/Maquetacion landing abogados Figma con SCSS",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Interfaces%20Web/SASS/Maquetacion%20landing%20abogados%20Figma%20con%20SCSS"
-    },
-    {
       "id": "boxchampy-figma",
       "title": "BoxChampy",
       "type": "Frontend",
@@ -165,20 +149,6 @@
       ],
       "folder": "Backend/JPA/CiclosFormativosAzarquiel",
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/JPA/CiclosFormativosAzarquiel"
-    },
-    {
-      "id": "fastapi-python",
-      "title": "Mi Primera API en Python",
-      "type": "Backend",
-      "status": "Proyecto",
-      "description": "API desarrollada con FastAPI como introducción a la creación de servicios web con Python.",
-      "tags": [
-        "Python",
-        "FastAPI",
-        "API REST"
-      ],
-      "folder": "Backend/Python/API/FastAPI/Mi primera API en Python",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Python/API/FastAPI/Mi%20primera%20API%20en%20Python"
     },
     {
       "id": "guestbook-docker",

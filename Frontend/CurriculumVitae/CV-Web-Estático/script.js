@@ -1504,7 +1504,7 @@ function createWebProjectUrls(project) {
     readme:
       project.readme ||
       (hasFolder
-        ? `${GITHUB_WEB_REPOSITORY}/tree/main/${encodedFolder}#readme`
+        ? `${GITHUB_WEB_REPOSITORY}/blob/main/${encodedFolder}/README.md`
         : "")
   };
 }
@@ -1597,7 +1597,7 @@ function createWebProjectCard(project, index) {
       >
 
       <div class="github-game-cover-fallback" aria-hidden="true">
-        ${escapeProjectText(projectType)}
+        PORTADA PENDIENTE
       </div>
     </div>
 
