@@ -19,6 +19,18 @@ const GITHUB_GAMES_REPOSITORY =
 const GITHUB_GAMES_RAW =
   "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main";
 
+const GITHUB_WEB_DATABASE =
+  "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Web/main/DATA/web-projects.json";
+
+const GITHUB_WEB_REPOSITORY =
+  "https://github.com/NachoSLKN/Desarrollo-Web";
+
+const GITHUB_WEB_RAW =
+  "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Web/main";
+
+const LOCAL_WEB_DATABASE =
+  "../../../DATA/web-projects.json";
+
 
 /*
   Estos son los parámetros que debes terminar ajustando.
@@ -1463,6 +1475,289 @@ async function loadGithubGames() {
   }
 }
 
+
+/* =========================================================
+   CATÁLOGO DE PROYECTOS WEB DESDE GITHUB
+========================================================= */
+
+function createWebProjectUrls(project) {
+  const hasFolder = Boolean(project.folder);
+  const encodedFolder = hasFolder
+    ? encodeGitHubPath(project.folder)
+    : "";
+
+  const imageFile = project.image || "Portada.png";
+
+  return {
+    github:
+      project.github ||
+      (hasFolder
+        ? `${GITHUB_WEB_REPOSITORY}/tree/main/${encodedFolder}`
+        : GITHUB_WEB_REPOSITORY),
+
+    image:
+      project.imageUrl ||
+      (hasFolder
+        ? `${GITHUB_WEB_RAW}/${encodedFolder}/${encodeURIComponent(imageFile)}`
+        : ""),
+
+    readme:
+      project.readme ||
+      (hasFolder
+        ? `${GITHUB_WEB_REPOSITORY}/tree/main/${encodedFolder}#readme`
+        : "")
+  };
+}
+
+let githubWebProjects = [];
+let githubWebPageIndex = 0;
+
+function githubWebItemsPerPage() {
+  return window.matchMedia("(max-width: 820px)").matches ? 1 : 2;
+}
+
+function renderGithubWebPage() {
+  const grid = document.querySelector("#github-web-grid");
+  const pageLabel = document.querySelector("#github-web-page");
+  const previousButton = document.querySelector("#github-web-prev");
+  const nextButton = document.querySelector("#github-web-next");
+
+  if (!grid || !pageLabel || !previousButton || !nextButton) return;
+
+  const itemsPerPage = githubWebItemsPerPage();
+  const pageCount = Math.max(
+    1,
+    Math.ceil(githubWebProjects.length / itemsPerPage)
+  );
+
+  githubWebPageIndex = Math.min(githubWebPageIndex, pageCount - 1);
+
+  const start = githubWebPageIndex * itemsPerPage;
+  const visibleProjects = githubWebProjects.slice(
+    start,
+    start + itemsPerPage
+  );
+
+  grid.replaceChildren();
+
+  visibleProjects.forEach((project, visibleIndex) => {
+    grid.appendChild(
+      createWebProjectCard(project, start + visibleIndex)
+    );
+  });
+
+  pageLabel.textContent = githubWebProjects.length
+    ? `${githubWebPageIndex + 1} / ${pageCount}`
+    : "0 / 0";
+
+  previousButton.disabled = githubWebPageIndex <= 0;
+  nextButton.disabled = githubWebPageIndex >= pageCount - 1;
+}
+
+function createWebProjectCard(project, index) {
+  const urls = createWebProjectUrls(project);
+  const tags = Array.isArray(project.tags) ? project.tags : [];
+  const projectType = project.type || "WEB";
+
+  const article = document.createElement("article");
+  article.className = "github-game-card web-project-card";
+
+  const readmeButton = urls.readme
+    ? `
+      <a
+        class="terminal-link secondary-link"
+        href="${escapeProjectText(urls.readme)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VER README
+      </a>
+    `
+    : "";
+
+  const demoButton = project.demo
+    ? `
+      <a
+        class="terminal-link gameplay-link"
+        href="${escapeProjectText(project.demo)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VER DEMO
+      </a>
+    `
+    : "";
+
+  article.innerHTML = `
+    <div class="github-game-cover">
+      <img
+        ${urls.image ? `src="${escapeProjectText(urls.image)}"` : ""}
+        alt="Portada de ${escapeProjectText(project.title)}"
+        loading="lazy"
+      >
+
+      <div class="github-game-cover-fallback" aria-hidden="true">
+        ${escapeProjectText(projectType)}
+      </div>
+    </div>
+
+    <div class="github-game-content">
+      <p class="project-code">
+        WEB_${String(index + 1).padStart(3, "0")}
+        · ${escapeProjectText(project.status || "PROYECTO")}
+      </p>
+
+      <h3>${escapeProjectText(project.title || "Proyecto sin título")}</h3>
+
+      <p class="github-game-engine">
+        ${escapeProjectText(projectType)}
+      </p>
+
+      <p class="github-game-description">
+        ${escapeProjectText(project.description || "Sin descripción disponible.")}
+      </p>
+
+      <div class="tech-list">
+        ${tags
+          .map((tag) => `<span>${escapeProjectText(tag)}</span>`)
+          .join("")}
+      </div>
+
+      <div class="project-actions">
+        <a
+          class="terminal-link"
+          href="${escapeProjectText(urls.github)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          VER PROYECTO
+        </a>
+        ${readmeButton}
+        ${demoButton}
+      </div>
+    </div>
+  `;
+
+  const image = article.querySelector("img");
+  const fallback = article.querySelector(".github-game-cover-fallback");
+
+  image.addEventListener("load", () => {
+    fallback.hidden = true;
+  });
+
+  image.addEventListener("error", () => {
+    image.hidden = true;
+    fallback.hidden = false;
+  });
+
+  return article;
+}
+
+async function fetchWebProjectsDatabase() {
+  const sources = [
+    `${GITHUB_WEB_DATABASE}?v=${Date.now()}`,
+    `${LOCAL_WEB_DATABASE}?v=${Date.now()}`
+  ];
+
+  let lastError = null;
+
+  for (const source of sources) {
+    try {
+      const response = await fetch(source, { cache: "no-store" });
+
+      if (!response.ok) {
+        throw new Error(`Respuesta ${response.status} desde ${source}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+      console.warn(`No se pudo cargar el catálogo web desde ${source}`, error);
+    }
+  }
+
+  throw lastError || new Error("No se pudo cargar el catálogo web");
+}
+
+async function loadGithubWebProjects() {
+  const grid = document.querySelector("#github-web-grid");
+  const status = document.querySelector("#github-web-status");
+  const previousButton = document.querySelector("#github-web-prev");
+  const nextButton = document.querySelector("#github-web-next");
+
+  if (!grid || !status || !previousButton || !nextButton) return;
+
+  previousButton.addEventListener("click", () => {
+    if (githubWebPageIndex <= 0) return;
+    githubWebPageIndex -= 1;
+    renderGithubWebPage();
+  });
+
+  nextButton.addEventListener("click", () => {
+    const pageCount = Math.max(
+      1,
+      Math.ceil(githubWebProjects.length / githubWebItemsPerPage())
+    );
+
+    if (githubWebPageIndex >= pageCount - 1) return;
+    githubWebPageIndex += 1;
+    renderGithubWebPage();
+  });
+
+  status.textContent = "CONECTANDO CON EL CATÁLOGO WEB…";
+
+  try {
+    const database = await fetchWebProjectsDatabase();
+
+    githubWebProjects = Array.isArray(database.projects)
+      ? database.projects
+      : [];
+
+    githubWebPageIndex = 0;
+
+    if (!githubWebProjects.length) {
+      status.textContent =
+        "NO HAY PROYECTOS DEFINIDOS EN DATA/WEB-PROJECTS.JSON";
+      renderGithubWebPage();
+      return;
+    }
+
+    renderGithubWebPage();
+
+    status.textContent =
+      `${githubWebProjects.length} PROYECTO${githubWebProjects.length === 1 ? "" : "S"} WEB CARGADO${githubWebProjects.length === 1 ? "" : "S"}`;
+
+    status.classList.add("loaded");
+  } catch (error) {
+    console.error("No se pudo cargar DATA/web-projects.json:", error);
+
+    githubWebProjects = [];
+    renderGithubWebPage();
+
+    status.textContent = "ERROR AL CARGAR EL CATÁLOGO WEB";
+
+    grid.innerHTML = `
+      <article class="github-catalogue-error">
+        <h3>NO SE PUDO CONECTAR</h3>
+        <p>
+          Comprueba que exista
+          <strong>DATA/web-projects.json</strong>
+          en la rama <strong>main</strong>.
+        </p>
+
+        <a
+          class="terminal-link"
+          href="${GITHUB_WEB_REPOSITORY}/blob/main/DATA/web-projects.json"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          COMPROBAR ARCHIVO
+        </a>
+      </article>
+    `;
+  }
+}
+
 /* =========================================================
    ARTSTATION // RSS AUTOMÁTICO + CARRUSEL RESPONSIVE
 ========================================================= */
@@ -1710,6 +2005,18 @@ window.addEventListener("resize", () => {
   }, 160);
 });
 
+let githubWebResizeTimer = null;
+window.addEventListener("resize", () => {
+  window.clearTimeout(githubWebResizeTimer);
+
+  githubWebResizeTimer = window.setTimeout(() => {
+    if (githubWebProjects.length) {
+      githubWebPageIndex = 0;
+      renderGithubWebPage();
+    }
+  }, 170);
+});
+
 let artstationResizeTimer = null;
 window.addEventListener("resize", () => {
   window.clearTimeout(artstationResizeTimer);
@@ -1771,6 +2078,7 @@ async function renderPdfPreview(pdfUrl, canvasId, statusId) {
 
 window.addEventListener("DOMContentLoaded", () => {
   loadGithubGames();
+  loadGithubWebProjects();
   loadArtstationProjects();
   renderPdfPreview(
     "cv/Curriculum_ES.pdf",

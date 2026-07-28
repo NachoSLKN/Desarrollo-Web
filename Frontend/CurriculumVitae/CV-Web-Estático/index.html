@@ -294,25 +294,60 @@
     ====================================================== -->
     <section class="portfolio-section alternate-section" id="proyectos-web">
       <div class="section-heading">
-        <p class="section-code">WEB DEVELOPMENT // PROJECT CATALOGUE</p>
+        <p class="section-code">WEB DEVELOPMENT // LIVE DATABASE</p>
         <h2>Desarrollo web</h2>
         <p>
-          En el siguiente paso conectaremos un catálogo controlado con tus
-          proyectos React y MVC reales.
+          Proyectos frontend, backend y full stack cargados automáticamente
+          desde <strong>DATA/web-projects.json</strong>.
         </p>
       </div>
 
-      <div class="project-source-grid single-source">
-        <article class="project-source-panel">
-          <p class="project-code">STATUS // PENDING SELECTION</p>
-          <h3>Proyectos web reales</h3>
-          <p>
-            Seleccionaremos cada aplicación concreta, su carpeta, tecnologías,
-            captura, repositorio y demo.
-          </p>
-          <a class="terminal-link" href="https://github.com/NachoSLKN"
-             target="_blank" rel="noopener noreferrer">VISITAR GITHUB</a>
-        </article>
+      <div class="game-platform-block">
+        <div class="platform-heading">
+          <div>
+            <p class="project-code">SOURCE_01 // GITHUB</p>
+            <h3>Proyectos web</h3>
+          </div>
+
+          <a
+            class="terminal-link"
+            href="https://github.com/NachoSLKN/Desarrollo-Web"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ABRIR REPOSITORIO
+          </a>
+        </div>
+
+        <div class="games-carousel-toolbar">
+          <div id="github-web-status" class="catalogue-status">
+            CONECTANDO CON EL CATÁLOGO WEB…
+          </div>
+
+          <div class="carousel-controls">
+            <button
+              id="github-web-prev"
+              class="carousel-button"
+              type="button"
+              aria-label="Proyectos web anteriores"
+            >←</button>
+
+            <span id="github-web-page" class="carousel-page">0 / 0</span>
+
+            <button
+              id="github-web-next"
+              class="carousel-button"
+              type="button"
+              aria-label="Proyectos web siguientes"
+            >→</button>
+          </div>
+        </div>
+
+        <div
+          id="github-web-grid"
+          class="github-games-grid"
+          aria-live="polite"
+        ></div>
       </div>
     </section>
 
