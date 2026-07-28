@@ -1812,3 +1812,8 @@ a {
     aspect-ratio: 16 / 9;
   }
 }
+
+/* Evita que el fallback se superponga a portadas cargadas correctamente. */
+.github-game-cover-fallback[hidden] {
+  display: none !important;
+}

@@ -1596,7 +1596,7 @@ function createWebProjectCard(project, index) {
         loading="lazy"
       >
 
-      <div class="github-game-cover-fallback" aria-hidden="true">
+      <div class="github-game-cover-fallback" aria-hidden="true" hidden>
         PORTADA PENDIENTE
       </div>
     </div>
