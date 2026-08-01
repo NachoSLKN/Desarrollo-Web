@@ -1263,31 +1263,73 @@ function createGameCard(game, index) {
   const article = document.createElement("article");
   article.className = "github-game-card";
 
-  const projectButton = game.github || game.folder
-    ? `
-      <a
-        class="terminal-link"
-        href="${escapeProjectText(urls.github)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        VER PROYECTO
-      </a>
-    `
-    : "";
+  function createActionButton({
+    url,
+    label,
+    className = "",
+    download = false
+  }) {
+    if (!url) return "";
 
-  const readmeButton = game.readme || game.folder
-    ? `
+    const extraClass = className ? ` ${className}` : "";
+    const downloadAttribute = download ? " download" : "";
+
+    return `
       <a
-        class="terminal-link secondary-link"
-        href="${escapeProjectText(urls.readme)}"
+        class="terminal-link${extraClass}"
+        href="${escapeProjectText(url)}"
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer"${downloadAttribute}
       >
-        VER README
+        ${escapeProjectText(label)}
       </a>
-    `
-    : "";
+    `;
+  }
+
+  /*
+    Estos botones solo aparecen cuando el campo correspondiente
+    contiene una URL en DATA/projects.json.
+  */
+  const playButton = createActionButton({
+    url: game.playUrl,
+    label: game.playLabel || "JUGAR ONLINE",
+    className: "play-link"
+  });
+
+  const downloadButton = createActionButton({
+    url: game.downloadUrl,
+    label: game.downloadLabel || "DESCARGAR WINDOWS",
+    className: "download-link"
+  });
+
+  const itchButton = createActionButton({
+    url: game.itchUrl,
+    label: game.itchLabel || "VER EN ITCH.IO",
+    className: "itch-link"
+  });
+
+  const projectButton = createActionButton({
+    url: game.github || game.folder ? urls.github : "",
+    label: "VER PROYECTO"
+  });
+
+  const githubPcButton = createActionButton({
+    url: game.githubPc,
+    label: "CÓDIGO PC",
+    className: "secondary-link"
+  });
+
+  const githubWebButton = createActionButton({
+    url: game.githubWeb,
+    label: "CÓDIGO WEB",
+    className: "secondary-link"
+  });
+
+  const readmeButton = createActionButton({
+    url: game.readme || game.folder ? urls.readme : "",
+    label: "VER README",
+    className: "secondary-link"
+  });
 
   const gameplayUrl =
     game.gameplay ||
@@ -1301,18 +1343,11 @@ function createGameCard(game, index) {
       ? "VER GAMEPLAY"
       : "VER DESARROLLO");
 
-  const gameplayButton = gameplayUrl
-    ? `
-      <a
-        class="terminal-link gameplay-link"
-        href="${escapeProjectText(gameplayUrl)}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ${escapeProjectText(gameplayLabel)}
-      </a>
-    `
-    : "";
+  const gameplayButton = createActionButton({
+    url: gameplayUrl,
+    label: gameplayLabel,
+    className: "gameplay-link"
+  });
 
   article.innerHTML = `
     <div class="github-game-cover">
@@ -1322,7 +1357,7 @@ function createGameCard(game, index) {
         loading="lazy"
       >
 
-      <div class="github-game-cover-fallback" aria-hidden="true">
+      <div class="github-game-cover-fallback" aria-hidden="true" hidden>
         ${escapeProjectText(game.engine || "GAME")}
       </div>
     </div>
@@ -1350,7 +1385,12 @@ function createGameCard(game, index) {
       </div>
 
       <div class="project-actions">
+        ${playButton}
+        ${downloadButton}
+        ${itchButton}
         ${projectButton}
+        ${githubPcButton}
+        ${githubWebButton}
         ${readmeButton}
         ${gameplayButton}
       </div>
@@ -1360,14 +1400,22 @@ function createGameCard(game, index) {
   const image = article.querySelector("img");
   const fallback = article.querySelector(".github-game-cover-fallback");
 
-  image.addEventListener("load", () => {
+  const showImage = () => {
+    image.hidden = false;
     fallback.hidden = true;
-  });
+  };
 
-  image.addEventListener("error", () => {
+  const showFallback = () => {
     image.hidden = true;
     fallback.hidden = false;
-  });
+  };
+
+  image.addEventListener("load", showImage);
+  image.addEventListener("error", showFallback);
+
+  if (image.complete) {
+    image.naturalWidth > 0 ? showImage() : showFallback();
+  }
 
   return article;
 }

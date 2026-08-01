@@ -23,16 +23,24 @@
       "title": "PyDew Valley",
       "engine": "Pygame",
       "folder": "PYGAME/PyDew-Valley",
-      "status": "Demo",
-      "description": "Juego de granja desarrollado con Python y Pygame.",
+      "status": "Demo publicada",
+      "description": "Juego de granja desarrollado con Python y Pygame, disponible para Windows y navegador.",
       "tags": [
         "Python",
-        "Pygame"
+        "Pygame",
+        "Windows",
+        "Web"
       ],
       "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/PYGAME/PyDew-Valley",
-      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/PYGAME/PyDew-Valley/README.md",
+      "githubPc": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/PYGAME/PyDew-Valley/PyDew-Valley-PC",
+      "githubWeb": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/PYGAME/PyDew-Valley/PyDew-Valley-WEB",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/PYGAME/PyDew-Valley/PyDew-Valley-PC/README.md",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/PYGAME/PyDew-Valley/PyDew-Valley-PC/Portada.png",
       "gameplay": "https://youtu.be/X5yHedo7cYY",
-      "gameplayLabel": "VER GAMEPLAY"
+      "gameplayLabel": "VER GAMEPLAY",
+      "itchUrl": "",
+      "playUrl": "",
+      "downloadUrl": ""
     },
     {
       "id": "inspector-ags",
@@ -47,7 +55,8 @@
         "Point & Click"
       ],
       "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/AGS/INSPECTORAGS",
-      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/AGS/INSPECTORAGS#readme"
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/AGS/INSPECTORAGS#readme",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/AGS/INSPECTORAGS/Portada.png"
     },
     {
       "id": "godette",
@@ -61,7 +70,8 @@
         "GDScript"
       ],
       "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/GODOT/The%20Leyend%20Of%20Godette",
-      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/GODOT/The%20Leyend%20Of%20Godette/README.md"
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/GODOT/The%20Leyend%20Of%20Godette/README.md",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/GODOT/The%20Leyend%20Of%20Godette/Portada.png"
     },
     {
       "id": "elden-ring",
@@ -76,45 +86,46 @@
         "Action RPG"
       ],
       "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Elden%20Ring",
-      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Elden%20Ring/README.md"
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Elden%20Ring/README.md",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/Elden%20Ring/Portada.png"
     },
-  {
-  "id": "quijote",
-  "title": "Don Quijote",
-  "engine": "Unity",
-  "folder": "UNITY/Quijote",
-  "status": "En desarrollo",
-  "description": "ARPG isométrico inspirado en Don Quijote, con combate y exploración estilo Diablo.",
-  "tags": [
-    "Unity",
-    "C#",
-    "ARPG",
-    "Isométrico"
-  ],
-  "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Quijote",
-  "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Quijote/README.md",
-  "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/Quijote/Portada.png",
-  "development": "https://youtube.com/live/R5Y4QydT8Pc?feature=share",
-  "gameplayLabel": "VER DESARROLLO"
-},
-{
-  "id": "iron-giant",
-  "title": "Gigante de Hierro",
-  "engine": "Unity",
-  "folder": "UNITY/IRONGIANT",
-  "status": "En desarrollo",
-  "description": "Demo 3D del Gigante de Hierro con locomoción, vuelo y sistemas interactivos.",
-  "tags": [
-    "Unity",
-    "C#",
-    "Blender",
-    "3D"
-  ],
-  "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/IRONGIANT",
-  "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/IRONGIANT/README.md",
-  "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/IRONGIANT/Portada.png",
-  "development": "https://youtu.be/KEFSmnB2Yjk",
-  "gameplayLabel": "VER DESARROLLO"
-}
+    {
+      "id": "quijote",
+      "title": "Don Quijote",
+      "engine": "Unity",
+      "folder": "UNITY/Quijote",
+      "status": "En desarrollo",
+      "description": "ARPG isométrico inspirado en Don Quijote, con combate y exploración estilo Diablo.",
+      "tags": [
+        "Unity",
+        "C#",
+        "ARPG",
+        "Isométrico"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/Quijote",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/Quijote/README.md",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/Quijote/Portada.png",
+      "development": "https://youtube.com/live/R5Y4QydT8Pc?feature=share",
+      "gameplayLabel": "VER DESARROLLO"
+    },
+    {
+      "id": "iron-giant",
+      "title": "Gigante de Hierro",
+      "engine": "Unity",
+      "folder": "UNITY/IRONGIANT",
+      "status": "En desarrollo",
+      "description": "Demo 3D del Gigante de Hierro con locomoción, vuelo y sistemas interactivos.",
+      "tags": [
+        "Unity",
+        "C#",
+        "Blender",
+        "3D"
+      ],
+      "github": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/tree/main/UNITY/IRONGIANT",
+      "readme": "https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/IRONGIANT/README.md",
+      "imageUrl": "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/IRONGIANT/Portada.png",
+      "development": "https://youtu.be/KEFSmnB2Yjk",
+      "gameplayLabel": "VER DESARROLLO"
+    }
   ]
 }
