@@ -1256,7 +1256,72 @@ function renderGithubGamesPage() {
   nextButton.disabled = githubGamesPageIndex >= pageCount - 1;
 }
 
+function ensureInlineGameStyles() {
+  if (document.querySelector("#inline-game-styles")) return;
+
+  const style = document.createElement("style");
+  style.id = "inline-game-styles";
+  style.textContent = `
+    .github-game-cover.inline-game-active {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      min-height: 360px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .inline-game-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: 0;
+      display: block;
+      background: #000;
+    }
+
+    .inline-game-toolbar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+    }
+
+    .inline-game-toolbar button {
+      border: 1px solid #63ff67;
+      background: rgba(0, 12, 3, 0.92);
+      color: #baff9e;
+      font: inherit;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .inline-game-toolbar button:hover,
+    .inline-game-toolbar button:focus-visible {
+      background: #63ff67;
+      color: #001804;
+    }
+
+    .terminal-link.inline-play-button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    @media (max-width: 820px) {
+      .github-game-cover.inline-game-active,
+      .inline-game-frame {
+        min-height: 240px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
 function createGameCard(game, index) {
+  ensureInlineGameStyles();
+
   const urls = createGameUrls(game);
   const tags = Array.isArray(game.tags) ? game.tags : [];
 
@@ -1287,14 +1352,23 @@ function createGameCard(game, index) {
   }
 
   /*
-    Estos botones solo aparecen cuando el campo correspondiente
-    contiene una URL en DATA/projects.json.
+    JUGAR ONLINE ya no abre otra pestaña.
+    Al pulsarlo, la portada de la tarjeta se sustituye por un iframe.
+    Se usa embedUrl cuando exista y, como respaldo, playUrl.
   */
-  const playButton = createActionButton({
-    url: game.playUrl,
-    label: game.playLabel || "JUGAR ONLINE",
-    className: "play-link"
-  });
+  const inlineGameUrl = game.embedUrl || game.playUrl || "";
+
+  const playButton = inlineGameUrl
+    ? `
+      <button
+        type="button"
+        class="terminal-link play-link inline-play-button"
+        data-inline-play
+      >
+        ${escapeProjectText(game.playLabel || "JUGAR ONLINE")}
+      </button>
+    `
+    : "";
 
   const downloadButton = createActionButton({
     url: game.downloadUrl,
@@ -1397,15 +1471,19 @@ function createGameCard(game, index) {
     </div>
   `;
 
+  const cover = article.querySelector(".github-game-cover");
   const image = article.querySelector("img");
   const fallback = article.querySelector(".github-game-cover-fallback");
+  const playControl = article.querySelector("[data-inline-play]");
 
   const showImage = () => {
+    if (cover.classList.contains("inline-game-active")) return;
     image.hidden = false;
     fallback.hidden = true;
   };
 
   const showFallback = () => {
+    if (cover.classList.contains("inline-game-active")) return;
     image.hidden = true;
     fallback.hidden = false;
   };
@@ -1415,6 +1493,65 @@ function createGameCard(game, index) {
 
   if (image.complete) {
     image.naturalWidth > 0 ? showImage() : showFallback();
+  }
+
+  if (playControl && inlineGameUrl) {
+    let gameOpen = false;
+
+    const closeInlineGame = () => {
+      cover.querySelector(".inline-game-frame")?.remove();
+      cover.querySelector(".inline-game-toolbar")?.remove();
+      cover.classList.remove("inline-game-active");
+
+      gameOpen = false;
+      playControl.textContent = game.playLabel || "JUGAR ONLINE";
+
+      image.naturalWidth > 0 ? showImage() : showFallback();
+    };
+
+    playControl.addEventListener("click", () => {
+      if (gameOpen) {
+        closeInlineGame();
+        return;
+      }
+
+      gameOpen = true;
+      image.hidden = true;
+      fallback.hidden = true;
+      cover.classList.add("inline-game-active");
+      playControl.textContent = "CERRAR JUEGO";
+
+      const frame = document.createElement("iframe");
+      frame.className = "inline-game-frame";
+      frame.src = inlineGameUrl;
+      frame.title = `Jugar a ${game.title || "videojuego"}`;
+      frame.loading = "eager";
+      frame.allow = "autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";
+      frame.setAttribute("allowfullscreen", "");
+      frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+
+      const toolbar = document.createElement("div");
+      toolbar.className = "inline-game-toolbar";
+
+      const fullscreenButton = document.createElement("button");
+      fullscreenButton.type = "button";
+      fullscreenButton.textContent = "PANTALLA COMPLETA";
+      fullscreenButton.addEventListener("click", async () => {
+        try {
+          await cover.requestFullscreen();
+        } catch (error) {
+          console.warn("No se pudo activar la pantalla completa:", error);
+        }
+      });
+
+      const closeButton = document.createElement("button");
+      closeButton.type = "button";
+      closeButton.textContent = "CERRAR";
+      closeButton.addEventListener("click", closeInlineGame);
+
+      toolbar.append(fullscreenButton, closeButton);
+      cover.replaceChildren(frame, toolbar);
+    });
   }
 
   return article;
