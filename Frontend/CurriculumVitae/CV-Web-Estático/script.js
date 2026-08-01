@@ -1288,6 +1288,35 @@ function ensureInlineGameStyles() {
       gap: 8px;
     }
 
+    /*
+      Pantalla completa visual:
+      ocupa toda la ventana sin utilizar requestFullscreen(),
+      evitando que Pygbag reinicie el juego.
+    */
+    .github-game-cover.inline-game-active.inline-game-expanded {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      min-height: 100vh;
+      aspect-ratio: auto;
+      z-index: 100000;
+      background: #000;
+    }
+
+    .github-game-cover.inline-game-active.inline-game-expanded .inline-game-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+    }
+
+    .github-game-cover.inline-game-active.inline-game-expanded .inline-game-toolbar {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100001;
+    }
+
     .inline-game-toolbar button {
       border: 1px solid #63ff67;
       background: rgba(0, 12, 3, 0.92);
@@ -1454,8 +1483,8 @@ function createGameCard(game, index) {
 
       <div class="tech-list">
         ${tags
-          .map((tag) => `<span>${escapeProjectText(tag)}</span>`)
-          .join("")}
+      .map((tag) => `<span>${escapeProjectText(tag)}</span>`)
+      .join("")}
       </div>
 
       <div class="project-actions">
@@ -1497,8 +1526,33 @@ function createGameCard(game, index) {
 
   if (playControl && inlineGameUrl) {
     let gameOpen = false;
+    let expandedPlaceholder = null;
+    let originalParent = null;
+    let originalNextSibling = null;
+
+    const restoreCoverToCard = () => {
+      cover.classList.remove("inline-game-expanded");
+
+      if (expandedPlaceholder?.parentNode) {
+        expandedPlaceholder.parentNode.insertBefore(
+          cover,
+          expandedPlaceholder
+        );
+
+        expandedPlaceholder.remove();
+      } else if (originalParent) {
+        originalParent.insertBefore(cover, originalNextSibling);
+      }
+
+      expandedPlaceholder = null;
+      originalParent = null;
+      originalNextSibling = null;
+      document.body.style.overflow = "";
+    };
 
     const closeInlineGame = () => {
+      restoreCoverToCard();
+
       cover.querySelector(".inline-game-frame")?.remove();
       cover.querySelector(".inline-game-toolbar")?.remove();
       cover.classList.remove("inline-game-active");
@@ -1527,8 +1581,11 @@ function createGameCard(game, index) {
       frame.title = `Jugar a ${game.title || "videojuego"}`;
       frame.loading = "eager";
       frame.allow = "autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";
-      frame.setAttribute("allowfullscreen", "");
       frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+
+      frame.style.width = "100%";
+      frame.style.height = "100%";
+      frame.style.border = "0";
 
       const toolbar = document.createElement("div");
       toolbar.className = "inline-game-toolbar";
@@ -1536,11 +1593,31 @@ function createGameCard(game, index) {
       const fullscreenButton = document.createElement("button");
       fullscreenButton.type = "button";
       fullscreenButton.textContent = "PANTALLA COMPLETA";
-      fullscreenButton.addEventListener("click", async () => {
-        try {
-          await cover.requestFullscreen();
-        } catch (error) {
-          console.warn("No se pudo activar la pantalla completa:", error);
+
+      fullscreenButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const expanded = cover.classList.contains("inline-game-expanded");
+
+        if (!expanded) {
+          originalParent = cover.parentNode;
+          originalNextSibling = cover.nextSibling;
+
+          expandedPlaceholder = document.createComment(
+            "posición original del juego"
+          );
+
+          originalParent.insertBefore(expandedPlaceholder, cover);
+          document.body.appendChild(cover);
+
+          cover.classList.add("inline-game-expanded");
+          document.body.style.overflow = "hidden";
+
+          fullscreenButton.textContent = "SALIR DE PANTALLA COMPLETA";
+        } else {
+          restoreCoverToCard();
+          fullscreenButton.textContent = "PANTALLA COMPLETA";
         }
       });
 
@@ -1551,6 +1628,8 @@ function createGameCard(game, index) {
 
       toolbar.append(fullscreenButton, closeButton);
       cover.replaceChildren(frame, toolbar);
+
+
     });
   }
 
@@ -1804,8 +1883,8 @@ function createWebProjectCard(project, index) {
 
       <div class="tech-list">
         ${tags
-          .map((tag) => `<span>${escapeProjectText(tag)}</span>`)
-          .join("")}
+      .map((tag) => `<span>${escapeProjectText(tag)}</span>`)
+      .join("")}
       </div>
 
       <div class="project-actions">
@@ -2035,19 +2114,19 @@ function createArtstationCard(project) {
 
   const date = project.pubDate
     ? new Intl.DateTimeFormat("es-ES", {
-        year: "numeric",
-        month: "short",
-        day: "2-digit"
-      }).format(new Date(project.pubDate))
+      year: "numeric",
+      month: "short",
+      day: "2-digit"
+    }).format(new Date(project.pubDate))
     : "FECHA NO INDICADA";
 
   article.innerHTML = `
     <div class="artstation-card-media">
       ${imageUrl
-        ? `<img src="${escapeProjectText(imageUrl)}"
+      ? `<img src="${escapeProjectText(imageUrl)}"
                 alt="${escapeProjectText(project.title)}"
                 loading="lazy">`
-        : ""}
+      : ""}
       <div class="artstation-media-fallback" ${imageUrl ? "hidden" : ""}>
         ARTSTATION
       </div>
