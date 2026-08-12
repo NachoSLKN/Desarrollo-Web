@@ -137,6 +137,13 @@
         </p>
       </div>
 
+      <div class="featured-projects-toolbar" aria-label="Navegación de proyectos destacados">
+        <button id="featured-projects-prev" type="button" aria-label="Página anterior">←</button>
+        <span id="featured-projects-page">1 / 2</span>
+        <button id="featured-projects-next" type="button" aria-label="Página siguiente">→</button>
+      </div>
+
+      <div id="featured-projects-grid" class="featured-projects-grid">
       <article class="project-card featured-project">
        <div class="project-screen">
           <div class="video-frame">
@@ -156,10 +163,10 @@
 
         <div class="project-info">
           <p class="project-code">
-            PROJECT_001 · STATUS: COMPLETED
+            PROJECT_001 · VERSION: v0.1
           </p>
 
-          <h3>PyDew Valley</h3>
+          <h3>PyDew Valley · v0.1</h3>
 
           <p>
             Prototipo de juego de granja inspirado en Stardew Valley,
@@ -204,6 +211,116 @@
           </div>
         </div>
       </article>
+
+      <article class="project-card featured-project">
+        <div class="project-screen">
+          <div class="video-frame">
+            <iframe
+              class="project-video"
+              src="https://www.youtube.com/embed/LVttS41uzgk?rel=0&modestbranding=1"
+              title="PyDew Valley - Mejoras"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+
+            <div class="video-overlay" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="project-info">
+          <p class="project-code">
+            PROJECT_001 · VERSION: v1.0
+          </p>
+
+          <h3>PyDew Valley · v1.0</h3>
+
+          <p>
+            Versión 1.0 con nuevas interfaces y sistemas, correcciones de
+            gameplay y publicación completa para Windows y navegador.
+          </p>
+
+          <ul class="project-features">
+            <li>New in-game UI / HUD</li>
+            <li>Collider fixes</li>
+            <li>Save & load + Continue</li>
+            <li>Player name selection</li>
+            <li>Pause, options & controls</li>
+            <li>Credits & UI improvements</li>
+            <li>General polish & bug fixes</li>
+            <li>Windows executable</li>
+            <li>HTML5 / Pygbag version</li>
+            <li>itch.io browser support</li>
+          </ul>
+
+          <div class="tech-list">
+            <span>PYTHON</span>
+            <span>PYGAME</span>
+            <span>GAMEDEV</span>
+          </div>
+
+          <div class="project-actions">
+            <a
+              class="terminal-link secondary-link"
+              href="https://youtu.be/LVttS41uzgk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              VER MEJORAS
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card featured-project">
+        <div class="project-screen">
+          <div class="video-frame">
+            <iframe
+              class="project-video"
+              src="https://www.youtube.com/embed/U2zJ9ddfvJw?rel=0&modestbranding=1"
+              title="Hitman: The Temple Sun"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+
+            <div class="video-overlay" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="project-info">
+          <p class="project-code">
+            PROJECT_002 · STATUS: IN DEVELOPMENT
+          </p>
+
+          <h3>Hitman: The Temple Sun</h3>
+
+          <p>
+            Proyecto de sigilo en tercera persona desarrollado con Unity,
+            centrado en infiltración, exploración y sistemas de gameplay.
+          </p>
+
+          <div class="tech-list">
+            <span>UNITY</span>
+            <span>C#</span>
+            <span>STEALTH</span>
+          </div>
+
+          <div class="project-actions">
+            <a
+              class="terminal-link secondary-link"
+              href="https://youtu.be/U2zJ9ddfvJw"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              VER DESARROLLO
+            </a>
+          </div>
+        </div>
+      </article>
+      </div>
     </section>
 
     <section class="portfolio-section" id="desarrollo-videojuegos">
@@ -265,10 +382,10 @@
         ></div>
       </div>
 
-      <div class="game-platform-block itch-placeholder">
+      <div class="game-platform-block demos-playable-block">
         <div class="platform-heading">
           <div>
-            <p class="project-code">SOURCE_02 // ITCH.IO</p>
+            <p class="project-code">SOURCE_02 // PLAYABLE BUILDS</p>
             <h3>Demos jugables</h3>
           </div>
 
@@ -283,9 +400,74 @@
         </div>
 
         <p class="platform-description">
-          La conexión automática con itch.io será el siguiente paso.
-          De momento puedes acceder directamente al perfil público.
+          Builds jugables publicadas para navegador y Windows.
         </p>
+
+        <div class="playable-demos-grid">
+          <article
+            class="github-game-card playable-demo-card"
+            data-playable-demo
+            data-embed-url="./games/pydew-valley/index.html"
+          >
+            <div class="github-game-cover playable-demo-cover">
+              <img
+                src="https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/PYGAME/PyDew-Valley/PyDew-Valley-PC/Portada.png"
+                alt="Portada de PyDew Valley"
+                loading="lazy"
+              >
+              <div class="github-game-cover-fallback" aria-hidden="true" hidden>
+                PYGAME
+              </div>
+            </div>
+
+            <div class="github-game-content">
+              <p class="project-code">PLAYABLE_001 · VERSION: v1.0</p>
+              <h3>PyDew Valley</h3>
+
+              <p class="github-game-engine">PYGAME · HTML5 · WINDOWS</p>
+
+              <p class="github-game-description">
+                Versión jugable de PyDew Valley. Puedes ejecutarla directamente
+                en el navegador o acceder a la versión para Windows.
+              </p>
+
+              <div class="tech-list">
+                <span>PYTHON</span>
+                <span>PYGAME</span>
+                <span>HTML5</span>
+                <span>PYGBAG</span>
+              </div>
+
+              <div class="project-actions">
+                <button
+                  type="button"
+                  class="terminal-link play-link inline-play-button"
+                  data-demo-play
+                >
+                  JUGAR ONLINE
+                </button>
+
+                <a
+                  class="terminal-link download-link"
+                  href="https://nachoslkn.itch.io/pydew-valley"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  DESCARGAR WINDOWS
+                </a>
+
+                <a
+                  class="terminal-link itch-link"
+                  href="https://nachoslkn.itch.io/pydew-valley"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VER EN ITCH.IO
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 

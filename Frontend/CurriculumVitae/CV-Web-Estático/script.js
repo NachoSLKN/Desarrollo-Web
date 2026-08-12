@@ -1488,14 +1488,10 @@ function createGameCard(game, index) {
       </div>
 
       <div class="project-actions">
-        ${playButton}
-        ${downloadButton}
-        ${itchButton}
         ${projectButton}
         ${githubPcButton}
         ${githubWebButton}
         ${readmeButton}
-        ${gameplayButton}
       </div>
     </div>
   `;
@@ -2411,3 +2407,428 @@ function render() {
 
 selectSection(0);
 render();
+
+
+/* =========================================================
+   CARRUSEL DE PROYECTOS DESTACADOS
+   - 2 tarjetas por página en escritorio.
+   - 1 tarjeta por página en móvil.
+========================================================= */
+
+function ensureFeaturedProjectsStyles() {
+  if (document.querySelector("#featured-projects-styles")) return;
+
+  const style = document.createElement("style");
+  style.id = "featured-projects-styles";
+  style.textContent = `
+    /*
+      El carrusel destacado replica la lógica visual del carrusel
+      de PROYECTOS Y CÓDIGO: panel centrado, controles arriba
+      y dos tarjetas por página.
+    */
+    .featured-projects-toolbar,
+    .featured-projects-grid {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, 100%);
+      margin-inline: auto;
+    }
+
+    .featured-projects-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .featured-projects-toolbar button {
+      width: 48px;
+      height: 44px;
+      border: 1px solid #63ff67;
+      background: transparent;
+      color: #baff9e;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .featured-projects-toolbar button:hover:not(:disabled),
+    .featured-projects-toolbar button:focus-visible:not(:disabled) {
+      background: #63ff67;
+      color: #001804;
+    }
+
+    .featured-projects-toolbar button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    #featured-projects-page {
+      min-width: 58px;
+      text-align: center;
+      color: #baff9e;
+    }
+
+    .featured-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    /*
+      IMPORTANTE: .project-card tiene display:grid en style.css.
+      Eso anulaba visualmente el atributo hidden del carrusel.
+    */
+    .featured-projects-grid .featured-project[hidden] {
+      display: none !important;
+    }
+
+    /*
+      Dentro del carrusel cada destacado se comporta como las
+      tarjetas de PROYECTOS Y CÓDIGO: vídeo arriba, contenido abajo.
+    */
+    .featured-projects-grid .featured-project {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      overflow: hidden;
+      border: 1px solid rgba(124, 255, 114, 0.32);
+      background: rgba(1, 10, 4, 0.82);
+      box-shadow: inset 0 0 35px rgba(124, 255, 114, 0.025);
+    }
+
+    .featured-projects-grid .featured-project .project-screen {
+      min-height: 0;
+      padding: 10px;
+      margin: 0;
+      border: 0;
+      border-bottom: 1px solid rgba(124, 255, 114, 0.24);
+      aspect-ratio: 16 / 9;
+    }
+
+    .featured-projects-grid .featured-project .video-frame,
+    .featured-projects-grid .featured-project .project-video {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+    }
+
+    .featured-projects-grid .featured-project .project-info {
+      align-self: stretch;
+      padding: clamp(22px, 3vw, 32px);
+    }
+
+    .featured-projects-grid .featured-project .project-info h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.55rem, 3vw, 2.7rem);
+    }
+
+    .featured-projects-grid .featured-project .project-features {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .featured-projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-projects-toolbar {
+        justify-content: space-between;
+      }
+
+      .featured-projects-grid .featured-project .project-features {
+        grid-template-columns: 1fr;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function setupFeaturedProjectsCarousel() {
+  const grid = document.querySelector("#featured-projects-grid");
+  const previousButton = document.querySelector("#featured-projects-prev");
+  const nextButton = document.querySelector("#featured-projects-next");
+  const pageLabel = document.querySelector("#featured-projects-page");
+
+  if (!grid || !previousButton || !nextButton || !pageLabel) return;
+
+  ensureFeaturedProjectsStyles();
+
+  const cards = Array.from(grid.querySelectorAll(".featured-project"));
+  let pageIndex = 0;
+
+  const itemsPerPage = () =>
+    window.matchMedia("(max-width: 820px)").matches ? 1 : 2;
+
+  const render = () => {
+    const perPage = itemsPerPage();
+    const pageCount = Math.max(1, Math.ceil(cards.length / perPage));
+
+    pageIndex = Math.min(pageIndex, pageCount - 1);
+
+    const start = pageIndex * perPage;
+    const end = start + perPage;
+
+    cards.forEach((card, index) => {
+      card.hidden = index < start || index >= end;
+    });
+
+    pageLabel.textContent = `${pageIndex + 1} / ${pageCount}`;
+    previousButton.disabled = pageIndex === 0;
+    nextButton.disabled = pageIndex >= pageCount - 1;
+  };
+
+  previousButton.addEventListener("click", () => {
+    if (pageIndex <= 0) return;
+    pageIndex -= 1;
+    render();
+  });
+
+  nextButton.addEventListener("click", () => {
+    const pageCount = Math.max(1, Math.ceil(cards.length / itemsPerPage()));
+    if (pageIndex >= pageCount - 1) return;
+    pageIndex += 1;
+    render();
+  });
+
+  window.addEventListener("resize", render);
+  render();
+}
+
+setupFeaturedProjectsCarousel();
+
+
+/* =========================================================
+   DEMOS JUGABLES
+   PyDew Valley se ejecuta dentro de la propia tarjeta.
+========================================================= */
+
+function ensurePlayableDemoStyles() {
+  if (document.querySelector("#playable-demo-styles")) return;
+
+  const style = document.createElement("style");
+  style.id = "playable-demo-styles";
+  style.textContent = `
+    .playable-demos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .playable-demo-card {
+      max-width: none;
+    }
+
+    .playable-demo-cover.inline-game-active {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      min-height: 360px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .playable-demo-cover .inline-game-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: 0;
+      display: block;
+      background: #000;
+    }
+
+    .playable-demo-cover .inline-game-toolbar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+    }
+
+    .playable-demo-cover.inline-game-expanded {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      min-height: 100vh;
+      aspect-ratio: auto;
+      z-index: 100000;
+      background: #000;
+    }
+
+    .playable-demo-cover.inline-game-expanded .inline-game-frame {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+    }
+
+    .playable-demo-cover.inline-game-expanded .inline-game-toolbar {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100001;
+    }
+
+    .playable-demo-cover .inline-game-toolbar button {
+      border: 1px solid #63ff67;
+      background: rgba(0, 12, 3, 0.92);
+      color: #baff9e;
+      font: inherit;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .playable-demo-cover .inline-game-toolbar button:hover,
+    .playable-demo-cover .inline-game-toolbar button:focus-visible {
+      background: #63ff67;
+      color: #001804;
+    }
+
+    @media (max-width: 820px) {
+      .playable-demos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .playable-demo-cover.inline-game-active,
+      .playable-demo-cover .inline-game-frame {
+        min-height: 240px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function setupPlayableDemos() {
+  ensurePlayableDemoStyles();
+
+  document.querySelectorAll("[data-playable-demo]").forEach((card) => {
+    const cover = card.querySelector(".playable-demo-cover");
+    const image = cover?.querySelector("img");
+    const fallback = cover?.querySelector(".github-game-cover-fallback");
+    const playButton = card.querySelector("[data-demo-play]");
+    const embedUrl = card.dataset.embedUrl;
+
+    if (!cover || !playButton || !embedUrl) return;
+
+    let gameOpen = false;
+    let expandedPlaceholder = null;
+    let originalParent = null;
+    let originalNextSibling = null;
+
+    const restoreCoverToCard = () => {
+      cover.classList.remove("inline-game-expanded");
+
+      if (expandedPlaceholder?.parentNode) {
+        expandedPlaceholder.parentNode.insertBefore(cover, expandedPlaceholder);
+        expandedPlaceholder.remove();
+      } else if (originalParent) {
+        originalParent.insertBefore(cover, originalNextSibling);
+      }
+
+      expandedPlaceholder = null;
+      originalParent = null;
+      originalNextSibling = null;
+      document.body.style.overflow = "";
+    };
+
+    const showImage = () => {
+      if (cover.classList.contains("inline-game-active")) return;
+      if (image) image.hidden = false;
+      if (fallback) fallback.hidden = true;
+    };
+
+    const showFallback = () => {
+      if (cover.classList.contains("inline-game-active")) return;
+      if (image) image.hidden = true;
+      if (fallback) fallback.hidden = false;
+    };
+
+    image?.addEventListener("load", showImage);
+    image?.addEventListener("error", showFallback);
+
+    const closeGame = () => {
+      restoreCoverToCard();
+
+      cover.querySelector(".inline-game-frame")?.remove();
+      cover.querySelector(".inline-game-toolbar")?.remove();
+      cover.classList.remove("inline-game-active");
+
+      gameOpen = false;
+      playButton.textContent = "JUGAR ONLINE";
+
+      if (image?.naturalWidth > 0) showImage();
+      else showFallback();
+    };
+
+    playButton.addEventListener("click", () => {
+      if (gameOpen) {
+        closeGame();
+        return;
+      }
+
+      gameOpen = true;
+      if (image) image.hidden = true;
+      if (fallback) fallback.hidden = true;
+      cover.classList.add("inline-game-active");
+      playButton.textContent = "CERRAR JUEGO";
+
+      const frame = document.createElement("iframe");
+      frame.className = "inline-game-frame";
+      frame.src = embedUrl;
+      frame.title = "Jugar a PyDew Valley";
+      frame.loading = "eager";
+      frame.allow = "autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";
+      frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+
+      const toolbar = document.createElement("div");
+      toolbar.className = "inline-game-toolbar";
+
+      const fullscreenButton = document.createElement("button");
+      fullscreenButton.type = "button";
+      fullscreenButton.textContent = "PANTALLA COMPLETA";
+
+      fullscreenButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const expanded = cover.classList.contains("inline-game-expanded");
+
+        if (!expanded) {
+          originalParent = cover.parentNode;
+          originalNextSibling = cover.nextSibling;
+          expandedPlaceholder = document.createComment("posición original de la demo");
+
+          originalParent.insertBefore(expandedPlaceholder, cover);
+          document.body.appendChild(cover);
+
+          cover.classList.add("inline-game-expanded");
+          document.body.style.overflow = "hidden";
+          fullscreenButton.textContent = "SALIR DE PANTALLA COMPLETA";
+        } else {
+          restoreCoverToCard();
+          fullscreenButton.textContent = "PANTALLA COMPLETA";
+        }
+      });
+
+      const closeButton = document.createElement("button");
+      closeButton.type = "button";
+      closeButton.textContent = "CERRAR";
+      closeButton.addEventListener("click", closeGame);
+
+      toolbar.append(fullscreenButton, closeButton);
+      cover.replaceChildren(frame, toolbar);
+    });
+  });
+}
+
+setupPlayableDemos();

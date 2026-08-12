@@ -2,7 +2,7 @@
   "games": [
     {
       "id": "hitman",
-      "title": "Hitman Clone",
+      "title": "Hitman: The Temple Sun",
       "engine": "Unity",
       "folder": "UNITY/Hitman",
       "status": "En desarrollo",

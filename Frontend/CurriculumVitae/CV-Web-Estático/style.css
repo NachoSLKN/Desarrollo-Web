@@ -1817,3 +1817,13 @@ a {
 .github-game-cover-fallback[hidden] {
   display: none !important;
 }
+
+.inline-game-frame:fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.inline-game-frame:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+}
