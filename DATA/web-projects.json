@@ -14,7 +14,11 @@
         "WebGL"
       ],
       "folder": "Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS"
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
+      "playable": true,
+      "embedUrl": "./games/portfolio-interactivo/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./games/portfolio-interactivo/Portada.png"
     },
     {
       "id": "gameboy-react",
@@ -43,7 +47,10 @@
         "JavaScript"
       ],
       "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/proyecto-pkm-react",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/proyecto-pkm-react"
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/proyecto-pkm-react",
+      "playable": true,
+      "embedUrl": "./web-projects/proyecto-pkm-react/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR"
     },
     {
       "id": "javascript-quiz",
@@ -57,7 +64,10 @@
         "JavaScript"
       ],
       "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/javascript-quiz",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/javascript-quiz"
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/javascript-quiz",
+      "playable": true,
+      "embedUrl": "./web-projects/javascript-quiz/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR"
     },
     {
       "id": "snake-js",
@@ -71,7 +81,10 @@
         "JavaScript"
       ],
       "folder": "Frontend/Desarrollo Web Entorno Cliente/Javascript/SNAKE",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/SNAKE"
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/SNAKE",
+      "playable": true,
+      "embedUrl": "./web-projects/snake/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR"
     },
     {
       "id": "cronometro-js",
@@ -85,7 +98,10 @@
         "JavaScript"
       ],
       "folder": "Frontend/Desarrollo Web Entorno Cliente/Javascript/CRONÓMETRO",
-      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO"
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO",
+      "playable": true,
+      "embedUrl": "./web-projects/cronometro/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR"
     },
     {
       "id": "boxchampy-figma",

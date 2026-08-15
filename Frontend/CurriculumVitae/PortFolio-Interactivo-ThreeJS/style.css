@@ -7,7 +7,7 @@
 }
 
 body{
-  background-image: url('/azarquiel.jpg');
+  background-image: url('./azarquiel.jpg');
   background-size: 600px auto; /* ancho fijo */
   background-repeat: no-repeat;
   background-position: center 5%;
@@ -58,7 +58,7 @@ body{
 
 
 .modal-header {
-    widt: 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: row;

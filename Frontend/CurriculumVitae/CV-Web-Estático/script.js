@@ -29,7 +29,7 @@ const GITHUB_WEB_RAW =
   "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Web/main";
 
 const LOCAL_WEB_DATABASE =
-  "../../../DATA/web-projects.json";
+  "./data/web-projects.json";
 
 
 /*
@@ -1835,6 +1835,20 @@ function createWebProjectCard(project, index) {
     `
     : "";
 
+  const webEmbedUrl = project.embedUrl || project.playUrl || "";
+
+  const webPlayButton = webEmbedUrl
+    ? `
+      <button
+        type="button"
+        class="terminal-link play-link inline-play-button"
+        data-web-inline-play
+      >
+        ${escapeProjectText(project.playLabel || "PROBAR EN NAVEGADOR")}
+      </button>
+    `
+    : "";
+
   const demoButton = project.demo
     ? `
       <a
@@ -1893,30 +1907,129 @@ function createWebProjectCard(project, index) {
           VER PROYECTO
         </a>
         ${readmeButton}
+        ${webPlayButton}
         ${demoButton}
       </div>
     </div>
   `;
 
+  const cover = article.querySelector(".github-game-cover");
   const image = article.querySelector("img");
   const fallback = article.querySelector(".github-game-cover-fallback");
+  const playControl = article.querySelector("[data-web-inline-play]");
 
-  image.addEventListener("load", () => {
+  const showImage = () => {
+    if (cover.classList.contains("inline-game-active")) return;
+    image.hidden = false;
     fallback.hidden = true;
-  });
+  };
 
-  image.addEventListener("error", () => {
+  const showFallback = () => {
+    if (cover.classList.contains("inline-game-active")) return;
     image.hidden = true;
     fallback.hidden = false;
-  });
+  };
+
+  image.addEventListener("load", showImage);
+  image.addEventListener("error", showFallback);
+
+  if (image.complete) {
+    image.naturalWidth > 0 ? showImage() : showFallback();
+  }
+
+  if (playControl && webEmbedUrl) {
+    ensureInlineGameStyles();
+    let projectOpen = false;
+    let expandedPlaceholder = null;
+    let originalParent = null;
+    let originalNextSibling = null;
+
+    const restoreCoverToCard = () => {
+      cover.classList.remove("inline-game-expanded");
+      if (expandedPlaceholder?.parentNode) {
+        expandedPlaceholder.parentNode.insertBefore(cover, expandedPlaceholder);
+        expandedPlaceholder.remove();
+      } else if (originalParent) {
+        originalParent.insertBefore(cover, originalNextSibling);
+      }
+      expandedPlaceholder = null;
+      originalParent = null;
+      originalNextSibling = null;
+      document.body.style.overflow = "";
+    };
+
+    const closeWebProject = () => {
+      restoreCoverToCard();
+      cover.querySelector(".inline-game-frame")?.remove();
+      cover.querySelector(".inline-game-toolbar")?.remove();
+      cover.classList.remove("inline-game-active");
+      projectOpen = false;
+      playControl.textContent = project.playLabel || "PROBAR EN NAVEGADOR";
+      image.naturalWidth > 0 ? showImage() : showFallback();
+    };
+
+    playControl.addEventListener("click", () => {
+      if (projectOpen) {
+        closeWebProject();
+        return;
+      }
+
+      projectOpen = true;
+      image.hidden = true;
+      fallback.hidden = true;
+      cover.classList.add("inline-game-active");
+      playControl.textContent = "CERRAR PROYECTO";
+
+      const frame = document.createElement("iframe");
+      frame.className = "inline-game-frame";
+      frame.src = webEmbedUrl;
+      frame.title = `Probar ${project.title || "proyecto web"}`;
+      frame.loading = "eager";
+      frame.allow = "autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";
+      frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+
+      const toolbar = document.createElement("div");
+      toolbar.className = "inline-game-toolbar";
+
+      const fullscreenButton = document.createElement("button");
+      fullscreenButton.type = "button";
+      fullscreenButton.textContent = "PANTALLA COMPLETA";
+      fullscreenButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const expanded = cover.classList.contains("inline-game-expanded");
+        if (!expanded) {
+          originalParent = cover.parentNode;
+          originalNextSibling = cover.nextSibling;
+          expandedPlaceholder = document.createComment("posición original del proyecto web");
+          originalParent.insertBefore(expandedPlaceholder, cover);
+          document.body.appendChild(cover);
+          cover.classList.add("inline-game-expanded");
+          document.body.style.overflow = "hidden";
+          fullscreenButton.textContent = "SALIR DE PANTALLA COMPLETA";
+        } else {
+          restoreCoverToCard();
+          fullscreenButton.textContent = "PANTALLA COMPLETA";
+        }
+      });
+
+      const closeButton = document.createElement("button");
+      closeButton.type = "button";
+      closeButton.textContent = "CERRAR";
+      closeButton.addEventListener("click", closeWebProject);
+
+      toolbar.append(fullscreenButton, closeButton);
+      cover.replaceChildren(frame, toolbar);
+    });
+  }
 
   return article;
 }
 
 async function fetchWebProjectsDatabase() {
   const sources = [
-    `${GITHUB_WEB_DATABASE}?v=${Date.now()}`,
-    `${LOCAL_WEB_DATABASE}?v=${Date.now()}`
+    `${LOCAL_WEB_DATABASE}?v=${Date.now()}`,
+    `${GITHUB_WEB_DATABASE}?v=${Date.now()}`
   ];
 
   let lastError = null;
