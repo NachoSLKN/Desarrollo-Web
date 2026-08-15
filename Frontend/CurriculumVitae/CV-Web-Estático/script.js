@@ -9,6 +9,12 @@ import { GLTFLoader } from "https://unpkg.com/three@0.167.1/examples/jsm/loaders
 
 const MODEL_URL = "./models/PITBOYV2.glb";
 const PROFILE_IMAGE_URL = "./img/profile.jpg";
+const INSTANT_GAMING_QR_URL = "./img/affiliates/instant-gaming-qr.png";
+const FLAG_ES_URL = "./img/languages/flag-es.svg";
+const FLAG_EN_URL = "./img/languages/flag-en.svg";
+const FLAG_DE_URL = "./img/languages/flag-de.svg";
+const QUICKMAGIC_LOGO_URL = "./img/affiliates/quickmagic-logo.webp";
+const INSTANT_GAMING_LOGO_URL = "./img/affiliates/instant-gaming-logo.png";
 
 const GITHUB_GAMES_DATABASE =
   "https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/DATA/projects.json";
@@ -183,6 +189,11 @@ scene.add(floor);
 let model = null;
 let customScreen = null;
 let profileImage = null;
+let instantGamingQrImage = null;
+let quickMagicLogoImage = null;
+let instantGamingLogoImage = null;
+const languageFlagImages = new Map();
+const technologyImages = new Map();
 
 let isFocused = false;
 let currentSection = 0;
@@ -200,67 +211,81 @@ const sections = [
     tab: "STAT",
     kicker: "USER PROFILE",
     title: "NACHOSLKN",
-    subtitle: "GAME DEV · WEB DEV · 3D ARTIST",
+    subtitle: "VIDEOGAMES · WEB DEV · 3D",
     lines: [
       "Ignacio Liñán Vicente",
-      "Programación, videojuegos y creación 3D",
-      "Portfolio: nachoslkn.com"
-    ]
+      "Desarrollo · tecnología · creación 3D",
+      "Madrid, Spain"
+    ],
+    type: "profile"
   },
   {
     tab: "WEB",
     kicker: "WEB DEVELOPMENT",
     title: "DESARROLLO WEB",
     subtitle: "FRONTEND · BACKEND · DATABASES",
-    lines: [
-      "HTML · CSS · JavaScript · Three.js",
-      "Java · Spring · JPA · Hibernate",
-      "SQL · Git · APIs"
+    type: "technologies",
+    technologies: [
+      ["HTML", "html5"], ["CSS", "css"], ["JavaScript", "javascript"],
+      ["TypeScript", "typescript"], ["React", "react"], ["Vite", "vite"],
+      ["Next.js", "nextjs"], ["Node.js", "nodejs"], ["Tailwind", "tailwindcss"],
+      ["Redux", "redux"], ["Zustand", "zustand"], ["REST API", "restapi"],
+      ["Java", "java"], ["Spring", "spring"], ["JPA", "jpa"],
+      ["Hibernate", "hibernate"], ["Servlets", "servlets"], ["JSP", "jsp"],
+      ["SQL", "sql"], ["MySQL", "mysql"], ["MongoDB", "mongodb"],
+      ["Flask", "flask"], ["Docker", "docker"], ["Git / GitHub", "github"]
     ]
   },
   {
     tab: "GAME",
     kicker: "GAME DEVELOPMENT",
     title: "VIDEOJUEGOS",
-    subtitle: "PROTOTYPES · SYSTEMS · GAMEPLAY",
-    lines: [
-      "Unity · Unreal Engine · Pygame",
-      "C# · Python · Adventure Game Studio",
-      "Realidad virtual y prototipado"
+    subtitle: "GAMEPLAY · SYSTEMS · IMMERSIVE",
+    type: "technologies",
+    featured: ["VR", "AR"],
+    technologies: [
+      ["Unity", "unity"], ["Unreal", "unrealengine"], ["Godot", "godot"],
+      ["Pygame", "pygame"], ["Adventure Game Studio", "ags"], ["C#", "csharp"],
+      ["Python", "python"], ["GDScript", "gdscript"], ["Blueprints", "blueprints"],
+      ["Input System", "inputsystem"], ["Netcode", "netcode"], ["WebGL", "webgl"],
+      ["Tiled", "tiled"], ["Audacity", "audacity"], ["FMOD", "fmod"], ["VR", "vr"], ["AR", "ar"]
     ]
   },
   {
     tab: "3D",
     kicker: "3D & VISUALS",
-    title: "ARTE 3D",
+    title: "3D / VISUALS",
     subtitle: "MODELING · ASSETS · RENDER",
-    lines: [
-      "Blender · 3ds Max",
-      "Modelado y creación de assets",
-      "Render · edición · presentación"
-    ]
+    type: "technologies",
+    technologies: [
+      ["Blender", "blender"], ["SimLab", "simlab"],
+      ["Krita", "krita"], ["Photoshop", "photoshop"], ["GIMP", "gimp"]
+    ],
+    noteLines: ["Edición básica · Krita / Photoshop", "Presentación · Modelado · Assets"]
   },
   {
     tab: "CV",
     kicker: "PERSONNEL FILE",
     title: "CURRÍCULUM",
-    subtitle: "ESPAÑOL · ENGLISH",
+    subtitle: "VIDEOGAMES · WEB DEV · 3D",
     lines: [
-      "Formación en videojuegos, web y 3D",
-      "Consulta las versiones bajo el Pip-Boy",
-      "Madrid, España"
-    ]
+      "Español · English · Deutsch",
+      "Videojuegos / Videogames · Web Dev · 3D",
+      "CV disponible bajo el Pip-Boy"
+    ],
+    type: "text"
   },
   {
-    tab: "RADIO",
-    kicker: "COMMUNICATIONS",
-    title: "CONTACTO",
-    subtitle: "OPEN CHANNEL",
+    tab: "AFF",
+    kicker: "PARTNERS & AFFILIATES",
+    title: "COLABORACIONES",
+    subtitle: "QUICKMAGIC · INSTANT GAMING",
     lines: [
-      "nachoslkn.com",
-      "github.com/NachoSLKN",
-      "Nacho15111997@gmail.com"
-    ]
+      "QuickMagic · Código: NachoSLKN",
+      "Instant Gaming · Affiliate: Nacho-slkn",
+      "QR y enlaces bajo el Pip-Boy"
+    ],
+    type: "affiliates"
   }
 ];
 
@@ -306,6 +331,291 @@ function loadProfileImage() {
   };
 
   image.src = PROFILE_IMAGE_URL;
+}
+
+function loadInstantGamingQr() {
+  const image = new Image();
+
+  image.onload = () => {
+    instantGamingQrImage = image;
+    drawScreen();
+  };
+
+  image.onerror = () => {
+    instantGamingQrImage = null;
+    drawScreen();
+  };
+
+  image.src = INSTANT_GAMING_QR_URL;
+}
+
+const TECHNOLOGY_ICON_URLS = {
+  html5: "./img/technologies/web/html5.svg",
+  css: "./img/technologies/web/css.svg",
+  javascript: "./img/technologies/web/javascript.svg",
+  typescript: "./img/technologies/web/typescript.svg",
+  react: "./img/technologies/web/react.svg",
+  vite: "./img/technologies/web/vite.svg",
+  nextjs: "./img/technologies/web/nextjs.svg",
+  nodejs: "./img/technologies/web/nodejs.svg",
+  tailwindcss: "./img/technologies/web/tailwindcss.svg",
+  redux: "./img/technologies/web/redux.svg",
+  zustand: "./img/technologies/web/zustand.svg",
+  restapi: "./img/technologies/web/rest-api.svg",
+  java: "./img/technologies/web/java.svg",
+  spring: "./img/technologies/web/spring.svg",
+  jpa: "./img/technologies/web/jpa.svg",
+  hibernate: "./img/technologies/web/hibernate.svg",
+  servlets: "./img/technologies/web/servlets.svg",
+  jsp: "./img/technologies/web/jsp.svg",
+  sql: "./img/technologies/web/sql.svg",
+  mysql: "./img/technologies/web/mysql.svg",
+  mongodb: "./img/technologies/web/mongodb.svg",
+  flask: "./img/technologies/web/flask.svg",
+  docker: "./img/technologies/web/docker.svg",
+  git: "./img/technologies/web/git.svg",
+  github: "./img/technologies/web/github.svg",
+  csharp: "./img/technologies/web/csharp.svg",
+
+  unity: "./img/technologies/gamedev/unity.svg",
+  unrealengine: "./img/technologies/gamedev/unrealengine.svg",
+  godot: "./img/technologies/gamedev/godot.svg",
+  python: "./img/technologies/gamedev/python.svg",
+  pygame: "./img/technologies/gamedev/pygame.svg",
+  ags: "./img/technologies/gamedev/ags.svg",
+  gdscript: "./img/technologies/gamedev/gdscript.svg",
+  blueprints: "./img/technologies/gamedev/blueprints.svg",
+  inputsystem: "./img/technologies/gamedev/input-system.svg",
+  netcode: "./img/technologies/gamedev/netcode.svg",
+  webgl: "./img/technologies/gamedev/webgl.svg",
+  tiled: "./img/technologies/gamedev/Tiled.png",
+  audacity: "./img/technologies/gamedev/audacity.svg",
+  fmod: "./img/technologies/gamedev/fmod.svg",
+  vr: "./img/technologies/gamedev/vr.svg",
+  ar: "./img/technologies/gamedev/ar.svg",
+  blender: "./img/technologies/3d/blender.svg",
+  krita: "./img/technologies/3d/krita.svg",
+  photoshop: "./img/technologies/3d/Photoshop.png",
+  gimp: "./img/technologies/3d/gimp.svg",
+  simlab: "./img/technologies/3d/simlab-vr-logo.png"
+};
+
+function loadBrandImages() {
+  [[QUICKMAGIC_LOGO_URL, "quick"], [INSTANT_GAMING_LOGO_URL, "instant"]].forEach(([src, key]) => {
+    const image = new Image();
+    image.onload = () => {
+      if (key === "quick") quickMagicLogoImage = image;
+      else instantGamingLogoImage = image;
+      drawScreen();
+    };
+    image.onerror = () => drawScreen();
+    image.src = src;
+  });
+}
+
+function getTechnologyImage(icon) {
+  if (technologyImages.has(icon)) return technologyImages.get(icon);
+
+  const image = new Image();
+  image.onload = drawScreen;
+  image.onerror = () => {
+    image.failed = true;
+    drawScreen();
+  };
+  image.src = TECHNOLOGY_ICON_URLS[icon] || "";
+  technologyImages.set(icon, image);
+  return image;
+}
+
+
+function loadLanguageFlags() {
+  [
+    ["ES", FLAG_ES_URL],
+    ["EN", FLAG_EN_URL],
+    ["DE", FLAG_DE_URL]
+  ].forEach(([key, src]) => {
+    const image = new Image();
+    image.onload = () => {
+      languageFlagImages.set(key, image);
+      drawScreen();
+    };
+    image.onerror = () => drawScreen();
+    image.src = src;
+  });
+}
+
+function drawLanguageBadge(x, y, code, label) {
+  const image = languageFlagImages.get(code);
+
+  ctx.fillStyle = "rgba(8,35,10,0.62)";
+  roundedRect(ctx, x, y, 330, 105, 16);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(125,255,105,0.34)";
+  ctx.lineWidth = 2;
+  roundedRect(ctx, x, y, 330, 105, 16);
+  ctx.stroke();
+
+  if (image && image.complete && image.naturalWidth) {
+    const maxW = 72;
+    const maxH = 45;
+    const ratio = Math.min(maxW / image.naturalWidth, maxH / image.naturalHeight);
+    const w = image.naturalWidth * ratio;
+    const h = image.naturalHeight * ratio;
+    ctx.drawImage(image, x + 24, y + (105 - h) / 2, w, h);
+  }
+
+  ctx.textAlign = "left";
+  ctx.fillStyle = "#baff9e";
+  ctx.font = "bold 23px monospace";
+  ctx.fillText(code, x + 118, y + 43);
+
+  ctx.fillStyle = "rgba(220,255,210,0.74)";
+  ctx.font = "18px monospace";
+  ctx.fillText(label, x + 118, y + 74);
+}
+
+function drawCvPanel(section) {
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+
+  ctx.fillStyle = "#76ff69";
+  ctx.font = "bold 22px monospace";
+  ctx.fillText(section.kicker, 80, 180);
+
+  ctx.fillStyle = "#baff9e";
+  ctx.font = "bold 42px monospace";
+  ctx.fillText(section.title, 80, 226);
+
+  ctx.fillStyle = "#80ff70";
+  ctx.font = "bold 20px monospace";
+  ctx.fillText(section.subtitle, 80, 260);
+
+  drawLanguageBadge(90, 320, "ES", "Español");
+  drawLanguageBadge(535, 320, "EN", "English");
+  drawLanguageBadge(980, 320, "DE", "Deutsch");
+
+  ctx.fillStyle = "rgba(220,255,210,0.84)";
+  ctx.font = "24px monospace";
+  ctx.fillText("Videojuegos / Videogames · Web Dev · 3D", 90, 520);
+  ctx.fillText("CV completo disponible bajo el Pip-Boy", 90, 575);
+}
+
+function drawTechnologyGrid(section) {
+  const items = section.technologies || [];
+  const isGame = section.tab === "GAME";
+  const startX = 90;
+  const cols = items.length > 12 ? 6 : 4;
+  const cellW = items.length > 12 ? 200 : 280;
+  const cellH = items.length > 12 ? 102 : 132;
+  const iconSize = items.length > 12 ? 46 : 58;
+
+  let startY = 300;
+
+  if (isGame) {
+    // Bloque VR/AR separado de la cabecera para evitar solapamientos.
+    const featureY = 285;
+
+    ctx.fillStyle = "rgba(125,255,105,0.08)";
+    roundedRect(ctx, 75, featureY, 1250, 82, 18);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(145,255,125,0.46)";
+    ctx.lineWidth = 2;
+    roundedRect(ctx, 75, featureY, 1250, 82, 18);
+    ctx.stroke();
+
+    ctx.fillStyle = "#baff9e";
+    ctx.font = "bold 24px monospace";
+    ctx.textAlign = "left";
+    ctx.fillText("IMMERSIVE DEVELOPMENT", 105, featureY + 32);
+
+    ctx.fillStyle = "#76ff69";
+    ctx.font = "bold 22px monospace";
+    ctx.fillText("VR  ·  AR", 105, featureY + 63);
+
+    startY = 390;
+  }
+
+  items.forEach(([name, icon], index) => {
+    const col = index % cols;
+    const row = Math.floor(index / cols);
+    const x = startX + col * cellW;
+    const y = startY + row * cellH;
+    const boxW = cellW - 18;
+    const boxH = cellH - 10;
+    const image = getTechnologyImage(icon);
+
+    ctx.fillStyle = "rgba(8,35,10,0.62)";
+    roundedRect(ctx, x, y, boxW, boxH, 14);
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(125,255,105,0.24)";
+    ctx.lineWidth = 2;
+    roundedRect(ctx, x, y, boxW, boxH, 14);
+    ctx.stroke();
+
+    if (image.complete && !image.failed && image.naturalWidth) {
+      const ratio = Math.min(iconSize / image.naturalWidth, iconSize / image.naturalHeight);
+      const drawW = image.naturalWidth * ratio;
+      const drawH = image.naturalHeight * ratio;
+      ctx.drawImage(
+        image,
+        x + 14 + (iconSize - drawW) / 2,
+        y + 12 + (iconSize - drawH) / 2,
+        drawW,
+        drawH
+      );
+    } else {
+      ctx.fillStyle = "#76ff69";
+      ctx.font = "bold 22px monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(name.slice(0, 2).toUpperCase(), x + 14 + iconSize / 2, y + 48);
+    }
+
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#baff9e";
+    ctx.font = items.length > 12 ? "bold 15px monospace" : "bold 19px monospace";
+
+    const maxChars = items.length > 12 ? 18 : 22;
+    const label = name.toUpperCase();
+    if (label.length > maxChars) {
+      const splitAt = label.lastIndexOf(" ", maxChars);
+      const cut = splitAt > 6 ? splitAt : maxChars;
+      ctx.fillText(label.slice(0, cut), x + 12, y + boxH - 31);
+      ctx.fillText(label.slice(cut).trim(), x + 12, y + boxH - 11);
+    } else {
+      ctx.fillText(label, x + 12, y + boxH - 18);
+    }
+  });
+
+  if (section.noteLines) {
+    ctx.fillStyle = "rgba(220,255,210,0.78)";
+    ctx.font = "21px monospace";
+    ctx.textAlign = "left";
+    section.noteLines.forEach((line, i) => ctx.fillText(line, 90, 735 + i * 35));
+  }
+}
+
+function drawAffiliatePanel() {
+  const cards = [
+    { x: 75, title: "QUICKMAGIC", image: quickMagicLogoImage, detail: "20% commission · Code NachoSLKN" },
+    { x: 455, title: "INSTANT GAMING", image: instantGamingLogoImage, detail: "3% commission · Nacho-slkn" }
+  ];
+  cards.forEach(card => {
+    ctx.fillStyle="#061607"; roundedRect(ctx,card.x,250,340,300,22); ctx.fill();
+    ctx.strokeStyle="rgba(145,255,125,.7)"; ctx.lineWidth=3; roundedRect(ctx,card.x,250,340,300,22); ctx.stroke();
+    if(card.image) {
+      const maxW=260,maxH=105,r=Math.min(maxW/card.image.width,maxH/card.image.height);
+      ctx.drawImage(card.image,card.x+(340-card.image.width*r)/2,285,card.image.width*r,card.image.height*r);
+    }
+    ctx.fillStyle="#baff9e";ctx.font="bold 25px monospace";ctx.textAlign="center";ctx.fillText(card.title,card.x+170,430);
+    ctx.fillStyle="rgba(220,255,210,.75)";ctx.font="16px monospace";ctx.fillText(card.detail,card.x+170,475);
+  });
+  const qx=875,qy=245,qs=280;
+  ctx.fillStyle="#fff";ctx.fillRect(qx-8,qy-8,qs+16,qs+16);
+  if(instantGamingQrImage) ctx.drawImage(instantGamingQrImage,qx,qy,qs,qs);
+  ctx.fillStyle="#baff9e";ctx.font="bold 21px monospace";ctx.textAlign="center";ctx.fillText("INSTANT GAMING QR",qx+qs/2,qy+qs+48);
 }
 
 function drawPortrait() {
@@ -415,8 +725,8 @@ function drawScreen() {
   ctx.stroke();
 
   const tabY = 84;
-  const tabStartX = 78;
-  const tabWidth = 195;
+  const tabStartX = 70;
+  const tabWidth = (width - tabStartX * 2) / sections.length;
 
   ctx.font = "bold 34px monospace";
   ctx.textAlign = "center";
@@ -444,31 +754,38 @@ function drawScreen() {
   ctx.lineTo(width - 70, 144);
   ctx.stroke();
 
-  drawPortrait();
+  if (section.type === "technologies") {
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#76ff69";
+    ctx.font = "bold 20px monospace";
+    ctx.fillText(section.kicker, 80, 178);
 
-  const contentX = 450;
+    ctx.fillStyle = "#baff9e";
+    ctx.font = "bold 38px monospace";
+    ctx.fillText(section.title, 80, 220);
 
-  ctx.textAlign = "left";
-  ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#80ff70";
+    ctx.font = "bold 18px monospace";
+    ctx.fillText(section.subtitle, 80, 252);
 
-  ctx.fillStyle = "#76ff69";
-  ctx.font = "bold 26px monospace";
-  ctx.fillText(section.kicker, contentX, 235);
-
-  ctx.fillStyle = "#baff9e";
-  ctx.font = "bold 62px monospace";
-  ctx.fillText(section.title, contentX, 322);
-
-  ctx.fillStyle = "#80ff70";
-  ctx.font = "bold 27px monospace";
-  ctx.fillText(section.subtitle, contentX, 378);
-
-  ctx.fillStyle = "rgba(220,255,210,0.84)";
-  ctx.font = "28px monospace";
-
-  section.lines.forEach((line, index) => {
-    ctx.fillText(line, contentX, 475 + index * 57);
-  });
+    drawTechnologyGrid(section);
+  } else if (section.type === "affiliates") {
+    ctx.textAlign="left"; ctx.fillStyle="#76ff69"; ctx.font="bold 24px monospace"; ctx.fillText(section.kicker,75,190);
+    ctx.fillStyle="#baff9e";ctx.font="bold 44px monospace";ctx.fillText(section.title,75,235);
+    drawAffiliatePanel();
+  } else if (section.tab === "CV") {
+    drawCvPanel(section);
+  } else {
+    if (section.type === "profile") drawPortrait();
+    const contentX = section.type === "profile" ? 450 : 120;
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#76ff69"; ctx.font = "bold 26px monospace"; ctx.fillText(section.kicker, contentX, 235);
+    ctx.fillStyle = "#baff9e"; ctx.font = "bold 62px monospace"; ctx.fillText(section.title, contentX, 322);
+    ctx.fillStyle = "#80ff70"; ctx.font = "bold 27px monospace"; ctx.fillText(section.subtitle, contentX, 378);
+    ctx.fillStyle = "rgba(220,255,210,0.84)"; ctx.font = "28px monospace";
+    (section.lines || []).forEach((line, index) => ctx.fillText(line, contentX, 475 + index * 57));
+  }
 
   ctx.strokeStyle = "rgba(130,255,110,0.35)";
   ctx.beginPath();
@@ -733,6 +1050,9 @@ loader.load(
 
     createCustomScreen();
     loadProfileImage();
+    loadInstantGamingQr();
+loadBrandImages();
+loadLanguageFlags();
 
     loadingProgress.style.width = "100%";
     loadingText.textContent = "";
@@ -2945,3 +3265,4 @@ function setupPlayableDemos() {
 }
 
 setupPlayableDemos();
+

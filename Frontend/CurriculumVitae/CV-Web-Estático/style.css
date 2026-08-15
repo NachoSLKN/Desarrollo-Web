@@ -1915,3 +1915,182 @@ iframe:-webkit-full-screen {
 .language-separator {
   opacity: 0.55;
 }
+/* =========================================================
+   COLABORACIONES & AFILIACIONES
+========================================================= */
+
+.collaborations-section {
+  background:
+    linear-gradient(rgba(124, 255, 114, 0.014) 50%, transparent 50%),
+    radial-gradient(circle at 50% 30%, rgba(53, 160, 75, 0.10), transparent 32rem),
+    #020503;
+  background-size: 100% 5px, auto, auto;
+}
+
+.collaborations-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  width: min(1180px, 100%);
+  margin-inline: auto;
+}
+
+.collaboration-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 430px;
+  padding: 30px;
+  border: 1px solid rgba(124, 255, 114, 0.34);
+  background: rgba(3, 18, 8, 0.72);
+  box-shadow:
+    0 0 34px rgba(124, 255, 114, 0.06),
+    inset 0 0 50px rgba(124, 255, 114, 0.025);
+  transition: 180ms ease;
+}
+
+.collaboration-card:hover {
+  border-color: rgba(124, 255, 114, 0.68);
+  box-shadow:
+    0 0 30px rgba(124, 255, 114, 0.10),
+    inset 0 0 50px rgba(124, 255, 114, 0.045);
+}
+
+.collaboration-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.collaboration-index {
+  color: rgba(124, 255, 114, 0.52);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+.collaboration-status {
+  border: 1px solid rgba(124, 255, 114, 0.45);
+  padding: 5px 8px;
+  color: var(--green);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+
+.collaboration-card h3 {
+  margin: 0 0 18px;
+  color: var(--green-bright);
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(124, 255, 114, 0.34);
+}
+
+.collaboration-card > p {
+  margin: 0 0 26px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.collaboration-data,
+.collaboration-benefit {
+  margin-top: 12px;
+  padding: 16px;
+  border-left: 2px solid rgba(124, 255, 114, 0.52);
+  background: rgba(124, 255, 114, 0.035);
+}
+
+.collaboration-data span,
+.collaboration-benefit span {
+  display: block;
+  margin-bottom: 7px;
+  color: rgba(217, 255, 212, 0.48);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+
+.collaboration-data strong,
+.collaboration-benefit strong {
+  color: var(--green-bright);
+  line-height: 1.5;
+}
+
+.collaboration-card .project-actions {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+@media (max-width: 820px) {
+  .collaborations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .collaboration-card {
+    min-height: 0;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .collaboration-card {
+    padding: 20px;
+  }
+
+  .collaboration-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/* Logos de marcas en Colaboraciones & Afiliaciones */
+.collaboration-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 72px;
+  margin-bottom: 18px;
+}
+
+.collaboration-brand img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.collaboration-brand--wide img {
+  width: 118px;
+  height: 58px;
+}
+
+.collaboration-brand h3 {
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .collaboration-brand {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+
+/* =========================================================
+   CV FLAGS
+========================================================= */
+.cv-language--flag {
+  overflow: hidden;
+  padding: 0;
+  background: rgba(3, 18, 8, 0.78);
+}
+
+.cv-language--flag img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
