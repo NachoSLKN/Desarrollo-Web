@@ -2452,7 +2452,7 @@ async function loadGithubWebProjects() {
 }
 
 /* =========================================================
-   ARTSTATION // RSS AUTOMÁTICO + CARRUSEL RESPONSIVE
+   ARTSTATION // JSON LOCAL + CARRUSEL RESPONSIVE
 ========================================================= */
 
 const ARTSTATION_API_URL = "/api/artstation-projects";
@@ -2499,38 +2499,19 @@ function normalizeRss2JsonItem(item) {
 }
 
 async function fetchArtstationProjects() {
-  try {
-    const response = await fetch(`${ARTSTATION_API_URL}?v=${Date.now()}`, {
-      cache: "no-store"
-    });
+  const localResponse = await fetch(
+    `./data/artstation-projects.json?v=${Date.now()}`,
+    { cache: "no-store" }
+  );
 
-    if (!response.ok) {
-      throw new Error(`API de ArtStation: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return Array.isArray(data.projects) ? data.projects : [];
-  } catch (apiError) {
-    console.warn(
-      "Live Server no ejecuta funciones de Vercel. " +
-      "Se utiliza la copia local de ArtStation.",
-      apiError
+  if (!localResponse.ok) {
+    throw new Error(
+      `No se pudo cargar data/artstation-projects.json: ${localResponse.status}`
     );
-
-    const localResponse = await fetch(
-      `./data/artstation-projects.json?v=${Date.now()}`,
-      { cache: "no-store" }
-    );
-
-    if (!localResponse.ok) {
-      throw new Error(
-        `No se pudo cargar data/artstation-projects.json: ${localResponse.status}`
-      );
-    }
-
-    const localData = await localResponse.json();
-    return Array.isArray(localData.projects) ? localData.projects : [];
   }
+
+  const localData = await localResponse.json();
+  return Array.isArray(localData.projects) ? localData.projects : [];
 }
 
 function createArtstationCard(project) {

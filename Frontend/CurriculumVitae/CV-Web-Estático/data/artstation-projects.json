@@ -1,7 +1,18 @@
 {
   "source": "https://nachoslkn.artstation.com/rss",
-  "note": "Copia local para Live Server. En producción se usa /api/artstation-projects.",
+  "note": "Copia manual de ArtStation usada por el portfolio.",
   "projects": [
+    {
+      "title": "Grease Pencil #1 - Bakery",
+      "description": "Stylized bakery environment created in Blender using Grease Pencil.",
+      "link": "https://www.artstation.com/artwork/RqnqBW",
+      "pubDate": "Mon, 17 Aug 2026 23:37:56 -0500",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/101/675/814/large/nacho-slkn-bakerynacho.jpg?1787027796",
+        "https://cdna.artstation.com/p/assets/images/images/101/675/816/large/nacho-slkn-bakerynachosolid.jpg?1787027801",
+        "https://cdna.artstation.com/p/assets/images/images/101/675/818/large/nacho-slkn-bakerynachowireframe.jpg?1787027806"
+      ]
+    },
     {
       "title": "IRON GIANT",
       "description": "En proceso. Curso: https://www.artstation.com/artwork/rAPg0a",
