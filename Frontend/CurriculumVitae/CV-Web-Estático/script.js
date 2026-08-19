@@ -2522,6 +2522,8 @@ function createArtstationCard(project) {
     ? project.images[0] || ""
     : "";
 
+  const videoEmbed = String(project.videoEmbed || "").trim();
+
   const date = project.pubDate
     ? new Intl.DateTimeFormat("es-ES", {
       year: "numeric",
@@ -2532,12 +2534,22 @@ function createArtstationCard(project) {
 
   article.innerHTML = `
     <div class="artstation-card-media">
-      ${imageUrl
-      ? `<img src="${escapeProjectText(imageUrl)}"
-                alt="${escapeProjectText(project.title)}"
-                loading="lazy">`
-      : ""}
-      <div class="artstation-media-fallback" ${imageUrl ? "hidden" : ""}>
+      ${videoEmbed
+      ? `<iframe
+            class="artstation-video"
+            src="${escapeProjectText(videoEmbed)}"
+            title="${escapeProjectText(project.title || "Vídeo de ArtStation")}"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>`
+      : imageUrl
+        ? `<img src="${escapeProjectText(imageUrl)}"
+                  alt="${escapeProjectText(project.title)}"
+                  loading="lazy">`
+        : ""}
+      <div class="artstation-media-fallback" ${videoEmbed || imageUrl ? "hidden" : ""}>
         ARTSTATION
       </div>
     </div>
