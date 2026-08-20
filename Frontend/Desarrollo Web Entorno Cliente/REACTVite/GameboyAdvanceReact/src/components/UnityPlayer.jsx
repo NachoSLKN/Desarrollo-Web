@@ -7,14 +7,14 @@ export default function UnityPlayer() {
     if (window.unityInstance) return;
 
     const script = document.createElement("script");
-    script.src = "/Build/gba.loader.js";
+    script.src = "./Build/gba.loader.js";
     script.async = true;
 
     script.onload = () => {
       window.createUnityInstance(canvasRef.current, {
-        dataUrl: "/Build/gba.data",
-        frameworkUrl: "/Build/gba.framework.js",
-        codeUrl: "/Build/gba.wasm",
+        dataUrl: "./Build/gba.data",
+        frameworkUrl: "./Build/gba.framework.js",
+        codeUrl: "./Build/gba.wasm",
         devicePixelRatio: 1,
       }).then((instance) => {
         window.unityInstance = instance;
