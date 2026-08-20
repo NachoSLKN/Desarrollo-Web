@@ -1,6 +1,6 @@
 # 🎵 Proyecto Música – Flask + Docker + MongoDB
 
-![Portada](img/0.png)
+![Portada Proyecto Música](Portada.png)
 
 ## 📌 Descripción
 
