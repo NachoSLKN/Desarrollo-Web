@@ -1,251 +1,251 @@
-﻿{
-    "projects":  [
-                     {
-                         "id":  "portfolio-interactivo-threejs",
-                         "title":  "Portfolio Interactivo ThreeJS",
-                         "type":  "Frontend",
-                         "status":  "Finalizado",
-                         "description":  "Portfolio interactivo desarrollado con Three.js que presenta contenidos y proyectos mediante una experiencia 3D ejecutable directamente en el navegador.",
-                         "tags":  [
-                                      "HTML",
-                                      "CSS",
-                                      "JavaScript",
-                                      "Three.js",
-                                      "WebGL"
-                                  ],
-                         "folder":  "Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
-                         "playable":  true,
-                         "embedUrl":  "./games/portfolio-interactivo/index.html",
-                         "playLabel":  "PROBAR EN NAVEGADOR",
-                         "imageUrl":  "./games/portfolio-interactivo/Portada.png"
-                     },
-                     {
-                         "id":  "gameboy-react",
-                         "title":  "Game Boy Advance React",
-                         "type":  "Frontend",
-                         "status":  "En desarrollo",
-                         "description":  "Interfaz de Game Boy Advance creada con React y Vite que integra un videojuego exportado desde Unity WebGL.",
-                         "tags":  [
-                                      "React",
-                                      "Vite",
-                                      "JavaScript",
-                                      "Unity WebGL"
-                                  ],
-                         "folder":  "Frontend/Desarrollo Web Entorno Cliente/REACTVite/GameboyAdvanceReact",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/GameboyAdvanceReact",
-                         "playable":  true,
-                         "embedUrl":  "./web-projects/gameboy-react/index.html",
-                         "playLabel":  "PROBAR EN NAVEGADOR",
-                         "imageUrl":  "./web-projects/gameboy-react/Portada.png"
-                     },
-                     {
-                         "id":  "pokemon-react",
-                         "title":  "Proyecto PokÃ©mon React",
-                         "type":  "Frontend",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n frontend desarrollada con React y Vite basada en el universo PokÃ©mon.",
-                         "tags":  [
-                                      "React",
-                                      "Vite",
-                                      "JavaScript"
-                                  ],
-                         "folder":  "Frontend/Desarrollo Web Entorno Cliente/REACTVite/proyecto-pkm-react",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/proyecto-pkm-react",
-                         "playable":  true,
-                         "embedUrl":  "./web-projects/proyecto-pkm-react/index.html",
-                         "playLabel":  "PROBAR EN NAVEGADOR",
-                         "imageUrl":  "./web-projects/proyecto-pkm-react/Portada.png"
-                     },
-                     {
-                         "id":  "javascript-quiz",
-                         "title":  "JavaScript Quiz",
-                         "type":  "Frontend",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n de preguntas desarrollada con React y Vite para practicar lÃ³gica, componentes e interacciÃ³n de usuario.",
-                         "tags":  [
-                                      "React",
-                                      "Vite",
-                                      "JavaScript"
-                                  ],
-                         "folder":  "Frontend/Desarrollo Web Entorno Cliente/REACTVite/javascript-quiz",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/javascript-quiz",
-                         "playable":  true,
-                         "embedUrl":  "./web-projects/javascript-quiz/index.html",
-                         "playLabel":  "PROBAR EN NAVEGADOR",
-                         "imageUrl":  "./web-projects/javascript-quiz/Portada.png"
-                     },
-                     {
-                         "id":  "snake-js",
-                         "title":  "Snake",
-                         "type":  "Frontend",
-                         "status":  "Proyecto",
-                         "description":  "RecreaciÃ³n del clÃ¡sico Snake desarrollada con tecnologÃ­as web y JavaScript.",
-                         "tags":  [
-                                      "HTML",
-                                      "CSS",
-                                      "JavaScript"
-                                  ],
-                         "folder":  "Frontend/Desarrollo Web Entorno Cliente/Javascript/SNAKE",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/SNAKE",
-                         "playable":  true,
-                         "embedUrl":  "./web-projects/snake/index.html",
-                         "playLabel":  "PROBAR EN NAVEGADOR",
-                         "imageUrl":  "./web-projects/snake/Portada.png"
-                     },
-                     {
-                         "id":  "cronometro-js",
-                         "title":  "CronÃ³metro JavaScript",
-                         "type":  "Frontend",
-                         "status":  "Proyecto",
-                         "description":  "CronÃ³metro interactivo desarrollado con HTML, CSS y JavaScript, acompaÃ±ado de capturas del resultado.",
-                         "tags":  [
-                                      "HTML",
-                                      "CSS",
-                                      "JavaScript"
-                                  ],
-                         "folder":  "Frontend/Desarrollo Web Entorno Cliente/Javascript/CRONÃ“METRO",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO",
-                         "playable":  true,
-                         "embedUrl":  "./web-projects/cronometro/index.html",
-                         "playLabel":  "PROBAR EN NAVEGADOR",
-                         "imageUrl":  "./web-projects/cronometro/Portada.png"
-                     },
-                     {
-                         "id":  "boxchampy-figma",
-                         "title":  "BoxChampy",
-                         "type":  "Frontend",
-                         "status":  "DiseÃ±o",
-                         "description":  "Proyecto de diseÃ±o de interfaz realizado en Figma con material grÃ¡fico y capturas del proceso.",
-                         "tags":  [
-                                      "Figma",
-                                      "UI",
-                                      "UX",
-                                      "Prototipado"
-                                  ],
-                         "folder":  "Frontend/Desarrollo Interfaces Web/FIGMA/BoxChampy",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Interfaces%20Web/FIGMA/BoxChampy"
-                     },
-                     {
-                         "id":  "flask-musica",
-                         "title":  "Proyecto MÃºsica",
-                         "type":  "Full Stack",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n web musical desarrollada con Flask y organizada mediante plantillas, recursos estÃ¡ticos, imÃ¡genes y despliegue con Docker.",
-                         "tags":  [
-                                      "Python",
-                                      "Flask",
-                                      "Docker",
-                                      "HTML",
-                                      "CSS"
-                                  ],
-                         "folder":  "Backend/Docker/Docker Flask/Proyecto_musica",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Docker%20Flask/Proyecto_musica"
-                     },
-                     {
-                         "id":  "santander-jpa",
-                         "title":  "Banco Santander JPA",
-                         "type":  "Full Stack",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n web bancaria desarrollada con Java, JPA, servlets y una arquitectura organizada por entidades, DAO y servicios.",
-                         "tags":  [
-                                      "Java",
-                                      "JPA",
-                                      "Servlets",
-                                      "JSP",
-                                      "DAO"
-                                  ],
-                         "folder":  "Backend/JPA/Santander JPA",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/JPA/Santander%20JPA"
-                     },
-                     {
-                         "id":  "ciclos-azarquiel",
-                         "title":  "Ciclos Formativos Azarquiel",
-                         "type":  "Full Stack",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n web para la gestiÃ³n y presentaciÃ³n de ciclos formativos, desarrollada con Java, JPA, servlets y recursos web.",
-                         "tags":  [
-                                      "Java",
-                                      "JPA",
-                                      "Servlets",
-                                      "JSP",
-                                      "DAO"
-                                  ],
-                         "folder":  "Backend/JPA/CiclosFormativosAzarquiel",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/JPA/CiclosFormativosAzarquiel"
-                     },
-                     {
-                         "id":  "guestbook-docker",
-                         "title":  "Guestbook Docker",
-                         "type":  "Backend",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n de libro de visitas contenerizada con Docker y persistencia de datos mediante Redis.",
-                         "tags":  [
-                                      "Docker",
-                                      "Flask",
-                                      "Redis",
-                                      "Python"
-                                  ],
-                         "folder":  "Backend/Docker/Docker Flask/Guestbook-Docker",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Docker%20Flask/Guestbook-Docker"
-                     },
-                     {
-                         "id":  "temperaturas-docker",
-                         "title":  "Temperaturas Docker",
-                         "type":  "Backend",
-                         "status":  "Proyecto",
-                         "description":  "AplicaciÃ³n Flask contenerizada orientada al tratamiento o consulta de temperaturas.",
-                         "tags":  [
-                                      "Docker",
-                                      "Flask",
-                                      "Python"
-                                  ],
-                         "folder":  "Backend/Docker/Docker Flask/Temperaturas-Docker",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Docker%20Flask/Temperaturas-Docker"
-                     },
-                     {
-                         "id":  "wordpress-docker",
-                         "title":  "WordPress con Docker",
-                         "type":  "Backend",
-                         "status":  "Proyecto",
-                         "description":  "Entorno WordPress desplegado mediante contenedores Docker, con configuraciÃ³n y capturas del resultado.",
-                         "tags":  [
-                                      "Docker",
-                                      "WordPress",
-                                      "CMS"
-                                  ],
-                         "folder":  "Backend/Docker/Wordpress-Docker",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Wordpress-Docker"
-                     },
-                     {
-                         "id":  "apache-tomcat-nginx",
-                         "title":  "Apache, Tomcat y Nginx",
-                         "type":  "Backend",
-                         "status":  "Proyecto",
-                         "description":  "PrÃ¡ctica de infraestructura y servidores web combinando Apache, Tomcat y Nginx.",
-                         "tags":  [
-                                      "Apache",
-                                      "Tomcat",
-                                      "Nginx",
-                                      "Docker"
-                                  ],
-                         "folder":  "Backend/Docker/ApacheTomcatNginx",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/ApacheTomcatNginx"
-                     },
-                     {
-                         "id":  "mvc-servlets",
-                         "title":  "PrÃ¡cticas MVC con Servlets",
-                         "type":  "Backend",
-                         "status":  "PrÃ¡cticas",
-                         "description":  "ColecciÃ³n de prÃ¡cticas con Java Servlets aplicando el patrÃ³n MVC en aplicaciones web.",
-                         "tags":  [
-                                      "Java",
-                                      "Servlets",
-                                      "MVC",
-                                      "JSP"
-                                  ],
-                         "folder":  "Backend/MVC/Practicas-Servlets-MVC",
-                         "github":  "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/MVC/Practicas-Servlets-MVC"
-                     }
-                 ]
+{
+  "projects": [
+    {
+      "id": "portfolio-interactivo-threejs",
+      "title": "Portfolio Interactivo ThreeJS",
+      "type": "Frontend",
+      "status": "Finalizado",
+      "description": "Portfolio interactivo desarrollado con Three.js que presenta contenidos y proyectos mediante una experiencia 3D ejecutable directamente en el navegador.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Three.js",
+        "WebGL"
+      ],
+      "folder": "Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/CurriculumVitae/PortFolio-Interactivo-ThreeJS",
+      "playable": true,
+      "embedUrl": "./games/portfolio-interactivo/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./games/portfolio-interactivo/Portada.png"
+    },
+    {
+      "id": "gameboy-react",
+      "title": "Game Boy Advance React",
+      "type": "Frontend",
+      "status": "En desarrollo",
+      "description": "Interfaz de Game Boy Advance creada con React y Vite que integra un videojuego exportado desde Unity WebGL.",
+      "tags": [
+        "React",
+        "Vite",
+        "JavaScript",
+        "Unity WebGL"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/GameboyAdvanceReact",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/GameboyAdvanceReact",
+      "playable": true,
+      "embedUrl": "./web-projects/gameboy-react/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/gameboy-react/Portada.png"
+    },
+    {
+      "id": "pokemon-react",
+      "title": "Proyecto Pokémon React",
+      "type": "Frontend",
+      "status": "Proyecto",
+      "description": "Aplicación frontend desarrollada con React y Vite basada en el universo Pokémon.",
+      "tags": [
+        "React",
+        "Vite",
+        "JavaScript"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/proyecto-pkm-react",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/proyecto-pkm-react",
+      "playable": true,
+      "embedUrl": "./web-projects/proyecto-pkm-react/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/proyecto-pkm-react/Portada.png"
+    },
+    {
+      "id": "javascript-quiz",
+      "title": "JavaScript Quiz",
+      "type": "Frontend",
+      "status": "Proyecto",
+      "description": "Aplicación de preguntas desarrollada con React y Vite para practicar lógica, componentes e interacción de usuario.",
+      "tags": [
+        "React",
+        "Vite",
+        "JavaScript"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/javascript-quiz",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/javascript-quiz",
+      "playable": true,
+      "embedUrl": "./web-projects/javascript-quiz/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/javascript-quiz/Portada.png"
+    },
+    {
+      "id": "snake-js",
+      "title": "Snake",
+      "type": "Frontend",
+      "status": "Proyecto",
+      "description": "Recreación del clásico Snake desarrollada con tecnologías web y JavaScript.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/Javascript/SNAKE",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/SNAKE",
+      "playable": true,
+      "embedUrl": "./web-projects/snake/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/snake/Portada.png"
+    },
+    {
+      "id": "cronometro-js",
+      "title": "Cronómetro JavaScript",
+      "type": "Frontend",
+      "status": "Proyecto",
+      "description": "Cronómetro interactivo desarrollado con HTML, CSS y JavaScript, acompañado de capturas del resultado.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/Javascript/CRONÓMETRO",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO",
+      "playable": true,
+      "embedUrl": "./web-projects/cronometro/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/cronometro/Portada.png"
+    },
+    {
+      "id": "boxchampy-figma",
+      "title": "BoxChampy",
+      "type": "Frontend",
+      "status": "Diseño",
+      "description": "Proyecto de diseño de interfaz realizado en Figma con material gráfico y capturas del proceso.",
+      "tags": [
+        "Figma",
+        "UI",
+        "UX",
+        "Prototipado"
+      ],
+      "folder": "Frontend/Desarrollo Interfaces Web/FIGMA/BoxChampy",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Interfaces%20Web/FIGMA/BoxChampy"
+    },
+    {
+      "id": "flask-musica",
+      "title": "Proyecto Música",
+      "type": "Full Stack",
+      "status": "Proyecto",
+      "description": "Aplicación web musical desarrollada con Flask y organizada mediante plantillas, recursos estáticos, imágenes y despliegue con Docker.",
+      "tags": [
+        "Python",
+        "Flask",
+        "Docker",
+        "HTML",
+        "CSS"
+      ],
+      "folder": "Backend/Docker/Docker Flask/Proyecto_musica",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Docker%20Flask/Proyecto_musica"
+    },
+    {
+      "id": "santander-jpa",
+      "title": "Banco Santander JPA",
+      "type": "Full Stack",
+      "status": "Proyecto",
+      "description": "Aplicación web bancaria desarrollada con Java, JPA, servlets y una arquitectura organizada por entidades, DAO y servicios.",
+      "tags": [
+        "Java",
+        "JPA",
+        "Servlets",
+        "JSP",
+        "DAO"
+      ],
+      "folder": "Backend/JPA/Santander JPA",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/JPA/Santander%20JPA"
+    },
+    {
+      "id": "ciclos-azarquiel",
+      "title": "Ciclos Formativos Azarquiel",
+      "type": "Full Stack",
+      "status": "Proyecto",
+      "description": "Aplicación web para la gestión y presentación de ciclos formativos, desarrollada con Java, JPA, servlets y recursos web.",
+      "tags": [
+        "Java",
+        "JPA",
+        "Servlets",
+        "JSP",
+        "DAO"
+      ],
+      "folder": "Backend/JPA/CiclosFormativosAzarquiel",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/JPA/CiclosFormativosAzarquiel"
+    },
+    {
+      "id": "guestbook-docker",
+      "title": "Guestbook Docker",
+      "type": "Backend",
+      "status": "Proyecto",
+      "description": "Aplicación de libro de visitas contenerizada con Docker y persistencia de datos mediante Redis.",
+      "tags": [
+        "Docker",
+        "Flask",
+        "Redis",
+        "Python"
+      ],
+      "folder": "Backend/Docker/Docker Flask/Guestbook-Docker",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Docker%20Flask/Guestbook-Docker"
+    },
+    {
+      "id": "temperaturas-docker",
+      "title": "Temperaturas Docker",
+      "type": "Backend",
+      "status": "Proyecto",
+      "description": "Aplicación Flask contenerizada orientada al tratamiento o consulta de temperaturas.",
+      "tags": [
+        "Docker",
+        "Flask",
+        "Python"
+      ],
+      "folder": "Backend/Docker/Docker Flask/Temperaturas-Docker",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Docker%20Flask/Temperaturas-Docker"
+    },
+    {
+      "id": "wordpress-docker",
+      "title": "WordPress con Docker",
+      "type": "Backend",
+      "status": "Proyecto",
+      "description": "Entorno WordPress desplegado mediante contenedores Docker, con configuración y capturas del resultado.",
+      "tags": [
+        "Docker",
+        "WordPress",
+        "CMS"
+      ],
+      "folder": "Backend/Docker/Wordpress-Docker",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/Wordpress-Docker"
+    },
+    {
+      "id": "apache-tomcat-nginx",
+      "title": "Apache, Tomcat y Nginx",
+      "type": "Backend",
+      "status": "Proyecto",
+      "description": "Práctica de infraestructura y servidores web combinando Apache, Tomcat y Nginx.",
+      "tags": [
+        "Apache",
+        "Tomcat",
+        "Nginx",
+        "Docker"
+      ],
+      "folder": "Backend/Docker/ApacheTomcatNginx",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/Docker/ApacheTomcatNginx"
+    },
+    {
+      "id": "mvc-servlets",
+      "title": "Prácticas MVC con Servlets",
+      "type": "Backend",
+      "status": "Prácticas",
+      "description": "Colección de prácticas con Java Servlets aplicando el patrón MVC en aplicaciones web.",
+      "tags": [
+        "Java",
+        "Servlets",
+        "MVC",
+        "JSP"
+      ],
+      "folder": "Backend/MVC/Practicas-Servlets-MVC",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/MVC/Practicas-Servlets-MVC"
+    }
+  ]
 }
