@@ -50,7 +50,8 @@
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/proyecto-pkm-react",
       "playable": true,
       "embedUrl": "./web-projects/proyecto-pkm-react/index.html",
-      "playLabel": "PROBAR EN NAVEGADOR"
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/proyecto-pkm-react/Portada.png"
     },
     {
       "id": "javascript-quiz",
@@ -67,7 +68,8 @@
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/javascript-quiz",
       "playable": true,
       "embedUrl": "./web-projects/javascript-quiz/index.html",
-      "playLabel": "PROBAR EN NAVEGADOR"
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/javascript-quiz/Portada.png"
     },
     {
       "id": "snake-js",
@@ -84,7 +86,8 @@
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/SNAKE",
       "playable": true,
       "embedUrl": "./web-projects/snake/index.html",
-      "playLabel": "PROBAR EN NAVEGADOR"
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/snake/Portada.png"
     },
     {
       "id": "cronometro-js",
@@ -101,7 +104,8 @@
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO",
       "playable": true,
       "embedUrl": "./web-projects/cronometro/index.html",
-      "playLabel": "PROBAR EN NAVEGADOR"
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/cronometro/Portada.png"
     },
     {
       "id": "boxchampy-figma",
