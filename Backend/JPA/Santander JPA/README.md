@@ -1,7 +1,6 @@
 # Banco Santander - JPA MVC Banking App 💳
 
-![Menu Principal](img/1.png)
-
+![Banco Santander](Portada-1080.png)
 Mini aplicación bancaria desarrollada con Java Enterprise utilizando:
 
 - Java
