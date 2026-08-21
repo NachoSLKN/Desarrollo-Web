@@ -247,6 +247,25 @@
       ],
       "folder": "Backend/MVC/Practicas-Servlets-MVC",
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Backend/MVC/Practicas-Servlets-MVC"
+    },
+    {
+      "id": "guitarla-typescript",
+      "title": "GuitarLA",
+      "type": "Frontend",
+      "status": "Proyecto",
+      "description": "Tienda de guitarras desarrollada con React y TypeScript, con cat?logo interactivo y gesti?n completa del carrito de compra.",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "useReducer"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/GuitarLA-TypeScript",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/GuitarLA-TypeScript",
+      "playable": true,
+      "embedUrl": "./web-projects/guitarla/index.html",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/guitarla/Portada-1080.png"
     }
   ]
 }
