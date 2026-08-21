@@ -266,6 +266,28 @@
       "embedUrl": "./web-projects/guitarla/index.html",
       "playLabel": "PROBAR EN NAVEGADOR",
       "imageUrl": "./web-projects/guitarla/Portada-1080.png"
+    },
+    {
+      "id": "cocktail-react-typescript",
+      "title": "Cocktail",
+      "type": "Frontend",
+      "status": "Proyecto",
+      "description": "Buscador de recetas de c?cteles desarrollado con React y TypeScript, con consumo de API, navegaci?n, favoritos, gesti?n global de estado y validaci?n de datos.",
+      "tags": [
+        "React",
+        "TypeScript",
+        "React Router",
+        "Tailwind",
+        "Zustand",
+        "Zod",
+        "Axios"
+      ],
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/REACTVite/Cocktail-React-TypeScript",
+      "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/REACTVite/Cocktail-React-TypeScript",
+      "playable": true,
+      "embedUrl": "./web-projects/cocktail/",
+      "playLabel": "PROBAR EN NAVEGADOR",
+      "imageUrl": "./web-projects/cocktail/Portada-1080.png"
     }
   ]
 }
