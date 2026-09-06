@@ -1,4 +1,4 @@
-import * as THREE from "https://unpkg.com/three@0.167.1/build/three.module.js";
+﻿import * as THREE from "https://unpkg.com/three@0.167.1/build/three.module.js";
 
 import { OrbitControls } from "https://unpkg.com/three@0.167.1/examples/jsm/controls/OrbitControls.js?module";
 import { GLTFLoader } from "https://unpkg.com/three@0.167.1/examples/jsm/loaders/GLTFLoader.js?module";
@@ -3136,126 +3136,161 @@ function ensurePlayableDemoStyles() {
 
 function setupPlayableDemos() {
   ensurePlayableDemoStyles();
-
-  document.querySelectorAll("[data-playable-demo]").forEach((card) => {
-    const cover = card.querySelector(".playable-demo-cover");
-    const image = cover?.querySelector("img");
-    const fallback = cover?.querySelector(".github-game-cover-fallback");
-    const playButton = card.querySelector("[data-demo-play]");
-    const embedUrl = card.dataset.embedUrl;
-
-    if (!cover || !playButton || !embedUrl) return;
-
-    let gameOpen = false;
-    let expandedPlaceholder = null;
-    let originalParent = null;
-    let originalNextSibling = null;
-
-    const restoreCoverToCard = () => {
-      cover.classList.remove("inline-game-expanded");
-
-      if (expandedPlaceholder?.parentNode) {
-        expandedPlaceholder.parentNode.insertBefore(cover, expandedPlaceholder);
-        expandedPlaceholder.remove();
-      } else if (originalParent) {
-        originalParent.insertBefore(cover, originalNextSibling);
-      }
-
-      expandedPlaceholder = null;
-      originalParent = null;
-      originalNextSibling = null;
-      document.body.style.overflow = "";
-    };
-
-    const showImage = () => {
-      if (cover.classList.contains("inline-game-active")) return;
-      if (image) image.hidden = false;
-      if (fallback) fallback.hidden = true;
-    };
-
-    const showFallback = () => {
-      if (cover.classList.contains("inline-game-active")) return;
-      if (image) image.hidden = true;
-      if (fallback) fallback.hidden = false;
-    };
-
-    image?.addEventListener("load", showImage);
-    image?.addEventListener("error", showFallback);
-
-    const closeGame = () => {
-      restoreCoverToCard();
-
-      cover.querySelector(".inline-game-frame")?.remove();
-      cover.querySelector(".inline-game-toolbar")?.remove();
-      cover.classList.remove("inline-game-active");
-
-      gameOpen = false;
-      playButton.textContent = "JUGAR ONLINE";
-
-      if (image?.naturalWidth > 0) showImage();
-      else showFallback();
-    };
-
-    playButton.addEventListener("click", () => {
-      if (gameOpen) {
-        closeGame();
-        return;
-      }
-
-      gameOpen = true;
-      if (image) image.hidden = true;
-      if (fallback) fallback.hidden = true;
-      cover.classList.add("inline-game-active");
-      playButton.textContent = "CERRAR JUEGO";
-
-      const frame = document.createElement("iframe");
-      frame.className = "inline-game-frame";
-      frame.src = embedUrl;
-      frame.title = "Jugar a PyDew Valley";
-      frame.loading = "eager";
-      frame.allow = "autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";
-      frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-
-      const toolbar = document.createElement("div");
-      toolbar.className = "inline-game-toolbar";
-
-      const fullscreenButton = document.createElement("button");
-      fullscreenButton.type = "button";
-      fullscreenButton.textContent = "PANTALLA COMPLETA";
-
-      fullscreenButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const expanded = cover.classList.contains("inline-game-expanded");
-
-        if (!expanded) {
-          originalParent = cover.parentNode;
-          originalNextSibling = cover.nextSibling;
-          expandedPlaceholder = document.createComment("posición original de la demo");
-
-          originalParent.insertBefore(expandedPlaceholder, cover);
-          document.body.appendChild(cover);
-
-          cover.classList.add("inline-game-expanded");
-          document.body.style.overflow = "hidden";
-          fullscreenButton.textContent = "SALIR DE PANTALLA COMPLETA";
-        } else {
-          restoreCoverToCard();
-          fullscreenButton.textContent = "PANTALLA COMPLETA";
-        }
+  document
+    .querySelectorAll("[data-playable-demo], [data-playable-demo-multiple]")
+    .forEach((card) => {
+      const cover = card.querySelector(".playable-demo-cover");
+      const image = cover?.querySelector("img");
+      const fallback = cover?.querySelector(".github-game-cover-fallback");
+      if (!cover) return;
+      const originalCoverChildren = Array.from(cover.childNodes);
+      const singlePlayButton = card.querySelector("[data-demo-play]");
+      const multiplePlayButtons = Array.from(
+        card.querySelectorAll("[data-vr-demo-play]")
+      );
+      const playButtons = singlePlayButton
+        ? [singlePlayButton]
+        : multiplePlayButtons;
+      if (!playButtons.length) return;
+      playButtons.forEach((button) => {
+        button.dataset.originalLabel = button.textContent.trim();
       });
-
-      const closeButton = document.createElement("button");
-      closeButton.type = "button";
-      closeButton.textContent = "CERRAR";
-      closeButton.addEventListener("click", closeGame);
-
-      toolbar.append(fullscreenButton, closeButton);
-      cover.replaceChildren(frame, toolbar);
+      let gameOpen = false;
+      let activeButton = null;
+      let expandedPlaceholder = null;
+      let originalParent = null;
+      let originalNextSibling = null;
+      const restoreCoverToCard = () => {
+        cover.classList.remove("inline-game-expanded");
+        if (expandedPlaceholder?.parentNode) {
+          expandedPlaceholder.parentNode.insertBefore(
+            cover,
+            expandedPlaceholder
+          );
+          expandedPlaceholder.remove();
+        } else if (originalParent) {
+          originalParent.insertBefore(cover, originalNextSibling);
+        }
+        expandedPlaceholder = null;
+        originalParent = null;
+        originalNextSibling = null;
+        document.body.style.overflow = "";
+      };
+      const showImage = () => {
+        if (cover.classList.contains("inline-game-active")) return;
+        if (image) image.hidden = false;
+        if (fallback) fallback.hidden = true;
+      };
+      const showFallback = () => {
+        if (cover.classList.contains("inline-game-active")) return;
+        if (image) image.hidden = true;
+        if (fallback) fallback.hidden = false;
+      };
+      image?.addEventListener("load", showImage);
+      image?.addEventListener("error", showFallback);
+      const restoreButtonLabels = () => {
+        playButtons.forEach((button) => {
+          button.textContent =
+            button.dataset.originalLabel || "JUGAR ONLINE";
+        });
+      };
+      const closeGame = () => {
+        restoreCoverToCard();
+        cover.classList.remove("inline-game-active");
+        cover.replaceChildren(...originalCoverChildren);
+        gameOpen = false;
+        activeButton = null;
+        restoreButtonLabels();
+        if (image?.naturalWidth > 0) showImage();
+        else showFallback();
+      };
+      const createGameViewer = (embedUrl, demoTitle) => {
+        const frame = document.createElement("iframe");
+        frame.className = "inline-game-frame";
+        frame.src = embedUrl;
+        frame.title = `Jugar a ${demoTitle}`;
+        frame.loading = "eager";
+        frame.allow =
+          "autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";
+        frame.setAttribute(
+          "referrerpolicy",
+          "strict-origin-when-cross-origin"
+        );
+        const toolbar = document.createElement("div");
+        toolbar.className = "inline-game-toolbar";
+        const fullscreenButton = document.createElement("button");
+        fullscreenButton.type = "button";
+        fullscreenButton.textContent = "PANTALLA COMPLETA";
+        fullscreenButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const expanded =
+            cover.classList.contains("inline-game-expanded");
+          if (!expanded) {
+            originalParent = cover.parentNode;
+            originalNextSibling = cover.nextSibling;
+            expandedPlaceholder = document.createComment(
+              "posición original de la demo"
+            );
+            originalParent.insertBefore(
+              expandedPlaceholder,
+              cover
+            );
+            document.body.appendChild(cover);
+            cover.classList.add("inline-game-expanded");
+            document.body.style.overflow = "hidden";
+            fullscreenButton.textContent =
+              "SALIR DE PANTALLA COMPLETA";
+          } else {
+            restoreCoverToCard();
+            fullscreenButton.textContent =
+              "PANTALLA COMPLETA";
+          }
+        });
+        const closeButton = document.createElement("button");
+        closeButton.type = "button";
+        closeButton.textContent = "CERRAR";
+        closeButton.addEventListener("click", closeGame);
+        toolbar.append(fullscreenButton, closeButton);
+        cover.replaceChildren(frame, toolbar);
+      };
+      playButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const embedUrl =
+            button.dataset.demoUrl ||
+            card.dataset.embedUrl ||
+            "";
+          const demoTitle =
+            button.dataset.demoTitle ||
+            card.querySelector("h3")?.textContent.trim() ||
+            "demo";
+          if (!embedUrl) return;
+          if (gameOpen && activeButton === button) {
+            closeGame();
+            return;
+          }
+          if (gameOpen && activeButton !== button) {
+            restoreButtonLabels();
+            activeButton = button;
+            activeButton.textContent = "CERRAR JUEGO";
+            const frame =
+              cover.querySelector(".inline-game-frame");
+            if (frame) {
+              frame.src = embedUrl;
+              frame.title = `Jugar a ${demoTitle}`;
+            }
+            return;
+          }
+          gameOpen = true;
+          activeButton = button;
+          if (image) image.hidden = true;
+          if (fallback) fallback.hidden = true;
+          cover.classList.add("inline-game-active");
+          activeButton.textContent = "CERRAR JUEGO";
+          createGameViewer(embedUrl, demoTitle);
+        });
+      });
     });
-  });
 }
-
 setupPlayableDemos();
 
