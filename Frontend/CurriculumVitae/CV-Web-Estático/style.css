@@ -2685,3 +2685,45 @@ iframe:-webkit-full-screen {
     min-height: 470px;
   }
 }
+
+
+/* =========================================================
+   CERTIFICATIONS — LOCAL IMAGE PREVIEW
+========================================================= */
+
+.certification-document {
+  min-height: 0;
+  overflow: hidden;
+  background: #f7f7f8;
+}
+
+.certification-preview-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: inherit;
+}
+
+.certification-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f7f7f8;
+}
+
+.certification-pdf {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .certification-document {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .certification-document {
+    min-height: 0;
+  }
+}
