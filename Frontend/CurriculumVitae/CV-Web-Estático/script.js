@@ -2678,38 +2678,81 @@ async function loadArtstationProjects() {
   }
 }
 
-let githubGamesResizeTimer = null;
+/* =========================================================
+   RESPONSIVE CAROUSELS
+   Preserve the current project when mobile browser chrome
+   changes the viewport height. Re-render only when crossing
+   the 820px mobile/desktop breakpoint.
+========================================================= */
+
+const portfolioBreakpoint = window.matchMedia("(max-width: 820px)");
+
+let previousPortfolioMobileState = portfolioBreakpoint.matches;
+let previousGithubGamesItemsPerPage = githubGamesItemsPerPage();
+let previousGithubWebItemsPerPage = githubWebItemsPerPage();
+let previousArtstationItemsPerPage = artstationItemsPerPage();
+
+let portfolioResizeTimer = null;
 
 window.addEventListener("resize", () => {
-  window.clearTimeout(githubGamesResizeTimer);
+  window.clearTimeout(portfolioResizeTimer);
 
-  githubGamesResizeTimer = window.setTimeout(() => {
+  portfolioResizeTimer = window.setTimeout(() => {
+    const isMobile = portfolioBreakpoint.matches;
+
+    // Mobile browsers frequently fire resize events when their
+    // address/navigation bars appear or disappear. If the layout
+    // breakpoint has not changed, keep every carousel untouched.
+    if (isMobile === previousPortfolioMobileState) return;
+
+    previousPortfolioMobileState = isMobile;
+
     if (githubGames.length) {
-      githubGamesPageIndex = 0;
+      const currentItemIndex =
+        githubGamesPageIndex * previousGithubGamesItemsPerPage;
+
+      const nextItemsPerPage = githubGamesItemsPerPage();
+
+      githubGamesPageIndex = Math.floor(
+        currentItemIndex / nextItemsPerPage
+      );
+
+      previousGithubGamesItemsPerPage = nextItemsPerPage;
       renderGithubGamesPage();
+    } else {
+      previousGithubGamesItemsPerPage = githubGamesItemsPerPage();
     }
-  }, 160);
-});
 
-let githubWebResizeTimer = null;
-window.addEventListener("resize", () => {
-  window.clearTimeout(githubWebResizeTimer);
-
-  githubWebResizeTimer = window.setTimeout(() => {
     if (githubWebProjects.length) {
-      githubWebPageIndex = 0;
-      renderGithubWebPage();
-    }
-  }, 170);
-});
+      const currentItemIndex =
+        githubWebPageIndex * previousGithubWebItemsPerPage;
 
-let artstationResizeTimer = null;
-window.addEventListener("resize", () => {
-  window.clearTimeout(artstationResizeTimer);
-  artstationResizeTimer = window.setTimeout(() => {
+      const nextItemsPerPage = githubWebItemsPerPage();
+
+      githubWebPageIndex = Math.floor(
+        currentItemIndex / nextItemsPerPage
+      );
+
+      previousGithubWebItemsPerPage = nextItemsPerPage;
+      renderGithubWebPage();
+    } else {
+      previousGithubWebItemsPerPage = githubWebItemsPerPage();
+    }
+
     if (artstationProjects.length) {
-      artstationPageIndex = 0;
+      const currentItemIndex =
+        artstationPageIndex * previousArtstationItemsPerPage;
+
+      const nextItemsPerPage = artstationItemsPerPage();
+
+      artstationPageIndex = Math.floor(
+        currentItemIndex / nextItemsPerPage
+      );
+
+      previousArtstationItemsPerPage = nextItemsPerPage;
       renderArtstationPage();
+    } else {
+      previousArtstationItemsPerPage = artstationItemsPerPage();
     }
   }, 180);
 });
