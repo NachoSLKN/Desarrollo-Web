@@ -2247,3 +2247,160 @@ iframe:-webkit-full-screen {
     padding: 6px 8px;
   }
 }
+
+/* =========================================================
+   FINAL CUSTOM CURSOR + MOBILE HEADER FIX
+   ========================================================= */
+
+/* Vault Boy cursor — desktop / mouse only */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  body *,
+  #scene,
+  #scene:active {
+    cursor: url("./img/ui/vaultboy-cursor.png") 2 2, auto !important;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label,
+  .project-card,
+  .language-option {
+    cursor: url("./img/ui/vaultboy-cursor.png") 2 2, pointer !important;
+  }
+}
+
+/* Mobile header */
+@media (max-width: 768px) {
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "logo menu"
+      "languages languages";
+    align-items: center;
+    gap: 8px 12px;
+
+    padding:
+      calc(10px + env(safe-area-inset-top))
+      14px
+      10px;
+
+    min-height: auto;
+  }
+
+  .site-logo {
+    grid-area: logo;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .site-logo span {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-toggle {
+    grid-area: menu;
+    justify-self: end;
+
+    position: relative;
+    inset: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+
+    margin: 0;
+  }
+
+  .language-switcher {
+    grid-area: languages;
+
+    position: relative;
+    inset: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+    margin: 0;
+    overflow: visible;
+  }
+
+  .language-option {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 120px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    padding: 8px 10px;
+  }
+
+  .language-option img {
+    width: 24px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .hero-3d {
+    padding-top: 108px;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 420px) {
+  .site-header {
+    gap: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .site-logo span {
+    font-size: 0.9rem;
+  }
+
+  .language-switcher {
+    gap: 5px;
+  }
+
+  .language-option {
+    padding: 7px 6px;
+    font-size: 0.8rem;
+  }
+
+  .language-option img {
+    width: 21px;
+  }
+
+  .hero-3d {
+    padding-top: 104px;
+  }
+}
+
