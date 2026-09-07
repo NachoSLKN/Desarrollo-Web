@@ -2581,3 +2581,107 @@ iframe:-webkit-full-screen {
     text-align: center;
   }
 }
+
+
+/* =========================================================
+   CERTIFICATIONS — PDF FIRST
+========================================================= */
+
+.certification-card-featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 0.7fr);
+  gap: 22px;
+  padding: 20px;
+  align-items: stretch;
+}
+
+.certification-document {
+  min-width: 0;
+  min-height: 640px;
+  border: 1px solid rgba(124, 255, 114, 0.34);
+  background: #0a0d0a;
+  box-shadow:
+    inset 0 0 28px rgba(124, 255, 114, 0.03),
+    0 0 22px rgba(124, 255, 114, 0.06);
+}
+
+.certification-pdf {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 640px;
+  border: 0;
+  background: #fff;
+}
+
+.certification-details {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.certification-card-featured .certification-provider-name {
+  font-size: 1.15rem;
+}
+
+.certification-card-featured h3 {
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+}
+
+.certification-card-featured .certification-summary {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.certification-card-featured .certification-meta {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.certification-card-featured .certification-meta div {
+  padding: 9px 10px;
+}
+
+.certification-card-featured .certification-id {
+  padding: 8px 10px;
+}
+
+.certification-card-featured .tech-list {
+  margin-top: 4px;
+}
+
+.certification-card-featured .project-actions {
+  gap: 8px;
+}
+
+.certification-card-featured .project-actions .terminal-link {
+  padding: 9px 10px;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+  .certification-card-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .certification-document,
+  .certification-pdf {
+    min-height: 560px;
+  }
+
+  .certification-details {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .certification-card-featured {
+    padding: 12px;
+  }
+
+  .certification-document,
+  .certification-pdf {
+    min-height: 470px;
+  }
+}
