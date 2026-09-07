@@ -1721,36 +1721,36 @@ function createGameCard(game, index) {
 
   const downloadButton = createActionButton({
     url: game.downloadUrl,
-    label: game.downloadLabel || "DESCARGAR WINDOWS",
+    label: game.downloadLabel || uiText("action.downloadwin", "DOWNLOAD WINDOWS"),
     className: "download-link"
   });
 
   const itchButton = createActionButton({
     url: game.itchUrl,
-    label: game.itchLabel || "VER EN ITCH.IO",
+    label: game.itchLabel || uiText("action.viewitch", "VIEW ON ITCH.IO"),
     className: "itch-link"
   });
 
   const projectButton = createActionButton({
     url: game.github || game.folder ? urls.github : "",
-    label: "VER PROYECTO"
+    label: uiText("action.project", "VIEW PROJECT")
   });
 
   const githubPcButton = createActionButton({
     url: game.githubPc,
-    label: "CÓDIGO PC",
+    label: uiText("action.codepc", "PC CODE"),
     className: "secondary-link"
   });
 
   const githubWebButton = createActionButton({
     url: game.githubWeb,
-    label: "CÓDIGO WEB",
+    label: uiText("action.codeweb", "WEB CODE"),
     className: "secondary-link"
   });
 
   const readmeButton = createActionButton({
     url: game.readme || game.folder ? urls.readme : "",
-    label: "VER README",
+    label: uiText("action.readme", "VIEW README"),
     className: "secondary-link"
   });
 
@@ -1761,10 +1761,15 @@ function createGameCard(game, index) {
     "";
 
   const gameplayLabel =
-    game.gameplayLabel ||
-    (game.status?.toLowerCase().includes("demo")
-      ? "VER GAMEPLAY"
-      : "VER DESARROLLO");
+    game.gameplayLabel
+      ? (currentUiLanguage === "es"
+          ? game.gameplayLabel
+          : /GAMEPLAY/i.test(game.gameplayLabel)
+            ? uiText("action.gameplay", "WATCH GAMEPLAY")
+            : uiText("action.development", "VIEW DEVELOPMENT"))
+      : (String(game.status || "").toLowerCase().includes("demo")
+          ? uiText("action.gameplay", "WATCH GAMEPLAY")
+          : uiText("action.development", "VIEW DEVELOPMENT"));
 
   const gameplayButton = createActionButton({
     url: gameplayUrl,
@@ -1788,17 +1793,17 @@ function createGameCard(game, index) {
     <div class="github-game-content">
       <p class="project-code">
         PROJECT_${String(index + 1).padStart(3, "0")}
-        · ${escapeProjectText(game.status || "EN DESARROLLO")}
+        · ${escapeProjectText(localizedProjectValue("games", game, "status", "PROJECT"))}
       </p>
 
-      <h3>${escapeProjectText(game.title || "Proyecto sin título")}</h3>
+      <h3>${escapeProjectText(localizedProjectValue("games", game, "title", uiText("project.untitled", "Untitled project")))}</h3>
 
       <p class="github-game-engine">
-        ${escapeProjectText(game.engine || "Motor no indicado")}
+        ${escapeProjectText(game.engine || uiText("engine.missing", "Engine not specified"))}
       </p>
 
       <p class="github-game-description">
-        ${escapeProjectText(game.description || (currentUiLanguage === "es" ? "Sin descripción disponible." : currentUiLanguage === "de" ? "Keine Beschreibung verfügbar." : "No description available."))}
+        ${escapeProjectText(localizedProjectValue("games", game, "description", currentUiLanguage === "es" ? "Sin descripción disponible." : currentUiLanguage === "de" ? "Keine Beschreibung verfügbar." : "No description available."))}
       </p>
 
       <div class="tech-list">
@@ -1889,7 +1894,7 @@ function createGameCard(game, index) {
       image.hidden = true;
       fallback.hidden = true;
       cover.classList.add("inline-game-active");
-      playControl.textContent = "CERRAR JUEGO";
+      playControl.textContent = uiText("action.closegame", "CLOSE GAME");
 
       const frame = document.createElement("iframe");
       frame.className = "inline-game-frame";
@@ -1908,7 +1913,7 @@ function createGameCard(game, index) {
 
       const fullscreenButton = document.createElement("button");
       fullscreenButton.type = "button";
-      fullscreenButton.textContent = "PANTALLA COMPLETA";
+      fullscreenButton.textContent = uiText("action.fullscreen", "FULL SCREEN");
 
       fullscreenButton.addEventListener("click", (event) => {
         event.preventDefault();
@@ -1930,16 +1935,16 @@ function createGameCard(game, index) {
           cover.classList.add("inline-game-expanded");
           document.body.style.overflow = "hidden";
 
-          fullscreenButton.textContent = "SALIR DE PANTALLA COMPLETA";
+          fullscreenButton.textContent = uiText("action.exitfullscreen", "EXIT FULL SCREEN");
         } else {
           restoreCoverToCard();
-          fullscreenButton.textContent = "PANTALLA COMPLETA";
+          fullscreenButton.textContent = uiText("action.fullscreen", "FULL SCREEN");
         }
       });
 
       const closeButton = document.createElement("button");
       closeButton.type = "button";
-      closeButton.textContent = "CERRAR";
+      closeButton.textContent = uiText("action.close", "CLOSE");
       closeButton.addEventListener("click", closeInlineGame);
 
       toolbar.append(fullscreenButton, closeButton);
@@ -2009,7 +2014,7 @@ async function loadGithubGames() {
 
     if (!githubGames.length) {
       status.textContent =
-        "NO HAY PROYECTOS DEFINIDOS EN DATA/PROJECTS.JSON";
+        `${uiText("catalog.empty", "NO PROJECTS DEFINED")} IN DATA/PROJECTS.JSON`;
       grid.replaceChildren();
       renderGithubGamesPage();
       return;
@@ -2017,8 +2022,7 @@ async function loadGithubGames() {
 
     renderGithubGamesPage();
 
-    status.textContent =
-      `${githubGames.length} PROYECTO${githubGames.length === 1 ? "" : "S"} CARGADO${githubGames.length === 1 ? "" : "S"} DESDE GITHUB`;
+    status.textContent = formatUiText("games.loaded", { count: githubGames.length });
 
     status.classList.add("loaded");
   } catch (error) {
@@ -2031,11 +2035,11 @@ async function loadGithubGames() {
     renderGithubGamesPage();
 
     status.textContent =
-      "ERROR AL CARGAR EL CATÁLOGO DE GITHUB";
+      `${uiText("catalog.error", "ERROR LOADING CATALOGUE")} · GITHUB`;
 
     grid.innerHTML = `
       <article class="github-catalogue-error">
-        <h3>NO SE PUDO CONECTAR</h3>
+        <h3>${uiText("catalog.connect", "COULD NOT CONNECT")}</h3>
         <p>
           Comprueba que exista
           <strong>DATA/projects.json</strong>
@@ -2048,7 +2052,7 @@ async function loadGithubGames() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          COMPROBAR ARCHIVO
+          ${uiText("catalog.check", "CHECK FILE")}
         </a>
       </article>
     `;
@@ -2150,7 +2154,7 @@ function createWebProjectCard(project, index) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        VER README
+        ${escapeProjectText(uiText("action.readme", "VIEW README"))}
       </a>
     `
     : "";
@@ -2164,7 +2168,7 @@ function createWebProjectCard(project, index) {
         class="terminal-link play-link inline-play-button"
         data-web-inline-play
       >
-        ${escapeProjectText(project.playLabel || "PROBAR EN NAVEGADOR")}
+        ${escapeProjectText(currentUiLanguage === "es" ? (project.playLabel || "PROBAR EN NAVEGADOR") : uiText("action.play", "PLAY ONLINE"))}
       </button>
     `
     : "";
@@ -2177,7 +2181,7 @@ function createWebProjectCard(project, index) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        VER DEMO
+        ${escapeProjectText(uiText("action.demo", "VIEW DEMO"))}
       </a>
     `
     : "";
@@ -2191,24 +2195,24 @@ function createWebProjectCard(project, index) {
       >
 
       <div class="github-game-cover-fallback" aria-hidden="true" hidden>
-        PORTADA PENDIENTE
+        ${escapeProjectText(uiText("cover.pending", "COVER PENDING"))}
       </div>
     </div>
 
     <div class="github-game-content">
       <p class="project-code">
         WEB_${String(index + 1).padStart(3, "0")}
-        · ${escapeProjectText(project.status || (currentUiLanguage === "es" ? "PROYECTO" : currentUiLanguage === "de" ? "PROJEKT" : "PROJECT"))}
+        · ${escapeProjectText(localizedProjectValue("web", project, "status", currentUiLanguage === "es" ? "PROYECTO" : currentUiLanguage === "de" ? "PROJEKT" : "PROJECT"))}
       </p>
 
-      <h3>${escapeProjectText(project.title || "Proyecto sin título")}</h3>
+      <h3>${escapeProjectText(localizedProjectValue("web", project, "title", uiText("project.untitled", "Untitled project")))}</h3>
 
       <p class="github-game-engine">
         ${escapeProjectText(projectType)}
       </p>
 
       <p class="github-game-description">
-        ${escapeProjectText(project.description || (currentUiLanguage === "es" ? "Sin descripción disponible." : currentUiLanguage === "de" ? "Keine Beschreibung verfügbar." : "No description available."))}
+        ${escapeProjectText(localizedProjectValue("web", project, "description", currentUiLanguage === "es" ? "Sin descripción disponible." : currentUiLanguage === "de" ? "Keine Beschreibung verfügbar." : "No description available."))}
       </p>
 
       <div class="tech-list">
@@ -2224,7 +2228,7 @@ function createWebProjectCard(project, index) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          VER PROYECTO
+          ${escapeProjectText(uiText("action.project", "VIEW PROJECT"))}
         </a>
         ${readmeButton}
         ${webPlayButton}
@@ -2284,7 +2288,7 @@ function createWebProjectCard(project, index) {
       cover.querySelector(".inline-game-toolbar")?.remove();
       cover.classList.remove("inline-game-active");
       projectOpen = false;
-      playControl.textContent = project.playLabel || "PROBAR EN NAVEGADOR";
+      playControl.textContent = currentUiLanguage === "es" ? (project.playLabel || "PROBAR EN NAVEGADOR") : uiText("action.play", "PLAY ONLINE");
       image.naturalWidth > 0 ? showImage() : showFallback();
     };
 
@@ -2298,7 +2302,7 @@ function createWebProjectCard(project, index) {
       image.hidden = true;
       fallback.hidden = true;
       cover.classList.add("inline-game-active");
-      playControl.textContent = "CERRAR PROYECTO";
+      playControl.textContent = uiText("action.closeproject", "CLOSE PROJECT");
 
       const frame = document.createElement("iframe");
       frame.className = "inline-game-frame";
@@ -2313,7 +2317,7 @@ function createWebProjectCard(project, index) {
 
       const fullscreenButton = document.createElement("button");
       fullscreenButton.type = "button";
-      fullscreenButton.textContent = "PANTALLA COMPLETA";
+      fullscreenButton.textContent = uiText("action.fullscreen", "FULL SCREEN");
       fullscreenButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -2326,16 +2330,16 @@ function createWebProjectCard(project, index) {
           document.body.appendChild(cover);
           cover.classList.add("inline-game-expanded");
           document.body.style.overflow = "hidden";
-          fullscreenButton.textContent = "SALIR DE PANTALLA COMPLETA";
+          fullscreenButton.textContent = uiText("action.exitfullscreen", "EXIT FULL SCREEN");
         } else {
           restoreCoverToCard();
-          fullscreenButton.textContent = "PANTALLA COMPLETA";
+          fullscreenButton.textContent = uiText("action.fullscreen", "FULL SCREEN");
         }
       });
 
       const closeButton = document.createElement("button");
       closeButton.type = "button";
-      closeButton.textContent = "CERRAR";
+      closeButton.textContent = uiText("action.close", "CLOSE");
       closeButton.addEventListener("click", closeWebProject);
 
       toolbar.append(fullscreenButton, closeButton);
@@ -2410,15 +2414,14 @@ async function loadGithubWebProjects() {
 
     if (!githubWebProjects.length) {
       status.textContent =
-        "NO HAY PROYECTOS DEFINIDOS EN DATA/WEB-PROJECTS.JSON";
+        `${uiText("catalog.empty", "NO PROJECTS DEFINED")} IN DATA/WEB-PROJECTS.JSON`;
       renderGithubWebPage();
       return;
     }
 
     renderGithubWebPage();
 
-    status.textContent =
-      `${githubWebProjects.length} PROYECTO${githubWebProjects.length === 1 ? "" : "S"} WEB CARGADO${githubWebProjects.length === 1 ? "" : "S"}`;
+    status.textContent = formatUiText("web.loaded", { count: githubWebProjects.length });
 
     status.classList.add("loaded");
   } catch (error) {
@@ -2427,11 +2430,11 @@ async function loadGithubWebProjects() {
     githubWebProjects = [];
     renderGithubWebPage();
 
-    status.textContent = "ERROR AL CARGAR EL CATÁLOGO WEB";
+    status.textContent = `${uiText("catalog.error", "ERROR LOADING CATALOGUE")} · WEB`;
 
     grid.innerHTML = `
       <article class="github-catalogue-error">
-        <h3>NO SE PUDO CONECTAR</h3>
+        <h3>${uiText("catalog.connect", "COULD NOT CONNECT")}</h3>
         <p>
           Comprueba que exista
           <strong>DATA/web-projects.json</strong>
@@ -2444,7 +2447,7 @@ async function loadGithubWebProjects() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          COMPROBAR ARCHIVO
+          ${uiText("catalog.check", "CHECK FILE")}
         </a>
       </article>
     `;
@@ -2525,12 +2528,12 @@ function createArtstationCard(project) {
   const videoEmbed = String(project.videoEmbed || "").trim();
 
   const date = project.pubDate
-    ? new Intl.DateTimeFormat("es-ES", {
+    ? new Intl.DateTimeFormat(currentUiLanguage === "es" ? "es-ES" : currentUiLanguage === "de" ? "de-DE" : "en-GB", {
       year: "numeric",
       month: "short",
       day: "2-digit"
     }).format(new Date(project.pubDate))
-    : "FECHA NO INDICADA";
+    : uiText("date.missing", "DATE NOT PROVIDED");
 
   article.innerHTML = `
     <div class="artstation-card-media">
@@ -2558,7 +2561,7 @@ function createArtstationCard(project) {
       <p class="artstation-date">${escapeProjectText(date)}</p>
       <h3>${escapeProjectText(project.title || "Proyecto 3D")}</h3>
       <p class="artstation-description">
-        ${escapeProjectText(project.description || (currentUiLanguage === "es" ? "Sin descripción publicada." : currentUiLanguage === "de" ? "Keine Beschreibung veröffentlicht." : "No description published."))}
+        ${escapeProjectText(localizedProjectValue("artstation", project, "description", currentUiLanguage === "es" ? "Sin descripción publicada." : currentUiLanguage === "de" ? "Keine Beschreibung veröffentlicht." : "No description published."))}
       </p>
 
     </div>
@@ -2648,30 +2651,29 @@ async function loadArtstationProjects() {
     artstationPageIndex = 0;
 
     if (!artstationProjects.length) {
-      status.textContent = "NO HAY PROYECTOS PUBLICADOS EN ARTSTATION";
+      status.textContent = uiText("art.empty", "NO PROJECTS PUBLISHED ON ARTSTATION");
       grid.innerHTML = `
         <article class="artstation-empty">
-          No se encontraron proyectos en el feed público.
+          ${uiText("art.emptydesc", "No projects were found in the public feed.")}
         </article>
       `;
       return;
     }
 
-    status.textContent =
-      `${artstationProjects.length} PROYECTOS CARGADOS DESDE ARTSTATION`;
+    status.textContent = formatUiText("art.loaded", { count: artstationProjects.length });
     status.classList.add("loaded");
     renderArtstationPage();
   } catch (error) {
     console.error("No se pudo cargar ArtStation:", error);
-    status.textContent = "ERROR AL CARGAR ARTSTATION";
+    status.textContent = uiText("art.error", "ERROR LOADING ARTSTATION");
     grid.innerHTML = `
       <article class="artstation-error">
-        <h3>NO SE PUDO CONECTAR</h3>
-        <p>Comprueba la conexión o abre directamente el perfil.</p>
+        <h3>${uiText("catalog.connect", "COULD NOT CONNECT")}</h3>
+        <p>${uiText("art.errordesc", "Check your connection or open the profile directly.")}</p>
         <a class="terminal-link"
            href="https://www.artstation.com/nachoslkn"
            target="_blank" rel="noopener noreferrer">
-          VISITAR ARTSTATION
+          ${uiText("action.artstation", "VISIT ARTSTATION")}
         </a>
       </article>
     `;
@@ -3300,7 +3302,7 @@ function setupPlayableDemos() {
         toolbar.className = "inline-game-toolbar";
         const fullscreenButton = document.createElement("button");
         fullscreenButton.type = "button";
-        fullscreenButton.textContent = "PANTALLA COMPLETA";
+        fullscreenButton.textContent = uiText("action.fullscreen", "FULL SCREEN");
         fullscreenButton.addEventListener("click", (event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -3329,7 +3331,7 @@ function setupPlayableDemos() {
         });
         const closeButton = document.createElement("button");
         closeButton.type = "button";
-        closeButton.textContent = "CERRAR";
+        closeButton.textContent = uiText("action.close", "CLOSE");
         closeButton.addEventListener("click", closeGame);
         toolbar.append(fullscreenButton, closeButton);
         cover.replaceChildren(frame, toolbar);
@@ -3380,6 +3382,564 @@ setupPlayableDemos();
    GLOBAL LANGUAGE SYSTEM · EN / ES / DE
    English is the default language on a first visit.
 ========================================================= */
+
+const EXTRA_UI_TRANSLATIONS = {
+  "en": {
+    "nav.certifications": "Certifications",
+    "code.certifications": "CREDENTIALS // VERIFIED TRAINING",
+    "certifications.title": "Certifications",
+    "certifications.desc": "Verified certificates and completed specialist training related to game development and interactive technologies.",
+    "certifications.completed": "COMPLETED",
+    "certifications.completion": "CERTIFICATE OF COMPLETION",
+    "certifications.vr.title": "Expert in Virtual Reality with Unity and Google VR",
+    "certifications.vr.desc": "Specialist training in virtual reality development with Unity and Google VR.",
+    "certifications.issuer": "ISSUER",
+    "certifications.instructor": "INSTRUCTOR",
+    "certifications.date": "ISSUED",
+    "certifications.vr.date": "5 September 2026",
+    "certifications.duration": "DURATION",
+    "certifications.vr.duration": "6 hours",
+    "certifications.credential": "CREDENTIAL ID",
+    "certifications.verify": "VERIFY CERTIFICATE ↗",
+    "certifications.pdf": "VIEW PDF ↗",
+
+    "games.desc": "Projects, source code and playable demos organised by platform. The GitHub catalogue is automatically updated from DATA/projects.json.",
+    "web.desc": "Frontend, backend and full-stack projects loaded automatically from DATA/web-projects.json.",
+    "games.loaded": "{count} PROJECTS LOADED FROM GITHUB",
+    "web.loaded": "{count} WEB PROJECTS LOADED",
+    "catalog.empty": "NO PROJECTS DEFINED",
+    "catalog.error": "ERROR LOADING CATALOGUE",
+    "catalog.connect": "COULD NOT CONNECT",
+    "catalog.check": "CHECK FILE",
+    "action.project": "VIEW PROJECT",
+    "action.codepc": "PC CODE",
+    "action.codeweb": "WEB CODE",
+    "action.readme": "VIEW README",
+    "action.demo": "VIEW DEMO",
+    "action.closegame": "CLOSE GAME",
+    "action.closeproject": "CLOSE PROJECT",
+    "action.fullscreen": "FULL SCREEN",
+    "action.exitfullscreen": "EXIT FULL SCREEN",
+    "action.close": "CLOSE",
+    "cover.pending": "COVER PENDING",
+    "project.untitled": "Untitled project",
+    "engine.missing": "Engine not specified",
+    "date.missing": "DATE NOT PROVIDED",
+    "v10.ui": "New in-game UI / HUD",
+    "v10.colliders": "Collider fixes",
+    "v10.save": "Save & load + Continue",
+    "v10.name": "Player name selection",
+    "v10.pause": "Pause, options & controls",
+    "v10.credits": "Credits & UI improvements",
+    "v10.polish": "General polish & bug fixes",
+    "v10.windows": "Windows executable",
+    "v10.html": "HTML5 / Pygbag version",
+    "v10.itch": "itch.io browser support",
+    "code.archive": "ARCHIVE // PROJECT DATABASE",
+    "code.games": "GAME DEVELOPMENT // LIVE DATABASE",
+    "code.web": "WEB DEVELOPMENT // LIVE DATABASE",
+    "code.visual": "3D & VISUALS // LIVE ARTSTATION FEED",
+    "code.profile": "PERSONNEL FILE // PROFILE & CV",
+    "code.partners": "PARTNERS // AFFILIATE PROGRAMS",
+    "code.contact": "RADIO // OPEN CHANNEL",
+    "hero.freehelp": "drag to rotate · wheel to zoom",
+    "hero.screenhelp": "wheel to change section",
+    "profile.focus": "FOCUS",
+    "profile.game": "GAME DEVELOPMENT",
+    "profile.web3d": "WEB / 3D",
+    "profile.madrid": "MADRID, SPAIN",
+    "collab.status": "COLLABORATION + AFFILIATE",
+    "collab.affiliate": "AFFILIATE",
+    "collab.affid": "AFFILIATE ID",
+    "art.loaded": "{count} PROJECTS LOADED FROM ARTSTATION",
+    "art.empty": "NO PROJECTS PUBLISHED ON ARTSTATION",
+    "art.emptydesc": "No projects were found in the public feed.",
+    "art.error": "ERROR LOADING ARTSTATION",
+    "art.errordesc": "Check your connection or open the profile directly.",
+    "page.title": "NachoSLKN | 3D Portfolio",
+    "page.description": "Interactive NachoSLKN portfolio: web development, video games, 3D, projects and contact."
+  },
+  "es": {
+    "nav.certifications": "Certificaciones",
+    "code.certifications": "CREDENCIALES // FORMACIÓN VERIFICADA",
+    "certifications.title": "Certificaciones",
+    "certifications.desc": "Certificados verificables y formación especializada completada relacionada con el desarrollo de videojuegos y las tecnologías interactivas.",
+    "certifications.completed": "COMPLETADO",
+    "certifications.completion": "CERTIFICADO DE FINALIZACIÓN",
+    "certifications.vr.title": "EXPERTO en Realidad Virtual con Unity y Google VR",
+    "certifications.vr.desc": "Formación especializada en desarrollo de realidad virtual con Unity y Google VR.",
+    "certifications.issuer": "ENTIDAD",
+    "certifications.instructor": "INSTRUCTOR",
+    "certifications.date": "FECHA",
+    "certifications.vr.date": "5 de septiembre de 2026",
+    "certifications.duration": "DURACIÓN",
+    "certifications.vr.duration": "6 horas",
+    "certifications.credential": "ID DE CREDENCIAL",
+    "certifications.verify": "VERIFICAR CERTIFICADO ↗",
+    "certifications.pdf": "VER PDF ↗",
+
+    "games.desc": "Proyectos, código fuente y demos jugables organizados por plataforma. El catálogo de GitHub se actualiza automáticamente desde DATA/projects.json.",
+    "web.desc": "Proyectos frontend, backend y full stack cargados automáticamente desde DATA/web-projects.json.",
+    "games.loaded": "{count} PROYECTOS CARGADOS DESDE GITHUB",
+    "web.loaded": "{count} PROYECTOS WEB CARGADOS",
+    "catalog.empty": "NO HAY PROYECTOS DEFINIDOS",
+    "catalog.error": "ERROR AL CARGAR EL CATÁLOGO",
+    "catalog.connect": "NO SE PUDO CONECTAR",
+    "catalog.check": "COMPROBAR ARCHIVO",
+    "action.project": "VER PROYECTO",
+    "action.codepc": "CÓDIGO PC",
+    "action.codeweb": "CÓDIGO WEB",
+    "action.readme": "VER README",
+    "action.demo": "VER DEMO",
+    "action.closegame": "CERRAR JUEGO",
+    "action.closeproject": "CERRAR PROYECTO",
+    "action.fullscreen": "PANTALLA COMPLETA",
+    "action.exitfullscreen": "SALIR DE PANTALLA COMPLETA",
+    "action.close": "CERRAR",
+    "cover.pending": "PORTADA PENDIENTE",
+    "project.untitled": "Proyecto sin título",
+    "engine.missing": "Motor no indicado",
+    "date.missing": "FECHA NO INDICADA",
+    "v10.ui": "Nueva interfaz / HUD",
+    "v10.colliders": "Correcciones de colliders",
+    "v10.save": "Guardado y carga + Continuar",
+    "v10.name": "Selección del nombre del jugador",
+    "v10.pause": "Pausa, opciones y controles",
+    "v10.credits": "Créditos y mejoras de interfaz",
+    "v10.polish": "Pulido general y corrección de errores",
+    "v10.windows": "Ejecutable para Windows",
+    "v10.html": "Versión HTML5 / Pygbag",
+    "v10.itch": "Compatibilidad con navegador en itch.io",
+    "code.archive": "ARCHIVO // BASE DE DATOS DE PROYECTOS",
+    "code.games": "DESARROLLO DE VIDEOJUEGOS // BASE DE DATOS EN VIVO",
+    "code.web": "DESARROLLO WEB // BASE DE DATOS EN VIVO",
+    "code.visual": "3D Y VISUALES // FEED DE ARTSTATION",
+    "code.profile": "ARCHIVO PERSONAL // PERFIL Y CV",
+    "code.partners": "COLABORADORES // PROGRAMAS DE AFILIACIÓN",
+    "code.contact": "RADIO // CANAL ABIERTO",
+    "hero.freehelp": "arrastra para rotar · rueda para zoom",
+    "hero.screenhelp": "rueda para cambiar de sección",
+    "profile.focus": "ENFOQUE",
+    "profile.game": "DESARROLLO DE VIDEOJUEGOS",
+    "profile.web3d": "WEB / 3D",
+    "profile.madrid": "MADRID, ESPAÑA",
+    "collab.status": "COLABORACIÓN + AFILIADO",
+    "collab.affiliate": "AFILIADO",
+    "collab.affid": "ID DE AFILIADO",
+    "art.loaded": "{count} PROYECTOS CARGADOS DESDE ARTSTATION",
+    "art.empty": "NO HAY PROYECTOS PUBLICADOS EN ARTSTATION",
+    "art.emptydesc": "No se encontraron proyectos en el feed público.",
+    "art.error": "ERROR AL CARGAR ARTSTATION",
+    "art.errordesc": "Comprueba la conexión o abre directamente el perfil.",
+    "page.title": "NachoSLKN | Portfolio 3D",
+    "page.description": "Portfolio interactivo de NachoSLKN: desarrollo web, videojuegos, 3D, proyectos y contacto."
+  },
+  "de": {
+    "nav.certifications": "Zertifizierungen",
+    "code.certifications": "NACHWEISE // VERIFIZIERTE WEITERBILDUNG",
+    "certifications.title": "Zertifizierungen",
+    "certifications.desc": "Überprüfbare Zertifikate und abgeschlossene Fachweiterbildungen in Spieleentwicklung und interaktiven Technologien.",
+    "certifications.completed": "ABGESCHLOSSEN",
+    "certifications.completion": "ABSCHLUSSZERTIFIKAT",
+    "certifications.vr.title": "Experte für Virtual Reality mit Unity und Google VR",
+    "certifications.vr.desc": "Fachweiterbildung in der Entwicklung von Virtual Reality mit Unity und Google VR.",
+    "certifications.issuer": "AUSSTELLER",
+    "certifications.instructor": "DOZENT",
+    "certifications.date": "AUSGESTELLT",
+    "certifications.vr.date": "5. September 2026",
+    "certifications.duration": "DAUER",
+    "certifications.vr.duration": "6 Stunden",
+    "certifications.credential": "NACHWEIS-ID",
+    "certifications.verify": "ZERTIFIKAT PRÜFEN ↗",
+    "certifications.pdf": "PDF ANSEHEN ↗",
+
+    "games.desc": "Projekte, Quellcode und spielbare Demos nach Plattform geordnet. Der GitHub-Katalog wird automatisch aus DATA/projects.json aktualisiert.",
+    "web.desc": "Frontend-, Backend- und Full-Stack-Projekte, die automatisch aus DATA/web-projects.json geladen werden.",
+    "games.loaded": "{count} PROJEKTE VON GITHUB GELADEN",
+    "web.loaded": "{count} WEBPROJEKTE GELADEN",
+    "catalog.empty": "KEINE PROJEKTE DEFINIERT",
+    "catalog.error": "FEHLER BEIM LADEN DES KATALOGS",
+    "catalog.connect": "VERBINDUNG NICHT MÖGLICH",
+    "catalog.check": "DATEI PRÜFEN",
+    "action.project": "PROJEKT ANSEHEN",
+    "action.codepc": "PC-CODE",
+    "action.codeweb": "WEB-CODE",
+    "action.readme": "README ANSEHEN",
+    "action.demo": "DEMO ANSEHEN",
+    "action.closegame": "SPIEL SCHLIESSEN",
+    "action.closeproject": "PROJEKT SCHLIESSEN",
+    "action.fullscreen": "VOLLBILD",
+    "action.exitfullscreen": "VOLLBILD BEENDEN",
+    "action.close": "SCHLIESSEN",
+    "cover.pending": "COVER AUSSTEHEND",
+    "project.untitled": "Projekt ohne Titel",
+    "engine.missing": "Engine nicht angegeben",
+    "date.missing": "DATUM NICHT ANGEGEBEN",
+    "v10.ui": "Neue In-Game-Oberfläche / HUD",
+    "v10.colliders": "Collider-Korrekturen",
+    "v10.save": "Speichern & Laden + Fortsetzen",
+    "v10.name": "Auswahl des Spielernamens",
+    "v10.pause": "Pause, Optionen & Steuerung",
+    "v10.credits": "Credits & UI-Verbesserungen",
+    "v10.polish": "Allgemeiner Feinschliff & Fehlerbehebungen",
+    "v10.windows": "Windows-Anwendung",
+    "v10.html": "HTML5- / Pygbag-Version",
+    "v10.itch": "Browser-Unterstützung auf itch.io",
+    "code.archive": "ARCHIV // PROJEKTDATENBANK",
+    "code.games": "SPIELEENTWICKLUNG // LIVE-DATENBANK",
+    "code.web": "WEBENTWICKLUNG // LIVE-DATENBANK",
+    "code.visual": "3D & VISUALS // ARTSTATION-FEED",
+    "code.profile": "PERSONALAKTE // PROFIL & CV",
+    "code.partners": "PARTNER // AFFILIATE-PROGRAMME",
+    "code.contact": "FUNK // OFFENER KANAL",
+    "hero.freehelp": "ziehen zum Drehen · Mausrad zum Zoomen",
+    "hero.screenhelp": "Mausrad zum Wechseln des Bereichs",
+    "profile.focus": "FOKUS",
+    "profile.game": "SPIELEENTWICKLUNG",
+    "profile.web3d": "WEB / 3D",
+    "profile.madrid": "MADRID, SPANIEN",
+    "collab.status": "KOOPERATION + AFFILIATE",
+    "collab.affiliate": "AFFILIATE",
+    "collab.affid": "AFFILIATE-ID",
+    "art.loaded": "{count} PROJEKTE VON ARTSTATION GELADEN",
+    "art.empty": "KEINE PROJEKTE AUF ARTSTATION VERÖFFENTLICHT",
+    "art.emptydesc": "Im öffentlichen Feed wurden keine Projekte gefunden.",
+    "art.error": "FEHLER BEIM LADEN VON ARTSTATION",
+    "art.errordesc": "Prüfe die Verbindung oder öffne das Profil direkt.",
+    "page.title": "NachoSLKN | 3D-Portfolio",
+    "page.description": "Interaktives Portfolio von NachoSLKN: Webentwicklung, Videospiele, 3D, Projekte und Kontakt."
+  }
+};
+
+const PROJECT_TRANSLATIONS = {
+  games: {
+  "hitman": {
+    "en": {
+      "status": "In development",
+      "description": "Third-person stealth demo inspired by Hitman."
+    },
+    "de": {
+      "status": "In Entwicklung",
+      "description": "Third-Person-Stealth-Demo, inspiriert von Hitman."
+    }
+  },
+  "pydew": {
+    "en": {
+      "status": "Published demo",
+      "description": "Farming game developed with Python and Pygame, available for Windows and browser."
+    },
+    "de": {
+      "status": "Veröffentlichte Demo",
+      "description": "Mit Python und Pygame entwickeltes Farmspiel, verfügbar für Windows und im Browser."
+    }
+  },
+  "inspector-ags": {
+    "en": {
+      "status": "Project",
+      "description": "Graphic adventure developed with Adventure Game Studio."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Mit Adventure Game Studio entwickeltes Grafikadventure."
+    }
+  },
+  "godette": {
+    "en": {
+      "status": "Project",
+      "description": "Video game project developed with Godot."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Mit Godot entwickeltes Videospielprojekt."
+    }
+  },
+  "elden-ring": {
+    "en": {
+      "status": "Project",
+      "description": "Action and combat prototype developed with Unity."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Mit Unity entwickelter Action- und Kampfprototyp."
+    }
+  },
+  "quijote": {
+    "en": {
+      "status": "In development",
+      "description": "Isometric ARPG inspired by Don Quixote, with Diablo-style combat and exploration."
+    },
+    "de": {
+      "status": "In Entwicklung",
+      "description": "Isometrisches ARPG, inspiriert von Don Quijote, mit Kämpfen und Erkundung im Diablo-Stil."
+    }
+  },
+  "iron-giant": {
+    "en": {
+      "title": "The Iron Giant",
+      "status": "In development",
+      "description": "3D Iron Giant demo featuring locomotion, flight and interactive systems."
+    },
+    "de": {
+      "title": "Der Gigant aus dem All",
+      "status": "In Entwicklung",
+      "description": "3D-Demo des Eisernen Giganten mit Fortbewegung, Flug und interaktiven Systemen."
+    }
+  }
+},
+  web: {
+  "portfolio-interactivo-threejs": {
+    "en": {
+      "title": "Interactive ThreeJS Portfolio",
+      "status": "Completed",
+      "description": "Interactive portfolio developed with Three.js, presenting content and projects through a 3D experience that runs directly in the browser."
+    },
+    "de": {
+      "title": "Interaktives ThreeJS-Portfolio",
+      "status": "Abgeschlossen",
+      "description": "Mit Three.js entwickeltes interaktives Portfolio, das Inhalte und Projekte als direkt im Browser ausführbare 3D-Erfahrung präsentiert."
+    }
+  },
+  "gameboy-react": {
+    "en": {
+      "status": "In development",
+      "description": "Game Boy Advance interface built with React and Vite that integrates a game exported from Unity WebGL."
+    },
+    "de": {
+      "status": "In Entwicklung",
+      "description": "Mit React und Vite erstellte Game-Boy-Advance-Oberfläche, die ein aus Unity WebGL exportiertes Spiel integriert."
+    }
+  },
+  "pokemon-react": {
+    "en": {
+      "title": "Pokémon React Project",
+      "status": "Project",
+      "description": "Frontend application developed with React and Vite based on the Pokémon universe."
+    },
+    "de": {
+      "title": "Pokémon-React-Projekt",
+      "status": "Projekt",
+      "description": "Mit React und Vite entwickelte Frontend-Anwendung auf Basis des Pokémon-Universums."
+    }
+  },
+  "javascript-quiz": {
+    "en": {
+      "status": "Project",
+      "description": "Quiz application developed with React and Vite to practise logic, components and user interaction."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Mit React und Vite entwickelte Quiz-Anwendung zum Üben von Logik, Komponenten und Benutzerinteraktion."
+    }
+  },
+  "snake-js": {
+    "en": {
+      "status": "Project",
+      "description": "Recreation of the classic Snake developed with web technologies and JavaScript."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Neuinterpretation des klassischen Snake mit Webtechnologien und JavaScript."
+    }
+  },
+  "cronometro-js": {
+    "en": {
+      "title": "JavaScript Stopwatch",
+      "status": "Project",
+      "description": "Interactive stopwatch developed with HTML, CSS and JavaScript, accompanied by screenshots of the result."
+    },
+    "de": {
+      "title": "JavaScript-Stoppuhr",
+      "status": "Projekt",
+      "description": "Interaktive Stoppuhr mit HTML, CSS und JavaScript, ergänzt durch Screenshots des Ergebnisses."
+    }
+  },
+  "boxchampy-figma": {
+    "en": {
+      "status": "Design",
+      "description": "Interface design project created in Figma with graphic assets and process screenshots."
+    },
+    "de": {
+      "status": "Design",
+      "description": "In Figma erstelltes Interface-Design-Projekt mit Grafiken und Screenshots des Arbeitsprozesses."
+    }
+  },
+  "flask-musica": {
+    "en": {
+      "title": "Music Project",
+      "status": "Project",
+      "description": "Music web application developed with Flask and organised using templates, static resources, images and Docker deployment."
+    },
+    "de": {
+      "title": "Musikprojekt",
+      "status": "Projekt",
+      "description": "Mit Flask entwickelte Musik-Webanwendung mit Templates, statischen Ressourcen, Bildern und Docker-Deployment."
+    }
+  },
+  "santander-jpa": {
+    "en": {
+      "title": "Santander Bank JPA",
+      "status": "Project",
+      "description": "Banking web application developed with Java, JPA and servlets, using an architecture organised around entities, DAOs and services."
+    },
+    "de": {
+      "title": "Santander Bank JPA",
+      "status": "Projekt",
+      "description": "Banking-Webanwendung mit Java, JPA und Servlets sowie einer Architektur aus Entitäten, DAOs und Services."
+    }
+  },
+  "ciclos-azarquiel": {
+    "en": {
+      "title": "Azarquiel Training Programmes",
+      "status": "Project",
+      "description": "Web application for managing and presenting vocational training programmes, developed with Java, JPA, servlets and web resources."
+    },
+    "de": {
+      "title": "Azarquiel-Ausbildungsgänge",
+      "status": "Projekt",
+      "description": "Webanwendung zur Verwaltung und Präsentation von Ausbildungsgängen, entwickelt mit Java, JPA, Servlets und Webressourcen."
+    }
+  },
+  "guestbook-docker": {
+    "en": {
+      "status": "Project",
+      "description": "Containerised guestbook application using Docker with Redis for data persistence."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Containerisierte Gästebuch-Anwendung mit Docker und Redis zur Datenpersistenz."
+    }
+  },
+  "temperaturas-docker": {
+    "en": {
+      "title": "Docker Temperatures",
+      "status": "Project",
+      "description": "Containerised Flask application focused on processing or querying temperature data."
+    },
+    "de": {
+      "title": "Docker-Temperaturen",
+      "status": "Projekt",
+      "description": "Containerisierte Flask-Anwendung zur Verarbeitung oder Abfrage von Temperaturdaten."
+    }
+  },
+  "wordpress-docker": {
+    "en": {
+      "title": "WordPress with Docker",
+      "status": "Project",
+      "description": "WordPress environment deployed with Docker containers, including configuration and result screenshots."
+    },
+    "de": {
+      "title": "WordPress mit Docker",
+      "status": "Projekt",
+      "description": "Mit Docker-Containern bereitgestellte WordPress-Umgebung inklusive Konfiguration und Screenshots."
+    }
+  },
+  "apache-tomcat-nginx": {
+    "en": {
+      "status": "Project",
+      "description": "Infrastructure and web-server practice combining Apache, Tomcat and Nginx."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Praxisprojekt zu Infrastruktur und Webservern mit Apache, Tomcat und Nginx."
+    }
+  },
+  "mvc-servlets": {
+    "en": {
+      "title": "MVC Practices with Servlets",
+      "status": "Exercises",
+      "description": "Collection of Java Servlet exercises applying the MVC pattern to web applications."
+    },
+    "de": {
+      "title": "MVC-Übungen mit Servlets",
+      "status": "Übungen",
+      "description": "Sammlung von Java-Servlet-Übungen zur Anwendung des MVC-Musters in Webanwendungen."
+    }
+  },
+  "guitarla-typescript": {
+    "en": {
+      "status": "Project",
+      "description": "Guitar shop developed with React and TypeScript, featuring an interactive catalogue and complete shopping-cart management."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Mit React und TypeScript entwickelter Gitarrenshop mit interaktivem Katalog und vollständiger Warenkorbverwaltung."
+    }
+  },
+  "cocktail-react-typescript": {
+    "en": {
+      "status": "Project",
+      "description": "Cocktail recipe finder developed with React and TypeScript, featuring API consumption, navigation, favourites, global state management and data validation."
+    },
+    "de": {
+      "status": "Projekt",
+      "description": "Mit React und TypeScript entwickelte Cocktailsuche mit API-Anbindung, Navigation, Favoriten, globalem State-Management und Datenvalidierung."
+    }
+  }
+},
+  artstation: {
+  "Grease Pencil #1 - Bakery": {
+    "es": "Entorno de panadería estilizado creado en Blender con Grease Pencil.",
+    "de": "Stilisierte Bäckerei-Umgebung, erstellt in Blender mit Grease Pencil."
+  },
+  "IRON GIANT": {
+    "en": "Work in progress. Course reference available on ArtStation.",
+    "es": "En proceso. Referencia del curso disponible en ArtStation.",
+    "de": "In Arbeit. Kursreferenz auf ArtStation verfügbar."
+  },
+  "Skull King in 3DS MAX": {
+    "en": "Created in 3ds Max.",
+    "es": "Creado en 3ds Max.",
+    "de": "Erstellt in 3ds Max."
+  },
+  "Lava Planet": {
+    "en": "Made in Blender.",
+    "es": "Realizado en Blender.",
+    "de": "Erstellt in Blender."
+  },
+  "Rubik's Cube": {
+    "en": "Rubik's Cube created in Blender.",
+    "es": "Cubo de Rubik creado en Blender.",
+    "de": "Rubik-Würfel, erstellt in Blender."
+  },
+  "Kirby - カービィ 💕⭐️": {
+    "en": "Kirby created in Blender.",
+    "es": "Kirby creado en Blender.",
+    "de": "Kirby, erstellt in Blender."
+  },
+  "BOSS ROOM - DARK SOULS": {
+    "en": "Dark Souls boss room created in Blender.",
+    "es": "Sala de jefe de Dark Souls creada en Blender.",
+    "de": "Dark-Souls-Bossraum, erstellt in Blender."
+  },
+  "HELLO KITTY": {
+    "en": "NachoSLKN 3D artwork.",
+    "es": "Trabajo 3D de NachoSLKN.",
+    "de": "3D-Arbeit von NachoSLKN."
+  },
+  "DARK SIGN - DARK SOULS": {
+    "en": "NachoSLKN 3D artwork.",
+    "es": "Trabajo 3D de NachoSLKN.",
+    "de": "3D-Arbeit von NachoSLKN."
+  }
+}
+};
+
+function localizedProjectValue(kind, project, field, fallback = "") {
+  if (currentUiLanguage === "es") return project?.[field] || fallback;
+  const key = kind === "artstation" ? project?.title : project?.id;
+  const translated = PROJECT_TRANSLATIONS[kind]?.[key]?.[currentUiLanguage];
+  if (kind === "artstation") return translated || project?.[field] || fallback;
+  return translated?.[field] || project?.[field] || fallback;
+}
+
+function formatUiText(key, values = {}, fallback = "") {
+  let value = uiText(key, fallback);
+  Object.entries(values).forEach(([name, replacement]) => {
+    value = value.replaceAll(`{${name}}`, String(replacement));
+  });
+  return value;
+}
+
 const UI_TRANSLATIONS = {
   "en": {
     "nav.home": "Home",
@@ -3636,13 +4196,18 @@ let currentUiLanguage = localStorage.getItem("nachoslkn-language") || "en";
 if (!UI_TRANSLATIONS[currentUiLanguage]) currentUiLanguage = "en";
 
 function uiText(key, fallback = "") {
-  return UI_TRANSLATIONS[currentUiLanguage]?.[key]
+  return EXTRA_UI_TRANSLATIONS[currentUiLanguage]?.[key]
+    || UI_TRANSLATIONS[currentUiLanguage]?.[key]
+    || EXTRA_UI_TRANSLATIONS.en?.[key]
     || UI_TRANSLATIONS.en?.[key]
     || fallback;
 }
 
 function applyStaticTranslations() {
   document.documentElement.lang = currentUiLanguage;
+  document.title = uiText("page.title", "NachoSLKN | 3D Portfolio");
+  const descriptionMeta = document.querySelector('meta[name="description"]');
+  if (descriptionMeta) descriptionMeta.content = uiText("page.description");
 
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
@@ -3672,6 +4237,22 @@ function applyStaticTranslations() {
   if (webStatus && /CATÁLOGO|CATALOGUE|KATALOG/i.test(webStatus.textContent)) webStatus.textContent = uiText("status.web");
   const artStatus = document.getElementById("artstation-status");
   if (artStatus && /ARTSTATION/i.test(artStatus.textContent)) artStatus.textContent = uiText("status.artstation");
+
+  // Re-render dynamic catalogues so project data and generated controls
+  // immediately follow the selected language.
+  if (githubGames.length) renderGithubGamesPage();
+  if (githubWebProjects.length) renderGithubWebPage();
+  if (artstationProjects.length) renderArtstationPage();
+
+  if (githubGames.length && githubStatus?.classList.contains("loaded")) {
+    githubStatus.textContent = formatUiText("games.loaded", { count: githubGames.length });
+  }
+  if (githubWebProjects.length && webStatus?.classList.contains("loaded")) {
+    webStatus.textContent = formatUiText("web.loaded", { count: githubWebProjects.length });
+  }
+  if (artstationProjects.length && artStatus?.classList.contains("loaded")) {
+    artStatus.textContent = formatUiText("art.loaded", { count: artstationProjects.length });
+  }
 
   // Pip-Boy screen labels that are not project data.
   applyPipBoyLanguage();

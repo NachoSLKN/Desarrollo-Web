@@ -23,6 +23,7 @@
 <a data-i18n="nav.web" href="#proyectos-web">Web</a>
 <a href="#proyectos-3d">3D</a>
 <a data-i18n="nav.cv" href="#perfil">CV</a>
+<a data-i18n="nav.certifications" href="#certificaciones">Certifications</a>
 <a data-i18n="nav.collab" href="#colaboraciones">Collaborations</a>
 <a data-i18n="contact.title" href="#contacto">Contact</a>
 </nav>
@@ -76,7 +77,7 @@
     ====================================================== -->
 <section class="portfolio-section projects-section" id="proyectos">
 <div class="section-heading">
-<p class="section-code">ARCHIVE // PROJECT DATABASE</p>
+<p class="section-code" data-i18n="code.archive">ARCHIVE // PROJECT DATABASE</p>
 <h2 data-i18n="featured.title">Featured projects</h2>
 <p data-i18n="featured.desc">Prototypes, video games and interactive experiences developed with different technologies.</p>
 </div>
@@ -134,16 +135,16 @@
 <h3>PyDew Valley · v1.0</h3>
 <p data-i18n="pyd.v10.desc">Version 1.0 with new interfaces and systems, gameplay fixes, and full release for Windows and browser.</p>
 <ul class="project-features">
-<li>New in-game UI / HUD</li>
-<li>Collider fixes</li>
-<li>Save &amp; load + Continue</li>
-<li>Player name selection</li>
-<li>Pause, options &amp; controls</li>
-<li>Credits &amp; UI improvements</li>
-<li>General polish &amp; bug fixes</li>
-<li>Windows executable</li>
-<li>HTML5 / Pygbag version</li>
-<li>itch.io browser support</li>
+<li data-i18n="v10.ui">New in-game UI / HUD</li>
+<li data-i18n="v10.colliders">Collider fixes</li>
+<li data-i18n="v10.save">Save &amp; load + Continue</li>
+<li data-i18n="v10.name">Player name selection</li>
+<li data-i18n="v10.pause">Pause, options &amp; controls</li>
+<li data-i18n="v10.credits">Credits &amp; UI improvements</li>
+<li data-i18n="v10.polish">General polish &amp; bug fixes</li>
+<li data-i18n="v10.windows">Windows executable</li>
+<li data-i18n="v10.html">HTML5 / Pygbag version</li>
+<li data-i18n="v10.itch">itch.io browser support</li>
 </ul>
 <div class="tech-list">
 <span>PYTHON</span>
@@ -182,9 +183,9 @@
 </section>
 <section class="portfolio-section" id="desarrollo-videojuegos">
 <div class="section-heading">
-<p class="section-code">GAME DEVELOPMENT // LIVE DATABASE</p>
+<p class="section-code" data-i18n="code.games">GAME DEVELOPMENT // LIVE DATABASE</p>
 <h2 data-i18n="games.title">Game development</h2>
-<p>
+<p data-i18n="games.desc">
           Proyectos, código fuente y demos jugables organizados por plataforma.
           El catálogo de GitHub se actualiza automáticamente desde
           <strong>DATA/projects.json</strong>.
@@ -281,9 +282,9 @@
     ====================================================== -->
 <section class="portfolio-section alternate-section" id="proyectos-web">
 <div class="section-heading">
-<p class="section-code">WEB DEVELOPMENT // LIVE DATABASE</p>
+<p class="section-code" data-i18n="code.web">WEB DEVELOPMENT // LIVE DATABASE</p>
 <h2 data-i18n="web.title">Web development</h2>
-<p>
+<p data-i18n="web.desc">
           Proyectos frontend, backend y full stack cargados automáticamente
           desde <strong>DATA/web-projects.json</strong>.
         </p>
@@ -313,7 +314,7 @@
 <section class="portfolio-section" id="proyectos-3d">
 <div class="section-heading artstation-section-heading">
 <div>
-<p class="section-code">3D &amp; VISUALS // LIVE ARTSTATION FEED</p>
+<p class="section-code" data-i18n="code.visual">3D &amp; VISUALS // LIVE ARTSTATION FEED</p>
 <h2 data-i18n="visual.title">3D &amp; multimedia</h2>
 <p data-i18n="visual.desc">Projects published on ArtStation. The catalogue is automatically updated from NachoSLKN’s public profile.</p>
 </div>
@@ -336,7 +337,7 @@
     ====================================================== -->
 <section class="portfolio-section alternate-section" id="perfil">
 <div class="section-heading">
-<p class="section-code">PERSONNEL FILE // PROFILE &amp; CV</p>
+<p class="section-code" data-i18n="code.profile">PERSONNEL FILE // PROFILE &amp; CV</p>
 <h2 data-i18n="profile.title">About me &amp; résumé</h2>
 <p data-i18n="profile.desc">Multidisciplinary profile focused on game development, web development and 3D creation. You can view or download the résumé in English, Spanish and German.</p>
 </div>
@@ -351,16 +352,16 @@
 </div>
 <div class="profile-stats">
 <div>
-<span>FOCUS</span>
-<strong>GAME DEVELOPMENT</strong>
+<span data-i18n="profile.focus">FOCUS</span>
+<strong data-i18n="profile.game">GAME DEVELOPMENT</strong>
 </div>
 <div>
 <span data-i18n="profile.secondary">SECONDARY</span>
-<strong>WEB / 3D</strong>
+<strong data-i18n="profile.web3d">WEB / 3D</strong>
 </div>
 <div>
 <span data-i18n="profile.location">LOCATION</span>
-<strong>MADRID, SPAIN</strong>
+<strong data-i18n="profile.madrid">MADRID, SPAIN</strong>
 </div>
 <div>
 <span data-i18n="profile.languages">LANGUAGES</span>
@@ -397,11 +398,66 @@
 </div>
 </section>
 <!-- =====================================================
+         CERTIFICACIONES
+    ====================================================== -->
+<section class="portfolio-section certifications-section" id="certificaciones">
+<div class="section-heading">
+<p class="section-code" data-i18n="code.certifications">CREDENTIALS // VERIFIED TRAINING</p>
+<h2 data-i18n="certifications.title">Certifications</h2>
+<p data-i18n="certifications.desc">Verified certificates and completed specialist training related to game development and interactive technologies.</p>
+</div>
+<div class="certifications-grid">
+<article class="certification-card">
+<div class="certification-header">
+<span class="certification-index">CERT_001</span>
+<span class="certification-status" data-i18n="certifications.completed">COMPLETED</span>
+</div>
+<div class="certification-provider">
+<span class="certification-provider-name">Udemy</span>
+<span class="certification-provider-type" data-i18n="certifications.completion">CERTIFICATE OF COMPLETION</span>
+</div>
+<h3 data-i18n="certifications.vr.title">Expert in Virtual Reality with Unity and Google VR</h3>
+<p class="certification-summary" data-i18n="certifications.vr.desc">Specialist training in virtual reality development with Unity and Google VR.</p>
+<div class="certification-meta">
+<div>
+<span data-i18n="certifications.issuer">ISSUER</span>
+<strong>Udemy</strong>
+</div>
+<div>
+<span data-i18n="certifications.instructor">INSTRUCTOR</span>
+<strong>Mariano Sosa</strong>
+</div>
+<div>
+<span data-i18n="certifications.date">ISSUED</span>
+<strong data-i18n="certifications.vr.date">5 September 2026</strong>
+</div>
+<div>
+<span data-i18n="certifications.duration">DURATION</span>
+<strong data-i18n="certifications.vr.duration">6 hours</strong>
+</div>
+</div>
+<div class="certification-id">
+<span data-i18n="certifications.credential">CREDENTIAL ID</span>
+<code>UC-1dfb37ee-5726-4773-82f0-b7121343dd4a</code>
+</div>
+<div class="tech-list">
+<span>UNITY</span>
+<span>VR</span>
+<span>GOOGLE VR</span>
+</div>
+<div class="project-actions">
+<a class="terminal-link" data-i18n="certifications.verify" href="https://www.udemy.com/certificate/UC-1dfb37ee-5726-4773-82f0-b7121343dd4a/" rel="noopener noreferrer" target="_blank">VERIFY CERTIFICATE ↗</a>
+<a class="terminal-link secondary-link" data-i18n="certifications.pdf" href="https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/%28VR%29%20GOOGLE%20VR/Certificate/UC-1dfb37ee-5726-4773-82f0-b7121343dd4a.pdf" rel="noopener noreferrer" target="_blank">VIEW PDF ↗</a>
+</div>
+</article>
+</div>
+</section>
+<!-- =====================================================
          COLABORACIONES Y AFILIACIONES
     ====================================================== -->
 <section class="portfolio-section collaborations-section" id="colaboraciones">
 <div class="section-heading">
-<p class="section-code">PARTNERS // AFFILIATE PROGRAMS</p>
+<p class="section-code" data-i18n="code.partners">PARTNERS // AFFILIATE PROGRAMS</p>
 <h2 data-i18n="collab.title">Collaborations &amp; Affiliations</h2>
 <p data-i18n="collab.desc">Platforms and tools I collaborate with or participate in through affiliate programmes.</p>
 </div>
@@ -409,7 +465,7 @@
 <article class="collaboration-card">
 <div class="collaboration-header">
 <span class="collaboration-index">PARTNER_01</span>
-<span class="collaboration-status">COLLABORATION + AFFILIATE</span>
+<span class="collaboration-status" data-i18n="collab.status">COLLABORATION + AFFILIATE</span>
 </div>
 <div class="collaboration-brand"><img alt="QuickMagic logo" src="./img/affiliates/quickmagic-logo.webp"/><h3>QuickMagic</h3></div>
 <p data-i18n="quick.desc">AI-assisted creation tool focused on motion, video, avatars and Motion Capture. Active collaboration with promotional access for content creation.</p>
@@ -434,12 +490,12 @@
 <article class="collaboration-card">
 <div class="collaboration-header">
 <span class="collaboration-index">AFFILIATE_02</span>
-<span class="collaboration-status">AFFILIATE</span>
+<span class="collaboration-status" data-i18n="collab.affiliate">AFFILIATE</span>
 </div>
 <div class="collaboration-brand collaboration-brand--wide"><img alt="Instant Gaming logo" src="./img/affiliates/instant-gaming-logo.png"/><h3>Instant Gaming</h3></div>
 <p data-i18n="instant.desc">Instant Gaming affiliate programme for video games and digital products. Purchases made through my link can directly support my content and projects.</p>
 <div class="collaboration-data">
-<span>AFFILIATE ID</span>
+<span data-i18n="collab.affid">AFFILIATE ID</span>
 <strong>Nacho-slkn</strong>
 </div>
 <div class="collaboration-benefit">
@@ -448,7 +504,7 @@
 </div>
 <div class="tech-list">
 <span>GAMING</span>
-<span>AFFILIATE</span>
+<span data-i18n="collab.affiliate">AFFILIATE</span>
 <span>DIGITAL STORE</span>
 </div>
 <div class="project-actions">
@@ -462,7 +518,7 @@
     ====================================================== -->
 <section class="portfolio-section contact-section" id="contacto">
 <div class="section-heading">
-<p class="section-code">RADIO // OPEN CHANNEL</p>
+<p class="section-code" data-i18n="code.contact">RADIO // OPEN CHANNEL</p>
 <h2 data-i18n="contact.title">Contact</h2>
 <p data-i18n="contact.desc">You can find my projects, videos and work on these platforms.</p>
 </div>

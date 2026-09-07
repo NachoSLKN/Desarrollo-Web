@@ -41,10 +41,10 @@
     },
     {
       "id": "pokemon-react",
-      "title": "Proyecto Pok\u00e9mon React",
+      "title": "Proyecto Pokémon React",
       "type": "Frontend",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n frontend desarrollada con React y Vite basada en el universo Pok\u00e9mon.",
+      "description": "Aplicación frontend desarrollada con React y Vite basada en el universo Pokémon.",
       "tags": [
         "React",
         "Vite",
@@ -62,7 +62,7 @@
       "title": "JavaScript Quiz",
       "type": "Frontend",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n de preguntas desarrollada con React y Vite para practicar l\u00f3gica, componentes e interacci\u00f3n de usuario.",
+      "description": "Aplicación de preguntas desarrollada con React y Vite para practicar lógica, componentes e interacción de usuario.",
       "tags": [
         "React",
         "Vite",
@@ -80,7 +80,7 @@
       "title": "Snake",
       "type": "Frontend",
       "status": "Proyecto",
-      "description": "Recreaci\u00f3n del cl\u00e1sico Snake desarrollada con tecnolog\u00edas web y JavaScript.",
+      "description": "Recreación del clásico Snake desarrollada con tecnologías web y JavaScript.",
       "tags": [
         "HTML",
         "CSS",
@@ -95,16 +95,16 @@
     },
     {
       "id": "cronometro-js",
-      "title": "Cron\u00f3metro JavaScript",
+      "title": "Cronómetro JavaScript",
       "type": "Frontend",
       "status": "Proyecto",
-      "description": "Cron\u00f3metro interactivo desarrollado con HTML, CSS y JavaScript, acompa\u00f1ado de capturas del resultado.",
+      "description": "Cronómetro interactivo desarrollado con HTML, CSS y JavaScript, acompañado de capturas del resultado.",
       "tags": [
         "HTML",
         "CSS",
         "JavaScript"
       ],
-      "folder": "Frontend/Desarrollo Web Entorno Cliente/Javascript/CRON\u00d3METRO",
+      "folder": "Frontend/Desarrollo Web Entorno Cliente/Javascript/CRONÓMETRO",
       "github": "https://github.com/NachoSLKN/Desarrollo-Web/tree/main/Frontend/Desarrollo%20Web%20Entorno%20Cliente/Javascript/CRON%C3%93METRO",
       "playable": true,
       "embedUrl": "./web-projects/cronometro/index.html",
@@ -115,8 +115,8 @@
       "id": "boxchampy-figma",
       "title": "BoxChampy",
       "type": "Frontend",
-      "status": "Dise\u00f1o",
-      "description": "Proyecto de dise\u00f1o de interfaz realizado en Figma con material gr\u00e1fico y capturas del proceso.",
+      "status": "Diseño",
+      "description": "Proyecto de diseño de interfaz realizado en Figma con material gráfico y capturas del proceso.",
       "tags": [
         "Figma",
         "UI",
@@ -128,10 +128,10 @@
     },
     {
       "id": "flask-musica",
-      "title": "Proyecto M\u00fasica",
+      "title": "Proyecto Música",
       "type": "Full Stack",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n web musical desarrollada con Flask y organizada mediante plantillas, recursos est\u00e1ticos, im\u00e1genes y despliegue con Docker.",
+      "description": "Aplicación web musical desarrollada con Flask y organizada mediante plantillas, recursos estáticos, imágenes y despliegue con Docker.",
       "tags": [
         "Python",
         "Flask",
@@ -147,7 +147,7 @@
       "title": "Banco Santander JPA",
       "type": "Full Stack",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n web bancaria desarrollada con Java, JPA, servlets y una arquitectura organizada por entidades, DAO y servicios.",
+      "description": "Aplicación web bancaria desarrollada con Java, JPA, servlets y una arquitectura organizada por entidades, DAO y servicios.",
       "tags": [
         "Java",
         "JPA",
@@ -164,7 +164,7 @@
       "title": "Ciclos Formativos Azarquiel",
       "type": "Full Stack",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n web para la gesti\u00f3n y presentaci\u00f3n de ciclos formativos, desarrollada con Java, JPA, servlets y recursos web.",
+      "description": "Aplicación web para la gestión y presentación de ciclos formativos, desarrollada con Java, JPA, servlets y recursos web.",
       "tags": [
         "Java",
         "JPA",
@@ -180,7 +180,7 @@
       "title": "Guestbook Docker",
       "type": "Backend",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n de libro de visitas contenerizada con Docker y persistencia de datos mediante Redis.",
+      "description": "Aplicación de libro de visitas contenerizada con Docker y persistencia de datos mediante Redis.",
       "tags": [
         "Docker",
         "Flask",
@@ -195,7 +195,7 @@
       "title": "Temperaturas Docker",
       "type": "Backend",
       "status": "Proyecto",
-      "description": "Aplicaci\u00f3n Flask contenerizada orientada al tratamiento o consulta de temperaturas.",
+      "description": "Aplicación Flask contenerizada orientada al tratamiento o consulta de temperaturas.",
       "tags": [
         "Docker",
         "Flask",
@@ -209,7 +209,7 @@
       "title": "WordPress con Docker",
       "type": "Backend",
       "status": "Proyecto",
-      "description": "Entorno WordPress desplegado mediante contenedores Docker, con configuraci\u00f3n y capturas del resultado.",
+      "description": "Entorno WordPress desplegado mediante contenedores Docker, con configuración y capturas del resultado.",
       "tags": [
         "Docker",
         "WordPress",
@@ -223,7 +223,7 @@
       "title": "Apache, Tomcat y Nginx",
       "type": "Backend",
       "status": "Proyecto",
-      "description": "Pr\u00e1ctica de infraestructura y servidores web combinando Apache, Tomcat y Nginx.",
+      "description": "Práctica de infraestructura y servidores web combinando Apache, Tomcat y Nginx.",
       "tags": [
         "Apache",
         "Tomcat",
@@ -235,10 +235,10 @@
     },
     {
       "id": "mvc-servlets",
-      "title": "Pr\u00e1cticas MVC con Servlets",
+      "title": "Prácticas MVC con Servlets",
       "type": "Backend",
-      "status": "Pr\u00e1cticas",
-      "description": "Colecci\u00f3n de pr\u00e1cticas con Java Servlets aplicando el patr\u00f3n MVC en aplicaciones web.",
+      "status": "Prácticas",
+      "description": "Colección de prácticas con Java Servlets aplicando el patrón MVC en aplicaciones web.",
       "tags": [
         "Java",
         "Servlets",
@@ -253,7 +253,7 @@
       "title": "GuitarLA",
       "type": "Frontend",
       "status": "Proyecto",
-      "description": "Tienda de guitarras desarrollada con React y TypeScript, con cat?logo interactivo y gesti?n completa del carrito de compra.",
+      "description": "Tienda de guitarras desarrollada con React y TypeScript, con catálogo interactivo y gestión completa del carrito de compra.",
       "tags": [
         "React",
         "TypeScript",
@@ -272,7 +272,7 @@
       "title": "Cocktail",
       "type": "Frontend",
       "status": "Proyecto",
-      "description": "Buscador de recetas de c?cteles desarrollado con React y TypeScript, con consumo de API, navegaci?n, favoritos, gesti?n global de estado y validaci?n de datos.",
+      "description": "Buscador de recetas de cócteles desarrollado con React y TypeScript, con consumo de API, navegación, favoritos, gestión global de estado y validación de datos.",
       "tags": [
         "React",
         "TypeScript",
