@@ -1,4 +1,4 @@
-﻿import * as THREE from "https://unpkg.com/three@0.167.1/build/three.module.js";
+import * as THREE from "https://unpkg.com/three@0.167.1/build/three.module.js";
 
 import { OrbitControls } from "https://unpkg.com/three@0.167.1/examples/jsm/controls/OrbitControls.js?module";
 import { GLTFLoader } from "https://unpkg.com/three@0.167.1/examples/jsm/loaders/GLTFLoader.js?module";
@@ -104,10 +104,10 @@ if (focusButton) {
   focusButton.title = "Activar o desactivar la vista del Pip-Boy";
 
   Object.assign(focusButton.style, {
-    position: "fixed",
+    position: "absolute",
     top: "72px",
     right: "20px",
-    zIndex: "9999",
+    zIndex: "30",
     pointerEvents: "auto"
   });
 }
@@ -1310,7 +1310,7 @@ function setFocus(nextState) {
     }
 
     if (mobileFocusButton) {
-      mobileFocusButton.textContent = "ABRIR PANTALLA";
+      mobileFocusButton.textContent = currentUiLanguage === "es" ? "ABRIR PANTALLA" : currentUiLanguage === "de" ? "BILDSCHIRM ÖFFNEN" : "OPEN SCREEN";
     }
 
     hideHolographicScreen();
@@ -1714,7 +1714,7 @@ function createGameCard(game, index) {
         class="terminal-link play-link inline-play-button"
         data-inline-play
       >
-        ${escapeProjectText(game.playLabel || "JUGAR ONLINE")}
+        ${escapeProjectText(game.playLabel || uiText("action.play", "PLAY ONLINE"))}
       </button>
     `
     : "";
@@ -1798,7 +1798,7 @@ function createGameCard(game, index) {
       </p>
 
       <p class="github-game-description">
-        ${escapeProjectText(game.description || "Sin descripción disponible.")}
+        ${escapeProjectText(game.description || (currentUiLanguage === "es" ? "Sin descripción disponible." : currentUiLanguage === "de" ? "Keine Beschreibung verfügbar." : "No description available."))}
       </p>
 
       <div class="tech-list">
@@ -1874,7 +1874,7 @@ function createGameCard(game, index) {
       cover.classList.remove("inline-game-active");
 
       gameOpen = false;
-      playControl.textContent = game.playLabel || "JUGAR ONLINE";
+      playControl.textContent = game.playLabel || uiText("action.play", "PLAY ONLINE");
 
       image.naturalWidth > 0 ? showImage() : showFallback();
     };
@@ -1984,7 +1984,7 @@ async function loadGithubGames() {
     renderGithubGamesPage();
   });
 
-  status.textContent = "CONECTANDO CON GITHUB…";
+  status.textContent = uiText("status.github", "CONNECTING TO GITHUB…");
 
   try {
     const requestUrl =
@@ -2198,7 +2198,7 @@ function createWebProjectCard(project, index) {
     <div class="github-game-content">
       <p class="project-code">
         WEB_${String(index + 1).padStart(3, "0")}
-        · ${escapeProjectText(project.status || "PROYECTO")}
+        · ${escapeProjectText(project.status || (currentUiLanguage === "es" ? "PROYECTO" : currentUiLanguage === "de" ? "PROJEKT" : "PROJECT"))}
       </p>
 
       <h3>${escapeProjectText(project.title || "Proyecto sin título")}</h3>
@@ -2208,7 +2208,7 @@ function createWebProjectCard(project, index) {
       </p>
 
       <p class="github-game-description">
-        ${escapeProjectText(project.description || "Sin descripción disponible.")}
+        ${escapeProjectText(project.description || (currentUiLanguage === "es" ? "Sin descripción disponible." : currentUiLanguage === "de" ? "Keine Beschreibung verfügbar." : "No description available."))}
       </p>
 
       <div class="tech-list">
@@ -2397,7 +2397,7 @@ async function loadGithubWebProjects() {
     renderGithubWebPage();
   });
 
-  status.textContent = "CONECTANDO CON EL CATÁLOGO WEB…";
+  status.textContent = uiText("status.web", "CONNECTING TO WEB CATALOGUE…");
 
   try {
     const database = await fetchWebProjectsDatabase();
@@ -2558,7 +2558,7 @@ function createArtstationCard(project) {
       <p class="artstation-date">${escapeProjectText(date)}</p>
       <h3>${escapeProjectText(project.title || "Proyecto 3D")}</h3>
       <p class="artstation-description">
-        ${escapeProjectText(project.description || "Sin descripción publicada.")}
+        ${escapeProjectText(project.description || (currentUiLanguage === "es" ? "Sin descripción publicada." : currentUiLanguage === "de" ? "Keine Beschreibung veröffentlicht." : "No description published."))}
       </p>
 
     </div>
@@ -2641,7 +2641,7 @@ async function loadArtstationProjects() {
     renderArtstationPage();
   });
 
-  status.textContent = "CONECTANDO CON ARTSTATION…";
+  status.textContent = uiText("status.artstation", "CONNECTING TO ARTSTATION…");
 
   try {
     artstationProjects = await fetchArtstationProjects();
@@ -2762,21 +2762,58 @@ async function renderPdfPreview(pdfUrl, canvasId, statusId) {
   }
 }
 
+const cvDocuments = [
+  { code: "EN", title: "English résumé", label: "ENGLISH RÉSUMÉ", pdf: "cv/Curriculum_EN.pdf", flag: "./img/languages/flag-en.svg", flagAlt: "English flag", openText: "OPEN ↗", loadingText: "Loading preview…" },
+  { code: "ES", title: "Currículum en español", label: "CURRÍCULUM EN ESPAÑOL", pdf: "cv/Curriculum_ES.pdf", flag: "./img/languages/flag-es.svg", flagAlt: "Bandera de España", openText: "ABRIR ↗", loadingText: "Cargando vista previa…" },
+  { code: "DE", title: "Lebenslauf auf Deutsch", label: "DEUTSCHER LEBENSLAUF", pdf: "cv/Curriculum_DE.pdf", flag: "./img/languages/flag-de.svg", flagAlt: "Deutsche Flagge", openText: "ÖFFNEN ↗", loadingText: "Vorschau wird geladen…" }
+];
+
+let currentCvIndex = 0;
+
+async function renderCurrentCv() {
+  const cv = cvDocuments[currentCvIndex];
+  const title = document.getElementById("cv-language-title");
+  const language = document.getElementById("cv-current-language");
+  const page = document.getElementById("cv-page");
+  const flag = document.getElementById("cv-language-flag");
+  const openLink = document.getElementById("cv-open-link");
+  const canvas = document.getElementById("cv-preview");
+  const status = document.getElementById("cv-status");
+
+  if (!title || !language || !page || !flag || !openLink || !canvas || !status) return;
+
+  title.textContent = cv.title;
+  language.textContent = cv.label;
+  page.textContent = `${currentCvIndex + 1} / ${cvDocuments.length}`;
+  flag.src = cv.flag;
+  flag.alt = cv.flagAlt;
+  openLink.href = cv.pdf;
+  openLink.textContent = cv.openText;
+  status.textContent = cv.loadingText;
+  status.classList.remove("hidden");
+
+  const context = canvas.getContext("2d");
+  context?.clearRect(0, 0, canvas.width, canvas.height);
+
+  await renderPdfPreview(cv.pdf, "cv-preview", "cv-status");
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   loadGithubGames();
   loadGithubWebProjects();
   loadArtstationProjects();
-  renderPdfPreview(
-    "cv/Curriculum_ES.pdf",
-    "cv-preview-es",
-    "cv-status-es"
-  );
 
-  renderPdfPreview(
-    "cv/Curriculum_EN.pdf",
-    "cv-preview-en",
-    "cv-status-en"
-  );
+  document.getElementById("cv-prev")?.addEventListener("click", () => {
+    currentCvIndex = (currentCvIndex - 1 + cvDocuments.length) % cvDocuments.length;
+    renderCurrentCv();
+  });
+
+  document.getElementById("cv-next")?.addEventListener("click", () => {
+    currentCvIndex = (currentCvIndex + 1) % cvDocuments.length;
+    renderCurrentCv();
+  });
+
+  renderCurrentCv();
 });
 
 /* =========================================================
@@ -3294,3 +3331,365 @@ function setupPlayableDemos() {
 }
 setupPlayableDemos();
 
+
+
+/* =========================================================
+   GLOBAL LANGUAGE SYSTEM · EN / ES / DE
+   English is the default language on a first visit.
+========================================================= */
+const UI_TRANSLATIONS = {
+  "en": {
+    "nav.home": "Home",
+    "nav.games": "Games",
+    "nav.web": "Web",
+    "nav.cv": "CV",
+    "nav.collab": "Collaborations",
+    "nav.contact": "Contact",
+    "hero.loading": "Loading NachoSLKN.com...",
+    "hero.version": "3D PORTFOLIO · VERSION 1",
+    "hero.focus": "FOCUS SCREEN",
+    "hero.reset": "RESET VIEW",
+    "hero.open": "OPEN SCREEN",
+    "hero.portfolio": "VIEW PORTFOLIO ↓",
+    "hero.free": "FREE MODE:",
+    "hero.freehelp": "drag to rotate · wheel to zoom",
+    "hero.screen": "SCREEN MODE:",
+    "hero.screenhelp": "wheel to change section",
+    "hero.explore": "EXPLORE PORTFOLIO ↓",
+    "featured.title": "Featured projects",
+    "featured.desc": "Prototypes, video games and interactive experiences developed with different technologies.",
+    "pyd.v01.desc": "Farming game prototype inspired by Stardew Valley, developed with Python and Pygame.",
+    "pyd.tree": "Tree chopping",
+    "pyd.apple": "Apple picking",
+    "pyd.plant": "Planting and watering",
+    "pyd.harvest": "Harvesting",
+    "pyd.trade": "Merchant trading",
+    "pyd.day": "Day / night cycle",
+    "pyd.sleep": "Sleep & recovery",
+    "pyd.weather": "Weather system",
+    "action.github": "VIEW ON GITHUB",
+    "action.gameplay": "WATCH GAMEPLAY",
+    "pyd.v10.desc": "Version 1.0 with new interfaces and systems, gameplay fixes, and full release for Windows and browser.",
+    "action.improvements": "VIEW IMPROVEMENTS",
+    "hitman.desc": "Third-person stealth project developed with Unity, focused on infiltration, exploration and gameplay systems.",
+    "action.development": "VIEW DEVELOPMENT",
+    "games.title": "Game development",
+    "games.source": "Projects and code",
+    "action.repo": "OPEN REPOSITORY",
+    "status.github": "CONNECTING TO GITHUB…",
+    "playable.title": "Playable demos",
+    "action.itch": "VISIT ITCH.IO",
+    "playable.desc": "Playable builds published for browser and Windows.",
+    "playable.pydew.desc": "Playable version of PyDew Valley. Run it directly in the browser or access the Windows version.",
+    "action.play": "PLAY ONLINE",
+    "action.downloadwin": "DOWNLOAD WINDOWS",
+    "action.viewitch": "VIEW ON ITCH.IO",
+    "vr.count": "PLAYABLE_002 · 5 EXPERIENCES",
+    "vr.desc": "Collection of five virtual reality experiences developed with Unity and Google VR. Select an experience to run it directly in the browser.",
+    "vr.locomotion": "LOCOMOTION",
+    "vr.realestate": "REAL ESTATE",
+    "vr.gallery": "ART GALLERY",
+    "vr.space": "SPACE WALK",
+    "web.title": "Web development",
+    "web.source": "Web projects",
+    "status.web": "CONNECTING TO WEB CATALOGUE…",
+    "visual.title": "3D & multimedia",
+    "visual.desc": "Projects published on ArtStation. The catalogue is automatically updated from NachoSLKN’s public profile.",
+    "action.artstation": "VISIT ARTSTATION",
+    "status.artstation": "CONNECTING TO ARTSTATION…",
+    "profile.title": "About me & résumé",
+    "profile.desc": "Multidisciplinary profile focused on game development, web development and 3D creation. You can view or download the résumé in English, Spanish and German.",
+    "profile.lead": "I am Ignacio Liñán Vicente, Game Developer, Web Developer and 3D Artist.",
+    "profile.study": "I am currently studying a Bachelor’s Degree in Video Game Design and Development. My background combines programming, web applications, virtual reality, 3D modelling and the creation of interactive experiences.",
+    "profile.work": "I have worked as a web developer and 3D artist, and I also have professional experience in international environments.",
+    "profile.viewcv": "VIEW RÉSUMÉ ↓",
+    "profile.secondary": "SECONDARY",
+    "profile.location": "LOCATION",
+    "profile.languages": "LANGUAGES",
+    "collab.title": "Collaborations & Affiliations",
+    "collab.desc": "Platforms and tools I collaborate with or participate in through affiliate programmes.",
+    "quick.desc": "AI-assisted creation tool focused on motion, video, avatars and Motion Capture. Active collaboration with promotional access for content creation.",
+    "quick.referral": "REFERRAL CODE",
+    "quick.benefit": "BENEFIT FOR NEW USERS",
+    "quick.coins": "+20 V Coins when signing up through my link",
+    "action.quick": "VISIT QUICKMAGIC",
+    "instant.desc": "Instant Gaming affiliate programme for video games and digital products. Purchases made through my link can directly support my content and projects.",
+    "instant.program": "AFFILIATE PROGRAMME",
+    "instant.commission": "3% commission on sales made through my link",
+    "action.instant": "VISIT INSTANT GAMING",
+    "contact.title": "Contact",
+    "contact.desc": "You can find my projects, videos and work on these platforms.",
+    "footer.back": "BACK TO PIP-BOY ↑"
+  },
+  "es": {
+    "nav.home": "Inicio",
+    "nav.games": "Videojuegos",
+    "nav.web": "Web",
+    "nav.cv": "CV",
+    "nav.collab": "Colaboraciones",
+    "nav.contact": "Contacto",
+    "hero.loading": "Cargando NachoSLKN.com...",
+    "hero.version": "PORTFOLIO 3D · VERSIÓN 1",
+    "hero.focus": "FIJAR PANTALLA",
+    "hero.reset": "REINICIAR VISTA",
+    "hero.open": "ABRIR PANTALLA",
+    "hero.portfolio": "VER PORTFOLIO ↓",
+    "hero.free": "MODO LIBRE:",
+    "hero.freehelp": "arrastra para rotar · rueda para zoom",
+    "hero.screen": "MODO PANTALLA:",
+    "hero.screenhelp": "rueda para cambiar de sección",
+    "hero.explore": "EXPLORAR PORTFOLIO ↓",
+    "featured.title": "Proyectos destacados",
+    "featured.desc": "Prototipos, videojuegos y experiencias interactivas desarrolladas con distintas tecnologías.",
+    "pyd.v01.desc": "Prototipo de juego de granja inspirado en Stardew Valley, desarrollado con Python y Pygame.",
+    "pyd.tree": "Tala de árboles",
+    "pyd.apple": "Recolección de manzanas",
+    "pyd.plant": "Plantación y riego",
+    "pyd.harvest": "Cosecha",
+    "pyd.trade": "Comercio con mercader",
+    "pyd.day": "Ciclo día / noche",
+    "pyd.sleep": "Sueño y recuperación",
+    "pyd.weather": "Sistema meteorológico",
+    "action.github": "VER EN GITHUB",
+    "action.gameplay": "VER GAMEPLAY",
+    "pyd.v10.desc": "Versión 1.0 con nuevas interfaces y sistemas, correcciones de gameplay y publicación completa para Windows y navegador.",
+    "action.improvements": "VER MEJORAS",
+    "hitman.desc": "Proyecto de sigilo en tercera persona desarrollado con Unity, centrado en infiltración, exploración y sistemas de gameplay.",
+    "action.development": "VER DESARROLLO",
+    "games.title": "Desarrollo de videojuegos",
+    "games.source": "Proyectos y código",
+    "action.repo": "ABRIR REPOSITORIO",
+    "status.github": "CONECTANDO CON GITHUB…",
+    "playable.title": "Demos jugables",
+    "action.itch": "VISITAR ITCH.IO",
+    "playable.desc": "Builds jugables publicadas para navegador y Windows.",
+    "playable.pydew.desc": "Versión jugable de PyDew Valley. Puedes ejecutarla directamente en el navegador o acceder a la versión para Windows.",
+    "action.play": "JUGAR ONLINE",
+    "action.downloadwin": "DESCARGAR WINDOWS",
+    "action.viewitch": "VER EN ITCH.IO",
+    "vr.count": "PLAYABLE_002 · 5 EXPERIENCIAS",
+    "vr.desc": "Colección de cinco experiencias de realidad virtual desarrolladas con Unity y Google VR. Selecciona una experiencia para ejecutarla directamente en el navegador.",
+    "vr.locomotion": "LOCOMOCIÓN",
+    "vr.realestate": "INMOBILIARIA",
+    "vr.gallery": "GALERÍA DE ARTE",
+    "vr.space": "PASEO ESPACIAL",
+    "web.title": "Desarrollo web",
+    "web.source": "Proyectos web",
+    "status.web": "CONECTANDO CON EL CATÁLOGO WEB…",
+    "visual.title": "3D y multimedia",
+    "visual.desc": "Proyectos publicados en ArtStation. El catálogo se actualiza automáticamente desde el perfil público de NachoSLKN.",
+    "action.artstation": "VISITAR ARTSTATION",
+    "status.artstation": "CONECTANDO CON ARTSTATION…",
+    "profile.title": "Sobre mí y currículum",
+    "profile.desc": "Perfil multidisciplinar orientado al desarrollo de videojuegos, desarrollo web y creación 3D. Puedes consultar o descargar el currículum en español, inglés y alemán.",
+    "profile.lead": "Soy Ignacio Liñán Vicente, Game Developer, Web Developer y 3D Artist.",
+    "profile.study": "Actualmente curso el Grado en Diseño y Desarrollo de Videojuegos. Mi formación combina programación, aplicaciones web, realidad virtual, modelado 3D y creación de experiencias interactivas.",
+    "profile.work": "He trabajado como desarrollador web y modelador 3D, además de contar con experiencia profesional en entornos internacionales.",
+    "profile.viewcv": "VER CURRÍCULUM ↓",
+    "profile.secondary": "SECUNDARIO",
+    "profile.location": "UBICACIÓN",
+    "profile.languages": "IDIOMAS",
+    "collab.title": "Colaboraciones & Afiliaciones",
+    "collab.desc": "Plataformas y herramientas con las que colaboro o participo mediante programas de afiliación.",
+    "quick.desc": "Herramienta de creación asistida por IA orientada a movimiento, vídeo, avatares y Motion Capture. Colaboración activa con acceso promocional para creación de contenido.",
+    "quick.referral": "CÓDIGO DE REFERIDO",
+    "quick.benefit": "VENTAJA PARA NUEVOS USUARIOS",
+    "quick.coins": "+20 V Coins al registrarse mediante mi enlace",
+    "action.quick": "VISITAR QUICKMAGIC",
+    "instant.desc": "Programa de afiliación de Instant Gaming para videojuegos y productos digitales. Las compras realizadas mediante mi enlace pueden apoyar directamente mi contenido y mis proyectos.",
+    "instant.program": "PROGRAMA DE AFILIACIÓN",
+    "instant.commission": "3% de comisión sobre las ventas realizadas mediante mi enlace",
+    "action.instant": "VISITAR INSTANT GAMING",
+    "contact.title": "Contacto",
+    "contact.desc": "Puedes encontrar mis proyectos, vídeos y trabajos en estas plataformas.",
+    "footer.back": "VOLVER AL PIP-BOY ↑"
+  },
+  "de": {
+    "nav.home": "Start",
+    "nav.games": "Spiele",
+    "nav.web": "Web",
+    "nav.cv": "CV",
+    "nav.collab": "Kooperationen",
+    "nav.contact": "Kontakt",
+    "hero.loading": "NachoSLKN.com wird geladen...",
+    "hero.version": "3D-PORTFOLIO · VERSION 1",
+    "hero.focus": "BILDSCHIRM FIXIEREN",
+    "hero.reset": "ANSICHT ZURÜCKSETZEN",
+    "hero.open": "BILDSCHIRM ÖFFNEN",
+    "hero.portfolio": "PORTFOLIO ANSEHEN ↓",
+    "hero.free": "FREIER MODUS:",
+    "hero.freehelp": "ziehen zum Drehen · Mausrad zum Zoomen",
+    "hero.screen": "BILDSCHIRMMODUS:",
+    "hero.screenhelp": "Mausrad zum Wechseln des Bereichs",
+    "hero.explore": "PORTFOLIO ENTDECKEN ↓",
+    "featured.title": "Ausgewählte Projekte",
+    "featured.desc": "Prototypen, Videospiele und interaktive Erlebnisse, die mit verschiedenen Technologien entwickelt wurden.",
+    "pyd.v01.desc": "Farmspiel-Prototyp, inspiriert von Stardew Valley und mit Python und Pygame entwickelt.",
+    "pyd.tree": "Bäume fällen",
+    "pyd.apple": "Äpfel sammeln",
+    "pyd.plant": "Pflanzen und Bewässern",
+    "pyd.harvest": "Ernten",
+    "pyd.trade": "Handel mit Händlern",
+    "pyd.day": "Tag-/Nacht-Zyklus",
+    "pyd.sleep": "Schlaf und Erholung",
+    "pyd.weather": "Wettersystem",
+    "action.github": "AUF GITHUB ANSEHEN",
+    "action.gameplay": "GAMEPLAY ANSEHEN",
+    "pyd.v10.desc": "Version 1.0 mit neuen Benutzeroberflächen und Systemen, Gameplay-Korrekturen sowie vollständiger Veröffentlichung für Windows und Browser.",
+    "action.improvements": "VERBESSERUNGEN ANSEHEN",
+    "hitman.desc": "Third-Person-Stealth-Projekt, entwickelt mit Unity und fokussiert auf Infiltration, Erkundung und Gameplay-Systeme.",
+    "action.development": "ENTWICKLUNG ANSEHEN",
+    "games.title": "Spieleentwicklung",
+    "games.source": "Projekte und Code",
+    "action.repo": "REPOSITORY ÖFFNEN",
+    "status.github": "VERBINDUNG ZU GITHUB…",
+    "playable.title": "Spielbare Demos",
+    "action.itch": "ITCH.IO BESUCHEN",
+    "playable.desc": "Spielbare Builds für Browser und Windows.",
+    "playable.pydew.desc": "Spielbare Version von PyDew Valley. Direkt im Browser starten oder die Windows-Version öffnen.",
+    "action.play": "ONLINE SPIELEN",
+    "action.downloadwin": "WINDOWS HERUNTERLADEN",
+    "action.viewitch": "AUF ITCH.IO ANSEHEN",
+    "vr.count": "PLAYABLE_002 · 5 ERLEBNISSE",
+    "vr.desc": "Sammlung von fünf Virtual-Reality-Erlebnissen, entwickelt mit Unity und Google VR. Wähle ein Erlebnis aus, um es direkt im Browser zu starten.",
+    "vr.locomotion": "FORTBEWEGUNG",
+    "vr.realestate": "IMMOBILIEN",
+    "vr.gallery": "KUNSTGALERIE",
+    "vr.space": "WELTRAUMSPAZIERGANG",
+    "web.title": "Webentwicklung",
+    "web.source": "Webprojekte",
+    "status.web": "VERBINDUNG ZUM WEB-KATALOG…",
+    "visual.title": "3D & Multimedia",
+    "visual.desc": "Auf ArtStation veröffentlichte Projekte. Der Katalog wird automatisch über das öffentliche Profil von NachoSLKN aktualisiert.",
+    "action.artstation": "ARTSTATION BESUCHEN",
+    "status.artstation": "VERBINDUNG ZU ARTSTATION…",
+    "profile.title": "Über mich & Lebenslauf",
+    "profile.desc": "Multidisziplinäres Profil mit Schwerpunkt auf Spieleentwicklung, Webentwicklung und 3D-Erstellung. Der Lebenslauf ist auf Englisch, Spanisch und Deutsch verfügbar.",
+    "profile.lead": "Ich bin Ignacio Liñán Vicente, Game Developer, Web Developer und 3D Artist.",
+    "profile.study": "Derzeit studiere ich im Bachelorstudiengang Game Design und Entwicklung. Meine Ausbildung verbindet Programmierung, Webanwendungen, Virtual Reality, 3D-Modellierung und die Entwicklung interaktiver Erlebnisse.",
+    "profile.work": "Ich habe als Webentwickler und 3D-Künstler gearbeitet und verfüge außerdem über Berufserfahrung in internationalen Arbeitsumgebungen.",
+    "profile.viewcv": "LEBENSLAUF ANSEHEN ↓",
+    "profile.secondary": "WEITERE BEREICHE",
+    "profile.location": "STANDORT",
+    "profile.languages": "SPRACHEN",
+    "collab.title": "Kooperationen & Affiliate-Programme",
+    "collab.desc": "Plattformen und Tools, mit denen ich zusammenarbeite oder an deren Affiliate-Programmen ich teilnehme.",
+    "quick.desc": "KI-gestütztes Kreativtool für Bewegung, Video, Avatare und Motion Capture. Aktive Kooperation mit Promotion-Zugang für die Content-Erstellung.",
+    "quick.referral": "EMPFEHLUNGSCODE",
+    "quick.benefit": "VORTEIL FÜR NEUE NUTZER",
+    "quick.coins": "+20 V Coins bei Registrierung über meinen Link",
+    "action.quick": "QUICKMAGIC BESUCHEN",
+    "instant.desc": "Affiliate-Programm von Instant Gaming für Videospiele und digitale Produkte. Käufe über meinen Link können meine Inhalte und Projekte direkt unterstützen.",
+    "instant.program": "AFFILIATE-PROGRAMM",
+    "instant.commission": "3 % Provision auf Verkäufe über meinen Link",
+    "action.instant": "INSTANT GAMING BESUCHEN",
+    "contact.title": "Kontakt",
+    "contact.desc": "Meine Projekte, Videos und Arbeiten findest du auf diesen Plattformen.",
+    "footer.back": "ZURÜCK ZUM PIP-BOY ↑"
+  }
+};
+
+let currentUiLanguage = localStorage.getItem("nachoslkn-language") || "en";
+if (!UI_TRANSLATIONS[currentUiLanguage]) currentUiLanguage = "en";
+
+function uiText(key, fallback = "") {
+  return UI_TRANSLATIONS[currentUiLanguage]?.[key]
+    || UI_TRANSLATIONS.en?.[key]
+    || fallback;
+}
+
+function applyStaticTranslations() {
+  document.documentElement.lang = currentUiLanguage;
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.dataset.i18n;
+    const value = uiText(key);
+    if (value) element.textContent = value;
+  });
+
+  document.querySelectorAll(".language-option").forEach((button) => {
+    const active = button.dataset.language === currentUiLanguage;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+
+  // Header/mobile accessibility labels.
+  const navToggleButton = document.getElementById("nav-toggle");
+  if (navToggleButton) {
+    navToggleButton.setAttribute(
+      "aria-label",
+      currentUiLanguage === "es" ? "Abrir menú" : currentUiLanguage === "de" ? "Menü öffnen" : "Open menu"
+    );
+  }
+
+  // Keep the dynamic catalogue status language-aware after changing language.
+  const githubStatus = document.getElementById("github-games-status");
+  if (githubStatus && githubStatus.textContent.includes("GITHUB")) githubStatus.textContent = uiText("status.github");
+  const webStatus = document.getElementById("github-web-status");
+  if (webStatus && /CATÁLOGO|CATALOGUE|KATALOG/i.test(webStatus.textContent)) webStatus.textContent = uiText("status.web");
+  const artStatus = document.getElementById("artstation-status");
+  if (artStatus && /ARTSTATION/i.test(artStatus.textContent)) artStatus.textContent = uiText("status.artstation");
+
+  // Pip-Boy screen labels that are not project data.
+  applyPipBoyLanguage();
+
+  if (typeof drawScreen === "function") drawScreen();
+}
+
+const PIPBOY_LANGUAGE_DATA = {
+  en: [
+    { kicker: "USER PROFILE", title: "NACHOSLKN", subtitle: "VIDEOGAMES · WEB DEV · 3D", lines: ["Ignacio Liñán Vicente", "Development · technology · 3D creation", "Madrid, Spain"] },
+    { kicker: "WEB DEVELOPMENT", title: "WEB DEVELOPMENT", subtitle: "FRONTEND · BACKEND · DATABASES" },
+    { kicker: "GAME DEVELOPMENT", title: "VIDEOGAMES", subtitle: "GAMEPLAY · SYSTEMS · IMMERSIVE" },
+    { kicker: "3D & VISUALS", title: "3D / VISUALS", subtitle: "MODELING · ASSETS · RENDER", noteLines: ["Basic editing · Krita / Photoshop", "Presentation · Modeling · Assets"] },
+    { kicker: "PERSONNEL FILE", title: "RÉSUMÉ", subtitle: "VIDEOGAMES · WEB DEV · 3D", lines: ["Español · English · Deutsch", "Videogames · Web Dev · 3D", "Full résumé available below the Pip-Boy"] },
+    { kicker: "PARTNERS & AFFILIATES", title: "COLLABORATIONS", subtitle: "QUICKMAGIC · INSTANT GAMING", lines: ["QuickMagic · Code: NachoSLKN", "Instant Gaming · Affiliate: Nacho-slkn", "QR and links below the Pip-Boy"] }
+  ],
+  es: [
+    { kicker: "PERFIL DE USUARIO", title: "NACHOSLKN", subtitle: "VIDEOJUEGOS · WEB DEV · 3D", lines: ["Ignacio Liñán Vicente", "Desarrollo · tecnología · creación 3D", "Madrid, España"] },
+    { kicker: "DESARROLLO WEB", title: "DESARROLLO WEB", subtitle: "FRONTEND · BACKEND · BASES DE DATOS" },
+    { kicker: "DESARROLLO DE VIDEOJUEGOS", title: "VIDEOJUEGOS", subtitle: "GAMEPLAY · SISTEMAS · INMERSIVO" },
+    { kicker: "3D Y VISUALES", title: "3D / VISUALES", subtitle: "MODELADO · ASSETS · RENDER", noteLines: ["Edición básica · Krita / Photoshop", "Presentación · Modelado · Assets"] },
+    { kicker: "ARCHIVO PERSONAL", title: "CURRÍCULUM", subtitle: "VIDEOJUEGOS · WEB DEV · 3D", lines: ["Español · English · Deutsch", "Videojuegos · Web Dev · 3D", "CV completo disponible bajo el Pip-Boy"] },
+    { kicker: "COLABORACIONES Y AFILIADOS", title: "COLABORACIONES", subtitle: "QUICKMAGIC · INSTANT GAMING", lines: ["QuickMagic · Código: NachoSLKN", "Instant Gaming · Affiliate: Nacho-slkn", "QR y enlaces bajo el Pip-Boy"] }
+  ],
+  de: [
+    { kicker: "BENUTZERPROFIL", title: "NACHOSLKN", subtitle: "VIDEOSPIELE · WEB DEV · 3D", lines: ["Ignacio Liñán Vicente", "Entwicklung · Technologie · 3D-Erstellung", "Madrid, Spanien"] },
+    { kicker: "WEBENTWICKLUNG", title: "WEBENTWICKLUNG", subtitle: "FRONTEND · BACKEND · DATENBANKEN" },
+    { kicker: "SPIELEENTWICKLUNG", title: "VIDEOSPIELE", subtitle: "GAMEPLAY · SYSTEME · IMMERSIV" },
+    { kicker: "3D & VISUALS", title: "3D / VISUALS", subtitle: "MODELLIERUNG · ASSETS · RENDER", noteLines: ["Grundlegende Bearbeitung · Krita / Photoshop", "Präsentation · Modellierung · Assets"] },
+    { kicker: "PERSONALAKTE", title: "LEBENSLAUF", subtitle: "VIDEOSPIELE · WEB DEV · 3D", lines: ["Español · English · Deutsch", "Videospiele · Web Dev · 3D", "Vollständiger Lebenslauf unter dem Pip-Boy verfügbar"] },
+    { kicker: "PARTNER & AFFILIATES", title: "KOOPERATIONEN", subtitle: "QUICKMAGIC · INSTANT GAMING", lines: ["QuickMagic · Code: NachoSLKN", "Instant Gaming · Affiliate: Nacho-slkn", "QR und Links unter dem Pip-Boy"] }
+  ]
+};
+
+function applyPipBoyLanguage() {
+  const languageData = PIPBOY_LANGUAGE_DATA[currentUiLanguage] || PIPBOY_LANGUAGE_DATA.en;
+  if (!Array.isArray(sections)) return;
+  languageData.forEach((translated, index) => {
+    const target = sections[index];
+    if (!target) return;
+    if (translated.kicker) target.kicker = translated.kicker;
+    if (translated.title) target.title = translated.title;
+    if (translated.subtitle) target.subtitle = translated.subtitle;
+    if (translated.lines) target.lines = [...translated.lines];
+    if (translated.noteLines) target.noteLines = [...translated.noteLines];
+  });
+}
+
+function setUiLanguage(language, persist = true) {
+  if (!UI_TRANSLATIONS[language]) return;
+  currentUiLanguage = language;
+  if (persist) localStorage.setItem("nachoslkn-language", language);
+  applyStaticTranslations();
+}
+
+document.addEventListener("click", (event) => {
+  const button = event.target.closest(".language-option");
+  if (!button) return;
+  setUiLanguage(button.dataset.language);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  setUiLanguage(currentUiLanguage, false);
+});

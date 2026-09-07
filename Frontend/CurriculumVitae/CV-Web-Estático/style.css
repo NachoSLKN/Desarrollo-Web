@@ -632,6 +632,91 @@ a {
 }
 
 /* =========================================================
+   CARRUSEL DE CURRÍCULUM
+========================================================= */
+
+.cv-carousel {
+  position: relative;
+  z-index: 1;
+  width: min(820px, 100%);
+  margin: 34px auto 0;
+}
+
+.cv-carousel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.cv-carousel-button {
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--green);
+  background: rgba(3, 18, 8, 0.82);
+  color: var(--green-bright);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 160ms ease;
+}
+
+.cv-carousel-button:hover {
+  background: var(--green);
+  color: #001000;
+  box-shadow: 0 0 22px rgba(124, 255, 114, 0.28);
+}
+
+.cv-carousel-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 220px;
+  gap: 4px;
+  text-align: center;
+}
+
+#cv-current-language {
+  color: var(--green-bright);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+#cv-page {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.cv-carousel .cv-viewer {
+  width: 100%;
+}
+
+.cv-language--flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cv-preview-shell {
+  position: relative;
+  background: #111;
+}
+
+.cv-preview-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+@media (max-width: 560px) {
+  .cv-carousel-toolbar { gap: 10px; }
+  .cv-carousel-button { width: 42px; height: 42px; }
+  .cv-carousel-status { min-width: 160px; }
+}
+
+/* =========================================================
    CONTACTO
 ========================================================= */
 
@@ -2102,4 +2187,63 @@ iframe:-webkit-full-screen {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+
+/* =========================================================
+   LANGUAGE SWITCHER
+========================================================= */
+.language-switcher {
+  position: relative;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 14px;
+}
+
+.language-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 9px;
+  border: 1px solid rgba(124, 255, 114, 0.28);
+  border-radius: 4px;
+  background: rgba(3, 18, 8, 0.78);
+  color: rgba(217, 255, 212, 0.72);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition: 160ms ease;
+}
+
+.language-option img {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.language-option:hover,
+.language-option.is-active {
+  border-color: var(--green);
+  color: var(--green-bright);
+  background: rgba(8, 34, 14, 0.95);
+  box-shadow: 0 0 18px rgba(124, 255, 114, 0.14);
+}
+
+@media (max-width: 760px) {
+  .language-switcher {
+    order: 3;
+    width: 100%;
+    justify-content: flex-end;
+    margin: 8px 0 0;
+  }
+  .language-option {
+    min-height: 32px;
+    padding: 6px 8px;
+  }
 }
