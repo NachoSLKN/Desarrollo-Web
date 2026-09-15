@@ -179,6 +179,93 @@
 </div>
 </div>
 </article>
+<article class="project-card featured-project">
+  <div class="project-screen">
+    <div class="video-frame">
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="project-video"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube.com/embed/D8M_L03-m04?rel=0&amp;modestbranding=1"
+        title="Google VR - Paseo Espacial"
+      ></iframe>
+      <div aria-hidden="true" class="video-overlay"></div>
+    </div>
+  </div>
+  <div class="project-info">
+    <p class="project-code">PROJECT_003 · GOOGLE VR</p>
+    <h3>Google VR</h3>
+    <p>
+      Virtual reality project developed with Unity and Google VR,
+      featuring multiple interactive VR experiences.
+    </p>
+    <div class="tech-list">
+      <span>UNITY</span>
+      <span>C#</span>
+      <span>VR</span>
+      <span>GOOGLE VR</span>
+    </div>
+    <div class="project-actions">
+      <a
+        class="terminal-link secondary-link"
+        href="https://youtu.be/D8M_L03-m04"
+        rel="noopener noreferrer"
+        target="_blank"
+      >PASEO ESPACIAL ↗</a>
+      <a
+        class="terminal-link secondary-link"
+        href="https://youtu.be/2_u57qjPnBg"
+        rel="noopener noreferrer"
+        target="_blank"
+      >QUIZ VR ↗</a>
+    </div>
+  </div>
+</article>
+<article class="project-card featured-project">
+  <div class="project-screen">
+    <div class="video-frame">
+      <iframe
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen=""
+        class="project-video"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        src="https://www.youtube.com/embed/JxGoeAdoVRo?rel=0&amp;modestbranding=1"
+        title="Spellbound Devlog"
+      ></iframe>
+      <div aria-hidden="true" class="video-overlay"></div>
+    </div>
+  </div>
+  <div class="project-info">
+    <p class="project-code">PROJECT_004 · SPELLBOUND</p>
+    <h3>Spellbound</h3>
+    <p data-i18n="spellbound.desc">
+      Deck-building card battler developed with Unity and C#.
+    </p>
+    <div class="tech-list">
+      <span>UNITY</span>
+      <span>C#</span>
+      <span>CARD GAME</span>
+      <span>DECK BUILDING</span>
+    </div>
+    <div class="project-actions">
+      <a
+        class="terminal-link secondary-link"
+        href="https://youtu.be/JxGoeAdoVRo"
+        rel="noopener noreferrer"
+        target="_blank"
+      >DEVLOG #1 ↗</a>
+      <a
+        class="terminal-link secondary-link"
+        href="https://youtu.be/Z5wHdLukuZE"
+        rel="noopener noreferrer"
+        target="_blank"
+      >DEVLOG #2 ↗</a>
+    </div>
+  </div>
+</article>
 </div>
 </section>
 <section class="portfolio-section" id="desarrollo-videojuegos">
@@ -218,7 +305,21 @@
 <a class="terminal-link" data-i18n="action.itch" href="https://nachoslkn.itch.io/" rel="noopener noreferrer" target="_blank">VISIT ITCH.IO</a>
 </div>
 <p class="platform-description" data-i18n="playable.desc">Playable builds published for browser and Windows.</p>
-<div class="playable-demos-grid">
+<div class="section-carousel-toolbar playable-demos-toolbar">
+  <button
+    id="playable-demos-prev"
+    class="carousel-button"
+    type="button"
+    aria-label="Previous playable demos"
+  >←</button>
+  <span id="playable-demos-page" class="section-carousel-page">1 / 1</span>
+  <button
+    id="playable-demos-next"
+    class="carousel-button"
+    type="button"
+    aria-label="Next playable demos"
+  >→</button>
+</div><div class="playable-demos-grid">
 <article class="github-game-card playable-demo-card" data-embed-url="./games/pydew-valley/index.html" data-playable-demo="">
 <div class="github-game-cover playable-demo-cover">
 <img alt="Portada de PyDew Valley" loading="lazy" src="https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/PYGAME/PyDew-Valley/PyDew-Valley-PC/Portada.png"/>
@@ -273,6 +374,43 @@
                 </button>
 </div>
 </div>
+</article>
+<article class="github-game-card playable-demo-card" data-embed-url="./games/cardgame/index.html" data-playable-demo="">
+  <div class="github-game-cover playable-demo-cover">
+    <img
+      alt="Portada de UnityCardBattler: Spellbound"
+      loading="lazy"
+      src="https://raw.githubusercontent.com/NachoSLKN/Desarrollo-Videojuegos/main/UNITY/UnityCardBattler/Portada.png">
+    <div aria-hidden="true" class="github-game-cover-fallback" hidden="">
+      UNITY CARD BATTLER
+    </div>
+  </div>
+  <div class="github-game-content">
+    <p class="project-code">PLAYABLE_003</p>
+    <h3>Spellbound</h3>
+    <p class="github-game-engine">UNITY · C# · WEBGL</p>
+    <p class="github-game-description" data-i18n="spellbound.desc">
+      Deck-building card battler developed with Unity and C#.
+    </p>
+    <div class="tech-list">
+      <span>UNITY</span>
+      <span>C#</span>
+      <span>CARD GAME</span>
+      <span>DECK BUILDING</span>
+      <span>WEBGL</span>
+    </div>
+    <div class="project-actions">
+      <button
+        class="terminal-link play-link inline-play-button"
+        data-demo-title="Spellbound"
+        data-demo-play=""
+        data-i18n="action.play"
+        type="button">
+        PLAY ONLINE
+      </button>
+      
+    </div>
+  </div>
 </article>
 </div>
 </div>
@@ -406,7 +544,21 @@
 <h2 data-i18n="certifications.title">Certifications</h2>
 <p data-i18n="certifications.desc">Verified certificates and completed specialist training related to game development and interactive technologies.</p>
 </div>
-<div class="certifications-grid">
+<div class="section-carousel-toolbar certifications-toolbar">
+  <button
+    id="certifications-prev"
+    class="carousel-button"
+    type="button"
+    aria-label="Previous certifications"
+  >←</button>
+  <span id="certifications-page" class="section-carousel-page">1 / 1</span>
+  <button
+    id="certifications-next"
+    class="carousel-button"
+    type="button"
+    aria-label="Next certifications"
+  >→</button>
+</div><div class="certifications-grid">
 <article class="certification-card certification-card-featured">
 <div class="certification-document">
 <a
@@ -461,6 +613,78 @@
 <a class="terminal-link secondary-link" data-i18n="certifications.pdf" href="https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/%28VR%29%20GOOGLE%20VR/Certificate/UC-1dfb37ee-5726-4773-82f0-b7121343dd4a.pdf" rel="noopener noreferrer" target="_blank">VIEW PDF ↗</a>
 </div>
 </div>
+</article>
+<article class="certification-card certification-card-featured">
+  <div class="certification-document">
+    <a
+      class="certification-preview-link"
+      href="https://www.udemy.com/certificate/UC-b45760ee-b61b-4b69-a54a-4b0aeafbcf51/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Verify Unity Card Battler Udemy certificate">
+      <img
+        class="certification-preview"
+        src="./img/certifications/udemy-unityCardBattler-certificate.png"
+        alt="Udemy certificate: Unity Card Battler - Ignacio Liñán Vicente"
+        loading="lazy">
+    </a>
+  </div>
+  <div class="certification-details">
+    <div class="certification-header">
+      <span class="certification-index">CERT_002</span>
+      <span class="certification-status" data-i18n="certifications.completed">COMPLETED</span>
+    </div>
+    <div class="certification-provider">
+      <span class="certification-provider-name">Udemy</span>
+      <span class="certification-provider-type" data-i18n="certifications.completion">CERTIFICATE OF COMPLETION</span>
+    </div>
+    <h3 data-i18n="certifications.cardbattler.title">Unity Card Battler: Code a Deck-Building Card Game in C#</h3>
+    <p class="certification-summary" data-i18n="certifications.cardbattler.desc">
+      Training in the development of a deck-building card battler with Unity and C#.
+    </p>
+    <div class="certification-meta">
+      <div>
+        <span data-i18n="certifications.instructor">INSTRUCTOR</span>
+        <strong>GameDev.tv Team, Grant Schonhoff</strong>
+      </div>
+      <div>
+        <span data-i18n="certifications.date">ISSUED</span>
+        <strong data-i18n="certifications.cardbattler.date">14 September 2026</strong>
+      </div>
+      <div>
+        <span data-i18n="certifications.duration">DURATION</span>
+        <strong data-i18n="certifications.cardbattler.duration">6.5 hours</strong>
+      </div>
+    </div>
+    <div class="certification-id">
+      <span data-i18n="certifications.credential">CREDENTIAL ID</span>
+      <code>UC-b45760ee-b61b-4b69-a54a-4b0aeafbcf51</code>
+    </div>
+    <div class="tech-list">
+      <span>UNITY</span>
+      <span>C#</span>
+      <span>CARD GAME</span>
+      <span>DECK BUILDING</span>
+    </div>
+    <div class="project-actions">
+      <a
+        class="terminal-link"
+        data-i18n="certifications.verify"
+        href="https://www.udemy.com/certificate/UC-b45760ee-b61b-4b69-a54a-4b0aeafbcf51/"
+        rel="noopener noreferrer"
+        target="_blank">
+        VERIFY CERTIFICATE ↗
+      </a>
+      <a
+        class="terminal-link secondary-link"
+        data-i18n="certifications.image"
+        href="https://github.com/NachoSLKN/Desarrollo-Videojuegos/blob/main/UNITY/UnityCardBattler/Certificate/udemy-unityCardBattler-certificate.png"
+        rel="noopener noreferrer"
+        target="_blank">
+        VIEW CERTIFICATE ↗
+      </a>
+    </div>
+  </div>
 </article>
 </div>
 </section>
@@ -561,3 +785,5 @@
 <script src="script.js" type="module"></script>
 </body>
 </html>
+
+

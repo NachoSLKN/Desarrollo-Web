@@ -3115,6 +3115,76 @@ setupFeaturedProjectsCarousel();
 
 
 /* =========================================================
+   CARRUSELES DE TARJETAS
+   Patrón común para demos jugables y certificaciones.
+========================================================= */
+function setupSectionCardCarousel({
+  gridSelector,
+  cardSelector,
+  previousSelector,
+  nextSelector,
+  pageSelector,
+  desktopItems = 2
+}) {
+  const grid = document.querySelector(gridSelector);
+  const previousButton = document.querySelector(previousSelector);
+  const nextButton = document.querySelector(nextSelector);
+  const pageLabel = document.querySelector(pageSelector);
+  if (!grid || !previousButton || !nextButton || !pageLabel) return;
+  const cards = Array.from(grid.querySelectorAll(cardSelector));
+  if (!cards.length) return;
+  let pageIndex = 0;
+  const itemsPerPage = () =>
+    window.matchMedia("(max-width: 820px)").matches
+      ? 1
+      : desktopItems;
+  const render = () => {
+    const perPage = itemsPerPage();
+    const pageCount = Math.max(1, Math.ceil(cards.length / perPage));
+    pageIndex = Math.min(pageIndex, pageCount - 1);
+    const start = pageIndex * perPage;
+    const end = start + perPage;
+    cards.forEach((card, index) => {
+      card.hidden = index < start || index >= end;
+    });
+    pageLabel.textContent = `${pageIndex + 1} / ${pageCount}`;
+    previousButton.disabled = pageIndex === 0;
+    nextButton.disabled = pageIndex >= pageCount - 1;
+  };
+  previousButton.addEventListener("click", () => {
+    if (pageIndex <= 0) return;
+    pageIndex -= 1;
+    render();
+  });
+  nextButton.addEventListener("click", () => {
+    const pageCount = Math.max(
+      1,
+      Math.ceil(cards.length / itemsPerPage())
+    );
+    if (pageIndex >= pageCount - 1) return;
+    pageIndex += 1;
+    render();
+  });
+  window.addEventListener("resize", render);
+  render();
+}
+setupSectionCardCarousel({
+  gridSelector: ".playable-demos-grid",
+  cardSelector: ".playable-demo-card",
+  previousSelector: "#playable-demos-prev",
+  nextSelector: "#playable-demos-next",
+  pageSelector: "#playable-demos-page",
+  desktopItems: 2
+});
+setupSectionCardCarousel({
+  gridSelector: ".certifications-grid",
+  cardSelector: ".certification-card",
+  previousSelector: "#certifications-prev",
+  nextSelector: "#certifications-next",
+  pageSelector: "#certifications-page",
+  desktopItems: 1
+});
+/* =========================================================
    DEMOS JUGABLES
    PyDew Valley se ejecuta dentro de la propia tarjeta.
 ========================================================= */
@@ -3393,6 +3463,11 @@ const EXTRA_UI_TRANSLATIONS = {
     "certifications.completion": "CERTIFICATE OF COMPLETION",
     "certifications.vr.title": "Expert in Virtual Reality with Unity and Google VR",
     "certifications.vr.desc": "Specialist training in virtual reality development with Unity and Google VR.",
+    "certifications.cardbattler.title": "Unity Card Battler: Code a Deck-Building Card Game in C#",
+    "certifications.cardbattler.desc": "Training in the development of a deck-building card battler with Unity and C#.",
+    "certifications.cardbattler.date": "14 September 2026",
+    "certifications.cardbattler.duration": "6.5 hours",
+    "certifications.image": "VIEW CERTIFICATE ↗",
     "certifications.issuer": "ISSUER",
     "certifications.instructor": "INSTRUCTOR",
     "certifications.date": "ISSUED",
@@ -3468,6 +3543,11 @@ const EXTRA_UI_TRANSLATIONS = {
     "certifications.completion": "CERTIFICADO DE FINALIZACIÓN",
     "certifications.vr.title": "EXPERTO en Realidad Virtual con Unity y Google VR",
     "certifications.vr.desc": "Formación especializada en desarrollo de realidad virtual con Unity y Google VR.",
+    "certifications.cardbattler.title": "Unity Card Battler: Programación de un juego de cartas Deck-Building en C#",
+    "certifications.cardbattler.desc": "Formación en el desarrollo de un card battler de construcción de mazos con Unity y C#.",
+    "certifications.cardbattler.date": "14 de septiembre de 2026",
+    "certifications.cardbattler.duration": "6,5 horas",
+    "certifications.image": "VER CERTIFICADO ↗",
     "certifications.issuer": "ENTIDAD",
     "certifications.instructor": "INSTRUCTOR",
     "certifications.date": "FECHA",
@@ -3543,6 +3623,11 @@ const EXTRA_UI_TRANSLATIONS = {
     "certifications.completion": "ABSCHLUSSZERTIFIKAT",
     "certifications.vr.title": "Experte für Virtual Reality mit Unity und Google VR",
     "certifications.vr.desc": "Fachweiterbildung in der Entwicklung von Virtual Reality mit Unity und Google VR.",
+    "certifications.cardbattler.title": "Unity Card Battler: Entwicklung eines Deckbuilding-Kartenspiels in C#",
+    "certifications.cardbattler.desc": "Fachtraining zur Entwicklung eines Deckbuilding-Kartenkampfspiels mit Unity und C#.",
+    "certifications.cardbattler.date": "14. September 2026",
+    "certifications.cardbattler.duration": "6,5 Stunden",
+    "certifications.image": "ZERTIFIKAT ANSEHEN ↗",
     "certifications.issuer": "AUSSTELLER",
     "certifications.instructor": "DOZENT",
     "certifications.date": "AUSGESTELLT",
@@ -3984,6 +4069,7 @@ const UI_TRANSLATIONS = {
     "action.itch": "VISIT ITCH.IO",
     "playable.desc": "Playable builds published for browser and Windows.",
     "playable.pydew.desc": "Playable version of PyDew Valley. Run it directly in the browser or access the Windows version.",
+    "spellbound.desc": "Deck-building card battler developed with Unity and C#.",
     "action.play": "PLAY ONLINE",
     "action.downloadwin": "DOWNLOAD WINDOWS",
     "action.viewitch": "VIEW ON ITCH.IO",
@@ -4067,6 +4153,7 @@ const UI_TRANSLATIONS = {
     "action.itch": "VISITAR ITCH.IO",
     "playable.desc": "Builds jugables publicadas para navegador y Windows.",
     "playable.pydew.desc": "Versión jugable de PyDew Valley. Puedes ejecutarla directamente en el navegador o acceder a la versión para Windows.",
+    "spellbound.desc": "Card battler de construcción de mazos desarrollado con Unity y C#.",
     "action.play": "JUGAR ONLINE",
     "action.downloadwin": "DESCARGAR WINDOWS",
     "action.viewitch": "VER EN ITCH.IO",
@@ -4150,6 +4237,7 @@ const UI_TRANSLATIONS = {
     "action.itch": "ITCH.IO BESUCHEN",
     "playable.desc": "Spielbare Builds für Browser und Windows.",
     "playable.pydew.desc": "Spielbare Version von PyDew Valley. Direkt im Browser starten oder die Windows-Version öffnen.",
+    "spellbound.desc": "Deckbuilding-Kartenkampfspiel, entwickelt mit Unity und C#.",
     "action.play": "ONLINE SPIELEN",
     "action.downloadwin": "WINDOWS HERUNTERLADEN",
     "action.viewitch": "AUF ITCH.IO ANSEHEN",
@@ -4317,3 +4405,5 @@ document.addEventListener("click", (event) => {
 document.addEventListener("DOMContentLoaded", () => {
   setUiLanguage(currentUiLanguage, false);
 });
+
+

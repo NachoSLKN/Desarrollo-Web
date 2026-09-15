@@ -2727,3 +2727,60 @@ iframe:-webkit-full-screen {
     min-height: 0;
   }
 }
+/* =========================================================
+   SECTION CARD CAROUSELS
+   Demos jugables + certificaciones
+========================================================= */
+.section-carousel-toolbar {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, 100%);
+  margin: 0 auto 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+.section-carousel-page {
+  min-width: 58px;
+  text-align: center;
+  color: rgba(217, 255, 212, 0.72);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+}
+.playable-demos-grid .playable-demo-card[hidden],
+.certifications-grid .certification-card[hidden] {
+  display: none !important;
+}
+/* =========================================================
+   CARD HOVER
+   Mismo comportamiento visual de github-game-card
+========================================================= */
+.certification-card,
+.collaboration-card,
+.project-card,
+.featured-project {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+.certification-card:hover,
+.collaboration-card:hover,
+.project-card:hover,
+.featured-project:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 255, 114, 0.7);
+  box-shadow:
+    0 0 28px rgba(124, 255, 114, 0.10),
+    inset 0 0 35px rgba(124, 255, 114, 0.04);
+}
+/*
+   github-game-card ya tiene este efecto de forma nativa,
+   por lo que no duplicamos su regla.
+*/
+@media (max-width: 820px) {
+  .section-carousel-toolbar {
+    justify-content: space-between;
+  }
+}
