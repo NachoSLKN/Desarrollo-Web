@@ -2783,4 +2783,44 @@ iframe:-webkit-full-screen {
   .section-carousel-toolbar {
     justify-content: space-between;
   }
+}/* =========================================================
+   ARTSTATION // CARRUSEL INTERNO DE IMÁGENES
+========================================================= */
+.artstation-image-controls {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateX(-50%);
+  padding: 6px 8px;
+  border: 1px solid rgba(124, 255, 114, 0.55);
+  background: rgba(1, 11, 4, 0.88);
+  backdrop-filter: blur(6px);
+}
+.artstation-image-controls button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(124, 255, 114, 0.45);
+  background: rgba(1, 11, 4, 0.92);
+  color: var(--green-bright);
+  font: inherit;
+  cursor: pointer;
+}
+.artstation-image-controls button:hover {
+  border-color: var(--green-bright);
+  background: rgba(124, 255, 114, 0.12);
+}
+.artstation-image-page {
+  min-width: 48px;
+  color: var(--green-bright);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: center;
 }

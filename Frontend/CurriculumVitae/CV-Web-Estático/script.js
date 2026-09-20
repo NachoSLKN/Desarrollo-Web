@@ -2520,13 +2520,12 @@ async function fetchArtstationProjects() {
 function createArtstationCard(project) {
   const article = document.createElement("article");
   article.className = "artstation-card";
-
-  const imageUrl = Array.isArray(project.images)
-    ? project.images[0] || ""
-    : "";
-
+  const images = Array.isArray(project.images)
+    ? project.images.filter(Boolean)
+    : [];
+  const imageUrl = images[0] || "";
+  const hasImageCarousel = images.length > 1;
   const videoEmbed = String(project.videoEmbed || "").trim();
-
   const date = project.pubDate
     ? new Intl.DateTimeFormat(currentUiLanguage === "es" ? "es-ES" : currentUiLanguage === "de" ? "de-DE" : "en-GB", {
       year: "numeric",
@@ -2534,7 +2533,6 @@ function createArtstationCard(project) {
       day: "2-digit"
     }).format(new Date(project.pubDate))
     : uiText("date.missing", "DATE NOT PROVIDED");
-
   article.innerHTML = `
     <div class="artstation-card-media">
       ${videoEmbed
@@ -2548,51 +2546,79 @@ function createArtstationCard(project) {
             allowfullscreen
           ></iframe>`
       : imageUrl
-        ? `<img src="${escapeProjectText(imageUrl)}"
-                  alt="${escapeProjectText(project.title)}"
-                  loading="lazy">`
+        ? `<img
+              class="artstation-gallery-image"
+              src="${escapeProjectText(imageUrl)}"
+              alt="${escapeProjectText(project.title)}"
+              loading="lazy">`
+        : ""}
+      ${!videoEmbed && hasImageCarousel
+        ? `<div class="artstation-image-controls">
+            <button
+              class="artstation-image-prev"
+              type="button"
+              aria-label="Previous image">←</button>
+            <span class="artstation-image-page">1 / ${images.length}</span>
+            <button
+              class="artstation-image-next"
+              type="button"
+              aria-label="Next image">→</button>
+          </div>`
         : ""}
       <div class="artstation-media-fallback" ${videoEmbed || imageUrl ? "hidden" : ""}>
         ARTSTATION
       </div>
     </div>
-
     <div class="artstation-card-content">
       <p class="artstation-date">${escapeProjectText(date)}</p>
       <h3>${escapeProjectText(project.title || "Proyecto 3D")}</h3>
       <p class="artstation-description">
         ${escapeProjectText(localizedProjectValue("artstation", project, "description", currentUiLanguage === "es" ? "Sin descripción publicada." : currentUiLanguage === "de" ? "Keine Beschreibung veröffentlicht." : "No description published."))}
       </p>
-
     </div>
   `;
-
-  const image = article.querySelector("img");
+  const image = article.querySelector(".artstation-gallery-image");
   const fallback = article.querySelector(".artstation-media-fallback");
-
   if (image) {
     const showImage = () => {
       image.hidden = false;
       fallback.hidden = true;
     };
-
     const showFallback = () => {
       image.hidden = true;
       fallback.hidden = false;
     };
-
     image.addEventListener("load", showImage);
     image.addEventListener("error", showFallback);
-
     if (image.complete) {
       image.naturalWidth > 0 ? showImage() : showFallback();
     }
+    if (hasImageCarousel) {
+      const previousButton = article.querySelector(".artstation-image-prev");
+      const nextButton = article.querySelector(".artstation-image-next");
+      const pageLabel = article.querySelector(".artstation-image-page");
+      let imageIndex = 0;
+      const renderImage = () => {
+        image.src = images[imageIndex];
+        image.alt = `${project.title || "ArtStation"} - ${imageIndex + 1}`;
+        pageLabel.textContent = `${imageIndex + 1} / ${images.length}`;
+      };
+      previousButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        imageIndex = (imageIndex - 1 + images.length) % images.length;
+        renderImage();
+      });
+      nextButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        imageIndex = (imageIndex + 1) % images.length;
+        renderImage();
+      });
+    }
   }
-
   return article;
-}
-
-function renderArtstationPage() {
+}function renderArtstationPage() {
   const grid = document.querySelector("#artstation-grid");
   const pageLabel = document.querySelector("#artstation-page");
   const previousButton = document.querySelector("#artstation-prev");
