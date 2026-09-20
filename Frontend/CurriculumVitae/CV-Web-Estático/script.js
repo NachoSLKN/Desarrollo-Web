@@ -4405,5 +4405,3 @@ document.addEventListener("click", (event) => {
 document.addEventListener("DOMContentLoaded", () => {
   setUiLanguage(currentUiLanguage, false);
 });
-
-

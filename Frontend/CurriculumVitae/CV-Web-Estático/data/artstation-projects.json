@@ -1,7 +1,18 @@
-{
+﻿{
   "source": "https://nachoslkn.artstation.com/rss",
   "note": "Copia manual de ArtStation usada por el portfolio.",
   "projects": [
+    {
+      "title": "Pixel Art Fundamentals",
+      "description": "Pixel Art Fundamentals: Introduction to 2D Game Pixel Art.",
+      "link": "https://www.artstation.com/artwork/q0e1Vz",
+      "pubDate": "Sun, 20 Sep 2026 00:00:00 +0200",
+      "images": [
+        "https://cdna.artstation.com/p/assets/images/images/102/574/610/large/nacho-slkn-roomscene2-artstation.jpg?1789928104",
+        "https://cdnb.artstation.com/p/assets/images/images/102/574/611/large/nacho-slkn-roomscene1-artstation.jpg?1789928106",
+        "https://cdna.artstation.com/p/assets/images/images/102/574/674/large/nacho-slkn-udemy-pixelartfundamentals-certificate.jpg?1789928243"
+      ]
+    },
     {
       "title": "Grease Pencil #1 - Bakery",
       "description": "Stylized bakery environment created in Blender using Grease Pencil.",
