@@ -25,3 +25,13 @@ No registrar tokens, contraseñas ni datos sensibles en el CSV.
 ---
 
 La versión inicial no contiene commits ficticios. Los registros se incorporarán cuando se pruebe el escenario.
+
+<!-- HISTORIAL_MAKE_INICIO -->
+## Historial de commits
+
+Generado automáticamente a partir de [`registro_commits.csv`](registro_commits.csv).
+
+| Fecha UTC | Autor | Mensaje | Commit |
+| --- | --- | --- | --- |
+| 2026-11-22T09:44:55Z | NachoSLKN | Inicializar automatizacion Big Data con Make | [`3640a09`](https://github.com/NachoSLKN/Desarrollo-Web/commit/3640a0905adeacbce690ed477f806498e91307a1) |
+<!-- HISTORIAL_MAKE_FIN -->
