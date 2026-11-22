@@ -33,5 +33,6 @@ Generado automáticamente a partir de [`registro_commits.csv`](registro_commits.
 
 | Fecha UTC | Autor | Mensaje | Commit |
 | --- | --- | --- | --- |
+| 2026-11-22T11:32:04Z | NachoSLKN | test: verificar lectura CSV en Make | [`17f409d`](https://github.com/NachoSLKN/Desarrollo-Web/commit/17f409d235dd0b048fe86a4587466577f2e94ec3) |
 | 2026-11-22T09:44:55Z | NachoSLKN | Inicializar automatizacion Big Data con Make | [`3640a09`](https://github.com/NachoSLKN/Desarrollo-Web/commit/3640a0905adeacbce690ed477f806498e91307a1) |
 <!-- HISTORIAL_MAKE_FIN -->
