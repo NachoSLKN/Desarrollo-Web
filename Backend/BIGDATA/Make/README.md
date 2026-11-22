@@ -1,8 +1,8 @@
 # Registro de commits — GitHub + Make
 
-> **Estado:** plantilla de trabajo; automatización aún pendiente de conectar y probar.
+> **Estado:** CSV y tabla Markdown funcionando. Pendiente validar la ejecución continua de Make con varios commits.
 
-Esta carpeta servirá para guardar un historial estructurado de los commits publicados en este repositorio. El escenario de Make detectará los cambios y añadirá una fila al archivo [`registro_commits.csv`](registro_commits.csv).
+Esta carpeta guarda un historial estructurado de los commits registrados mediante Make. El escenario de Make detectará los cambios y añadirá una fila al archivo [`registro_commits.csv`](registro_commits.csv).
 
 ## Campos del CSV
 
@@ -24,7 +24,7 @@ No registrar tokens, contraseñas ni datos sensibles en el CSV.
 
 ---
 
-La versión inicial no contiene commits ficticios. Los registros se incorporarán cuando se pruebe el escenario.
+El historial Markdown se genera automáticamente mediante GitHub Actions a partir del CSV. No se incluyen registros ficticios.
 
 <!-- HISTORIAL_MAKE_INICIO -->
 ## Historial de commits
